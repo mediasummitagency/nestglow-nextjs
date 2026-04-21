@@ -4,7 +4,7 @@ import { Star, ShieldCheck, Award, ThumbsUp, Clock, Home, Briefcase, Sparkles, T
 import { BUSINESS, BASE_URL } from "@/lib/config";
 import SiteNav from "@/components/layout/SiteNav";
 import Footer from "@/components/layout/Footer";
-import QuickQuoteForm from "@/components/forms/QuickQuoteForm";
+import QuickQuoteFormWrapper from "@/components/forms/QuickQuoteFormWrapper";
 
 const testimonials = [
   {
@@ -180,7 +180,7 @@ export default function HomePage() {
             <h2 className="text-2xl font-bold text-charcoal mb-6 text-center">
               Get a quick quote
             </h2>
-            <QuickQuoteForm />
+            <QuickQuoteFormWrapper />
           </div>
         </section>
 
