@@ -37,7 +37,7 @@ function NavDropdown({
       onMouseLeave={() => setOpen(false)}
     >
       <button
-        className="flex items-center gap-1 text-sm font-medium text-charcoal hover:text-gold transition-colors"
+        className="flex items-center gap-1 text-sm font-medium text-white/80 hover:text-gold transition-colors"
         aria-expanded={open}
       >
         {label}
@@ -70,7 +70,7 @@ export default function SiteNav() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-40 h-[72px] bg-cream border-b border-charcoal/10 flex items-center">
+      <header className="fixed top-0 left-0 right-0 z-40 h-[72px] bg-charcoal border-b border-white/10 flex items-center">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 w-full flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center shrink-0">
@@ -79,7 +79,7 @@ export default function SiteNav() {
               alt="NestGlow Co"
               width={140}
               height={40}
-              className="h-9 w-auto object-contain brightness-0"
+              className="h-9 w-auto object-contain"
               priority
             />
           </Link>
@@ -88,7 +88,7 @@ export default function SiteNav() {
           <nav className="hidden md:flex items-center gap-6">
             <Link
               href="/"
-              className="text-sm font-medium text-charcoal hover:text-gold transition-colors"
+              className="text-sm font-medium text-white/80 hover:text-gold transition-colors"
             >
               Home
             </Link>
@@ -96,13 +96,13 @@ export default function SiteNav() {
             <NavDropdown label="Service Areas" links={areasLinks} />
             <Link
               href="/guides"
-              className="text-sm font-medium text-charcoal hover:text-gold transition-colors"
+              className="text-sm font-medium text-white/80 hover:text-gold transition-colors"
             >
               Guides
             </Link>
             <Link
               href="/about"
-              className="text-sm font-medium text-charcoal hover:text-gold transition-colors"
+              className="text-sm font-medium text-white/80 hover:text-gold transition-colors"
             >
               About
             </Link>
@@ -131,9 +131,9 @@ export default function SiteNav() {
             onClick={() => setMobileOpen(true)}
             aria-label="Open menu"
           >
-            <span className="block w-5 h-0.5 bg-charcoal" />
-            <span className="block w-5 h-0.5 bg-charcoal" />
-            <span className="block w-5 h-0.5 bg-charcoal" />
+            <span className="block w-5 h-0.5 bg-white" />
+            <span className="block w-5 h-0.5 bg-white" />
+            <span className="block w-5 h-0.5 bg-white" />
           </button>
         </div>
       </header>
