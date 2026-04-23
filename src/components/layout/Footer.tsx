@@ -150,7 +150,7 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-cream/40">
-          <p>© {year} NestGlow Co. All rights reserved.</p>
+          <p suppressHydrationWarning>© {year} NestGlow Co. All rights reserved.</p>
           <div className="flex items-center gap-4">
             <Link href="/privacy-policy" className="hover:text-gold transition-colors">
               Privacy Policy
