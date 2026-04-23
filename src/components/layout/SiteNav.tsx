@@ -75,7 +75,7 @@ export default function SiteNav() {
           {/* Logo */}
           <Link href="/" className="flex items-center shrink-0">
             <Image
-              src="/logo.png"
+              src="/logo-white.png"
               alt="NestGlow Co"
               width={140}
               height={40}
