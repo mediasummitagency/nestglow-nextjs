@@ -86,24 +86,24 @@
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
 
-  /* NestGlow brand palette — warm residential */
-  --color-cream: #FBF8F3;
-  --color-cream-50: #FDFBF7;
-  --color-cream-100: #F7F2E9;
-  --color-charcoal: #1F1B16;
-  --color-charcoal-70: #4A443D;
-  --color-charcoal-40: #8A837B;
-  --color-gold: #E8B86A;
-  --color-gold-dark: #C59845;
-  --color-gold-light: #F4D8A6;
-  --color-sage: #A8B5A0;
-  --color-sage-dark: #7C8B73;
-  --color-terracotta: #C0614A;
-  --color-terracotta-dark: #9B4D3A;
+  /* NestGlow brand palette — sky blue */
+  --color-cream: #ffffff;
+  --color-cream-50: #f0f8ff;
+  --color-cream-100: #dbeeff;
+  --color-charcoal: #1a1f36;
+  --color-charcoal-70: #4a5568;
+  --color-charcoal-40: #8898aa;
+  --color-gold: #4facfe;
+  --color-gold-dark: #1d8fd8;
+  --color-gold-light: #b8e0ff;
+  --color-sage: #4b8ef1;
+  --color-sage-dark: #2d7bd4;
+  --color-terracotta: #00c2cb;
+  --color-terracotta-dark: #009ba3;
 
   /* Typography */
-  --font-display: var(--font-fraunces);
-  --font-sans: var(--font-dm-sans);
+  --font-display: var(--font-roboto);
+  --font-sans: var(--font-roboto);
 }
 
 :root {
@@ -186,12 +186,10 @@
   body {
     background-color: var(--color-cream);
     color: var(--color-charcoal);
-    font-family: var(--font-dm-sans), system-ui, sans-serif;
-    font-feature-settings: "ss01", "ss02";
+    font-family: var(--font-roboto), system-ui, sans-serif;
   }
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-fraunces), Georgia, serif;
-    letter-spacing: -0.01em;
+    font-family: var(--font-roboto), system-ui, sans-serif;
   }
   /* Respect reduced-motion preference */
   @media (prefers-reduced-motion: reduce) {

@@ -1,23 +1,17 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { DM_Sans, Fraunces } from "next/font/google";
+import { Roboto } from "next/font/google";
 import Script from "next/script";
 import { TRACKING, BASE_URL, BUSINESS } from "@/lib/config";
 import SiteNav from "@/components/layout/SiteNav";
 import Footer from "@/components/layout/Footer";
 import "./globals.css";
 
-const dmSans = DM_Sans({
+const roboto = Roboto({
   subsets: ["latin"],
-  variable: "--font-dm-sans",
+  weight: ["300", "400", "500", "700"],
+  variable: "--font-roboto",
   display: "swap",
-});
-
-const fraunces = Fraunces({
-  subsets: ["latin"],
-  variable: "--font-fraunces",
-  display: "swap",
-  axes: ["opsz", "SOFT"],
 });
 
 export const metadata: Metadata = {
@@ -48,7 +42,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body className={`${dmSans.variable} ${fraunces.variable} antialiased`}>
+      <body className={`${roboto.variable} antialiased`}>
         {TRACKING.gtmId && (
           <noscript>
             <iframe
