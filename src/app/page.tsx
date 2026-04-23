@@ -1,8 +1,9 @@
+import { Suspense } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Star, ShieldCheck, Award, ThumbsUp, Clock, Home, Briefcase, Sparkles, Truck, ChevronRight } from "lucide-react";
 import { BUSINESS, BASE_URL } from "@/lib/config";
-import QuickQuoteFormWrapper from "@/components/forms/QuickQuoteFormWrapper";
+import QuickQuoteForm from "@/components/forms/QuickQuoteForm";
 
 const testimonials = [
   {
@@ -177,7 +178,9 @@ export default function HomePage() {
             <h2 className="text-2xl font-bold text-charcoal mb-6 text-center">
               Get a quick quote
             </h2>
-            <QuickQuoteFormWrapper />
+            <Suspense fallback={<div className="h-[120px] bg-cream-100 rounded-xl animate-pulse" />}>
+              <QuickQuoteForm />
+            </Suspense>
           </div>
         </section>
 
