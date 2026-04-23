@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ChevronRight, Star } from "lucide-react";
 import { BASE_URL, BUSINESS } from "@/lib/config";
-import SiteNav from "@/components/layout/SiteNav";
-import Footer from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
   title: "Customer Reviews | NestGlow Co",
@@ -96,8 +94,6 @@ export default function ReviewsPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(aggregateRatingSchema) }}
       />
-
-      <SiteNav />
       <main className="pt-[72px]">
         {/* Breadcrumb */}
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center gap-2 text-sm text-charcoal-40">
@@ -181,7 +177,6 @@ export default function ReviewsPage() {
           </div>
         </section>
       </main>
-      <Footer />
     </>
   );
 }

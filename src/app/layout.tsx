@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { DM_Sans, Fraunces } from "next/font/google";
 import Script from "next/script";
 import { TRACKING, BASE_URL, BUSINESS } from "@/lib/config";
+import SiteNav from "@/components/layout/SiteNav";
+import Footer from "@/components/layout/Footer";
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -67,7 +70,11 @@ export default function RootLayout({
             />
           </noscript>
         )}
+        <Suspense fallback={null}>
+          <SiteNav />
+        </Suspense>
         {children}
+        <Footer />
       </body>
     </html>
   );

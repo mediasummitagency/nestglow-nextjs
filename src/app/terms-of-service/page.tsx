@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { BASE_URL, BUSINESS } from "@/lib/config";
-import SiteNav from "@/components/layout/SiteNav";
-import Footer from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
   title: "Terms of Service",
@@ -14,7 +12,6 @@ export const metadata: Metadata = {
 export default function TermsOfServicePage() {
   return (
     <>
-      <SiteNav />
       <main className="pt-[72px]">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 py-12">
           <header className="mb-10 space-y-3">
@@ -141,7 +138,6 @@ export default function TermsOfServicePage() {
           </div>
         </div>
       </main>
-      <Footer />
     </>
   );
 }

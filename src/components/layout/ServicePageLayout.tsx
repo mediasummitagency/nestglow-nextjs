@@ -2,8 +2,6 @@ import Link from "next/link";
 import { Check, ShieldCheck, Award, ThumbsUp, Clock, Star, ChevronRight } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { BUSINESS, BASE_URL } from "@/lib/config";
-import SiteNav from "./SiteNav";
-import Footer from "./Footer";
 
 export type ServicePageProps = {
   slug: string;
@@ -78,7 +76,6 @@ export default function ServicePageLayout({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
-      <SiteNav />
       <main className="pt-[72px]">
         {/* Breadcrumb */}
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center gap-2 text-sm text-charcoal-40">
@@ -245,7 +242,6 @@ export default function ServicePageLayout({
           </div>
         </section>
       </main>
-      <Footer />
     </>
   );
 }

@@ -3,8 +3,6 @@ import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { BASE_URL, BUSINESS } from "@/lib/config";
-import SiteNav from "@/components/layout/SiteNav";
-import Footer from "@/components/layout/Footer";
 import ComparisonTable from "@/components/sections/ComparisonTable";
 
 export const metadata: Metadata = {
@@ -54,7 +52,6 @@ export default function GeneralVsDeepPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
-      <SiteNav />
       <main className="pt-[72px]">
         {/* Breadcrumb */}
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center gap-2 text-sm text-charcoal-40">
@@ -185,7 +182,6 @@ export default function GeneralVsDeepPage() {
           </div>
         </section>
       </main>
-      <Footer />
     </>
   );
 }

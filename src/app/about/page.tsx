@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ShieldCheck, Award, ThumbsUp, Clock, Sparkles, Eye, Heart, RefreshCw } from "lucide-react";
 import { BASE_URL, BUSINESS } from "@/lib/config";
-import SiteNav from "@/components/layout/SiteNav";
-import Footer from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
   title: "About NestGlow Co",
@@ -29,7 +27,6 @@ const values = [
 export default function AboutPage() {
   return (
     <>
-      <SiteNav />
       <main className="pt-[72px]">
         {/* Hero */}
         <section className="max-w-3xl mx-auto px-4 sm:px-6 py-16 md:py-24 text-center space-y-6">
@@ -148,7 +145,6 @@ export default function AboutPage() {
           </div>
         </section>
       </main>
-      <Footer />
     </>
   );
 }

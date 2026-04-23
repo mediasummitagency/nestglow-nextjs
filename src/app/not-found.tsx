@@ -1,11 +1,8 @@
 import Link from "next/link";
-import SiteNav from "@/components/layout/SiteNav";
-import Footer from "@/components/layout/Footer";
 
 export default function NotFound() {
   return (
     <>
-      <SiteNav />
       <main className="pt-[72px] min-h-[60vh] flex items-center">
         <div className="max-w-xl mx-auto px-4 sm:px-6 py-24 text-center space-y-6">
           <p className="text-6xl font-bold text-gold/40">404</p>
@@ -31,7 +28,6 @@ export default function NotFound() {
           </div>
         </div>
       </main>
-      <Footer />
     </>
   );
 }

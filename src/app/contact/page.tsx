@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Phone, Mail, MessageSquare } from "lucide-react";
 import { BASE_URL, BUSINESS } from "@/lib/config";
-import SiteNav from "@/components/layout/SiteNav";
-import Footer from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
   title: "Contact NestGlow Co",
@@ -50,7 +48,6 @@ export default function ContactPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(speakableSchema) }}
       />
-      <SiteNav />
       <main className="pt-[72px]">
         {/* Hero */}
         <section className="max-w-3xl mx-auto px-4 sm:px-6 py-16 md:py-24 text-center space-y-4">
@@ -130,7 +127,6 @@ export default function ContactPage() {
           </div>
         </section>
       </main>
-      <Footer />
     </>
   );
 }

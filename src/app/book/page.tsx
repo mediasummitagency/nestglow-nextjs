@@ -4,8 +4,6 @@ import Link from "next/link";
 import { ShieldCheck, Award, ThumbsUp, Clock, ChevronRight } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { BASE_URL, BUSINESS } from "@/lib/config";
-import SiteNav from "@/components/layout/SiteNav";
-import Footer from "@/components/layout/Footer";
 import BookingFormWrapper from "./BookingFormWrapper";
 import PhoneLink from "@/components/PhoneLink";
 
@@ -63,7 +61,6 @@ export default function BookPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
-      <SiteNav />
       <main className="pt-[72px]">
         {/* Breadcrumb */}
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center gap-2 text-sm text-charcoal-40">
@@ -159,7 +156,6 @@ export default function BookPage() {
           </div>
         </section>
       </main>
-      <Footer />
     </>
   );
 }

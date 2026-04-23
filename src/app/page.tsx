@@ -2,8 +2,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { Star, ShieldCheck, Award, ThumbsUp, Clock, Home, Briefcase, Sparkles, Truck, ChevronRight } from "lucide-react";
 import { BUSINESS, BASE_URL } from "@/lib/config";
-import SiteNav from "@/components/layout/SiteNav";
-import Footer from "@/components/layout/Footer";
 import QuickQuoteFormWrapper from "@/components/forms/QuickQuoteFormWrapper";
 
 const testimonials = [
@@ -129,7 +127,6 @@ export default function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
       />
-      <SiteNav />
 
       <main className="pt-[72px]">
         {/* Hero */}
@@ -405,8 +402,6 @@ export default function HomePage() {
           </div>
         </section>
       </main>
-
-      <Footer />
     </>
   );
 }
