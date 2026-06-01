@@ -69,9 +69,9 @@ export default function HowMuchCostGuidePage() {
       <main className="pt-[72px]">
         {/* Breadcrumb */}
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center gap-2 text-sm text-charcoal-40 flex-wrap">
-          <Link href="/" className="hover:text-gold transition-colors">Home</Link>
+          <Link href="/" className="hover:text-brand transition-colors">Home</Link>
           <ChevronRight size={12} />
-          <Link href="/guides" className="hover:text-gold transition-colors">Guides</Link>
+          <Link href="/guides" className="hover:text-brand transition-colors">Guides</Link>
           <ChevronRight size={12} />
           <span className="text-charcoal">House Cleaning Costs in NJ</span>
         </nav>
@@ -79,7 +79,7 @@ export default function HowMuchCostGuidePage() {
         {/* Article header */}
         <article className="max-w-3xl mx-auto px-4 sm:px-6 py-10">
           <header className="space-y-4 mb-10">
-            <p className="text-sm font-semibold uppercase tracking-widest text-gold">Pricing Guide</p>
+            <p className="text-sm font-semibold uppercase tracking-widest text-brand">Pricing Guide</p>
             <h1 className="text-3xl md:text-4xl font-bold text-charcoal leading-tight">
               How Much Does House Cleaning Cost in NJ?
             </h1>
@@ -87,7 +87,7 @@ export default function HowMuchCostGuidePage() {
               <span className="flex items-center gap-1.5"><Clock size={13} /> 6 min read</span>
               <span>Updated October 2025</span>
             </div>
-            <p className="text-charcoal-70 text-lg leading-relaxed border-l-4 border-gold pl-4">
+            <p className="text-charcoal-70 text-lg leading-relaxed border-l-4 border-brand pl-4">
               Most NJ homes fall between $120 and $400 per clean. The real number depends on your home size, the type of cleaning, and how often you book. Here&apos;s what actually moves the price.
             </p>
           </header>
@@ -196,7 +196,7 @@ export default function HowMuchCostGuidePage() {
                 A deep clean is the right starting point for new clients, homes that haven&apos;t been professionally cleaned in months, and pre-listing or post-renovation cleans. After the first deep clean, a recurring standard clean keeps the home in that condition.
               </p>
               <p>
-                <Link href="/general-vs-deep-cleaning" className="text-gold hover:text-gold-dark underline transition-colors font-medium">
+                <Link href="/general-vs-deep-cleaning" className="text-brand hover:text-brand-dark underline transition-colors font-medium">
                   See the full room-by-room comparison →
                 </Link>
               </p>
@@ -247,7 +247,7 @@ export default function HowMuchCostGuidePage() {
             </section>
 
             {/* CTA block */}
-            <div className="bg-gold/10 border border-gold/20 rounded-2xl p-6 space-y-4">
+            <div className="bg-brand/10 border border-brand/20 rounded-2xl p-6 space-y-4">
               <p className="font-bold text-charcoal">Get a quote for your home</p>
               <p className="text-sm">
                 Submit the booking form with your home details. Our team returns a firm quote within 24 hours — no payment until the cleaning is done.
@@ -255,11 +255,11 @@ export default function HowMuchCostGuidePage() {
               <div className="flex flex-wrap gap-3">
                 <Link
                   href="/book"
-                  className="inline-flex items-center bg-gold text-charcoal font-semibold px-5 py-2.5 rounded-full hover:bg-gold-dark transition-colors text-sm"
+                  className="inline-flex items-center bg-brand text-charcoal font-semibold px-5 py-2.5 rounded-full hover:bg-brand-dark transition-colors text-sm"
                 >
                   Get a Quote
                 </Link>
-                <PhoneLink className="inline-flex items-center text-sm font-medium text-gold hover:text-gold-dark transition-colors" />
+                <PhoneLink className="inline-flex items-center text-sm font-medium text-brand hover:text-brand-dark transition-colors" />
               </div>
             </div>
           </div>
@@ -268,22 +268,22 @@ export default function HowMuchCostGuidePage() {
         {/* Related guides */}
         <section className="bg-cream-100 border-y border-charcoal/5">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 py-10 space-y-4">
-            <p className="text-sm font-semibold uppercase tracking-widest text-gold">Related</p>
+            <p className="text-sm font-semibold uppercase tracking-widest text-brand">Related</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <Link
                 href="/guides/what-to-expect-move-out-cleaning"
-                className="group bg-cream rounded-xl border border-charcoal/10 p-4 hover:border-gold/30 transition-all space-y-1"
+                className="group bg-cream rounded-xl border border-charcoal/10 p-4 hover:border-brand/30 transition-all space-y-1"
               >
-                <p className="font-semibold text-charcoal text-sm group-hover:text-gold transition-colors">
+                <p className="font-semibold text-charcoal text-sm group-hover:text-brand transition-colors">
                   What to Expect from a Move-Out Cleaning
                 </p>
                 <p className="text-xs text-charcoal-40">5 min read</p>
               </Link>
               <Link
                 href="/general-vs-deep-cleaning"
-                className="group bg-cream rounded-xl border border-charcoal/10 p-4 hover:border-gold/30 transition-all space-y-1"
+                className="group bg-cream rounded-xl border border-charcoal/10 p-4 hover:border-brand/30 transition-all space-y-1"
               >
-                <p className="font-semibold text-charcoal text-sm group-hover:text-gold transition-colors">
+                <p className="font-semibold text-charcoal text-sm group-hover:text-brand transition-colors">
                   General vs. Deep Cleaning: Full Comparison
                 </p>
                 <p className="text-xs text-charcoal-40">Service comparison</p>

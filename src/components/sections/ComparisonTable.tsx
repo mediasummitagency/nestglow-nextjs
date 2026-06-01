@@ -74,8 +74,8 @@ export default function ComparisonTable({ limit }: { limit?: number }) {
         <thead>
           <tr className="bg-charcoal text-cream">
             <th className="text-left py-3 px-4 font-semibold">Task</th>
-            <th className="py-3 px-4 font-semibold text-center text-gold-light">General</th>
-            <th className="py-3 px-4 font-semibold text-center text-gold">Deep</th>
+            <th className="py-3 px-4 font-semibold text-center text-brand-light">General</th>
+            <th className="py-3 px-4 font-semibold text-center text-brand">Deep</th>
           </tr>
         </thead>
         <tbody>

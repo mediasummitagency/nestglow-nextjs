@@ -48,9 +48,17 @@ export default function AboutPage() {
             <div className="w-32 h-32 rounded-full bg-cream border border-charcoal/10 flex items-center justify-center text-charcoal-40 text-xs text-center mb-6 mx-auto md:mx-0">
               Photo<br />coming soon
             </div>
-            <p className="text-base text-charcoal-70 leading-relaxed">
-              Caroline started NestGlow Co because she believed that cleaning should never feel like another thing on a homeowner&apos;s to-do list. After more than a decade of helping Jersey Shore families keep their homes feeling calm and cared for, she built a team that shares the same standard: show up on time, notice the details, and leave every home better than we found it.
-            </p>
+            <div className="space-y-5 text-base text-charcoal-70 leading-relaxed">
+              <p>
+                Caroline started NestGlow Co in [PLACEHOLDER: year] with a simple belief: cleaning should never feel like another thing on a homeowner&apos;s to-do list. She had been cleaning homes on her own since [PLACEHOLDER: year], building a reputation one satisfied family at a time along the Jersey Shore.
+              </p>
+              <p>
+                As word spread, Caroline couldn&apos;t keep up alone. By [PLACEHOLDER: year] she had brought on her first team members — people she trained herself and trusted to hold the same standard she had set from day one: show up on time, notice the details, and leave every home better than you found it.
+              </p>
+              <p>
+                Today NestGlow Co serves [PLACEHOLDER: number]+ homes across Monmouth, Ocean, and Middlesex County. The team has grown, but the approach hasn&apos;t changed: small-company care, professional results, and a guarantee that if something isn&apos;t right, we come back and fix it.
+              </p>
+            </div>
           </div>
         </section>
 
@@ -64,8 +72,8 @@ export default function AboutPage() {
               const Icon = item.icon;
               return (
                 <div key={item.label} className="flex items-center gap-4 bg-cream-100 rounded-2xl p-5">
-                  <div className="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center shrink-0">
-                    <Icon size={18} className="text-gold-dark" />
+                  <div className="w-10 h-10 rounded-full bg-brand/20 flex items-center justify-center shrink-0">
+                    <Icon size={18} className="text-brand-dark" />
                   </div>
                   <p className="font-semibold text-charcoal">{item.label}</p>
                 </div>
@@ -86,7 +94,7 @@ export default function AboutPage() {
                 return (
                   <div key={val.label} className="space-y-2">
                     <div className="flex items-center gap-2">
-                      <Icon size={16} className="text-gold" />
+                      <Icon size={16} className="text-brand" />
                       <h3 className="font-bold text-charcoal">{val.label}</h3>
                     </div>
                     <p className="text-sm text-charcoal-70 leading-relaxed">{val.body}</p>
@@ -114,7 +122,7 @@ export default function AboutPage() {
               <Link
                 key={c.href}
                 href={c.href}
-                className="bg-cream-100 border border-charcoal/10 hover:border-gold text-sm font-semibold text-charcoal px-4 py-2 rounded-full transition-colors"
+                className="bg-cream-100 border border-charcoal/10 hover:border-brand text-sm font-semibold text-charcoal px-4 py-2 rounded-full transition-colors"
               >
                 {c.label}
               </Link>
@@ -123,7 +131,7 @@ export default function AboutPage() {
         </section>
 
         {/* Final CTA */}
-        <section className="bg-gold py-16">
+        <section className="bg-brand py-16">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center space-y-6">
             <h2 className="text-3xl font-bold text-charcoal">
               Ready to come home to clean?

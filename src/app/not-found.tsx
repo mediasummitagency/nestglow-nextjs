@@ -5,7 +5,7 @@ export default function NotFound() {
     <>
       <main className="pt-[72px] min-h-[60vh] flex items-center">
         <div className="max-w-xl mx-auto px-4 sm:px-6 py-24 text-center space-y-6">
-          <p className="text-6xl font-bold text-gold/40">404</p>
+          <p className="text-6xl font-bold text-brand/40">404</p>
           <h1 className="text-3xl md:text-4xl font-bold text-charcoal">
             That page got lost in the laundry.
           </h1>
@@ -15,7 +15,7 @@ export default function NotFound() {
           <div className="flex flex-wrap justify-center gap-4">
             <Link
               href="/"
-              className="bg-gold text-charcoal font-semibold px-6 py-3 rounded-full hover:bg-gold-dark transition-colors"
+              className="bg-brand text-charcoal font-semibold px-6 py-3 rounded-full hover:bg-brand-dark transition-colors"
             >
               Back to Home
             </Link>

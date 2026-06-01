@@ -101,7 +101,7 @@ export default function PrivacyPolicyPage() {
                   href="https://tools.google.com/dlpage/gaoptout"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gold hover:text-gold-dark underline transition-colors"
+                  className="text-brand hover:text-brand-dark underline transition-colors"
                 >
                   Google Analytics Opt-out Browser Add-on
                 </a>
@@ -127,7 +127,7 @@ export default function PrivacyPolicyPage() {
               </ul>
               <p className="text-sm">
                 To exercise any of these rights, contact us at{" "}
-                <a href={BUSINESS.emailHref} className="text-gold hover:text-gold-dark underline transition-colors">
+                <a href={BUSINESS.emailHref} className="text-brand hover:text-brand-dark underline transition-colors">
                   {BUSINESS.email}
                 </a>
                 .
@@ -162,10 +162,10 @@ export default function PrivacyPolicyPage() {
               </p>
               <p className="text-sm">
                 {BUSINESS.name}<br />
-                <a href={BUSINESS.emailHref} className="text-gold hover:text-gold-dark underline transition-colors">
+                <a href={BUSINESS.emailHref} className="text-brand hover:text-brand-dark underline transition-colors">
                   {BUSINESS.email}
                 </a><br />
-                <a href={BUSINESS.phoneHref} className="text-gold hover:text-gold-dark underline transition-colors">
+                <a href={BUSINESS.phoneHref} className="text-brand hover:text-brand-dark underline transition-colors">
                   {BUSINESS.phone}
                 </a>
               </p>
@@ -174,7 +174,7 @@ export default function PrivacyPolicyPage() {
           </div>
 
           <div className="mt-12 pt-8 border-t border-charcoal/10">
-            <Link href="/" className="text-sm text-gold hover:text-gold-dark underline transition-colors">
+            <Link href="/" className="text-sm text-brand hover:text-brand-dark underline transition-colors">
               ← Back to home
             </Link>
           </div>

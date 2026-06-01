@@ -69,15 +69,15 @@ export default function ContactPage() {
                   <a
                     key={method.label}
                     href={method.href}
-                    className="bg-cream rounded-2xl p-6 border border-charcoal/10 hover:border-gold transition-all hover:-translate-y-0.5 flex flex-col items-center gap-3 text-center group"
+                    className="bg-cream rounded-2xl p-6 border border-charcoal/10 hover:border-brand transition-all hover:-translate-y-0.5 flex flex-col items-center gap-3 text-center group"
                   >
-                    <div className="w-12 h-12 rounded-full bg-gold/20 flex items-center justify-center">
-                      <Icon size={20} className="text-gold-dark" />
+                    <div className="w-12 h-12 rounded-full bg-brand/20 flex items-center justify-center">
+                      <Icon size={20} className="text-brand-dark" />
                     </div>
                     <p className="text-xs font-semibold uppercase tracking-widest text-charcoal-40">
                       {method.label}
                     </p>
-                    <p className="font-semibold text-charcoal group-hover:text-gold transition-colors">
+                    <p className="font-semibold text-charcoal group-hover:text-brand transition-colors">
                       {method.value}
                     </p>
                   </a>
@@ -101,7 +101,7 @@ export default function ContactPage() {
               <Link
                 key={c.href}
                 href={c.href}
-                className="bg-cream-100 border border-charcoal/10 hover:border-gold text-sm font-semibold text-charcoal px-4 py-2 rounded-full transition-colors"
+                className="bg-cream-100 border border-charcoal/10 hover:border-brand text-sm font-semibold text-charcoal px-4 py-2 rounded-full transition-colors"
               >
                 {c.label}
               </Link>
@@ -110,7 +110,7 @@ export default function ContactPage() {
         </section>
 
         {/* Book CTA */}
-        <section className="bg-gold py-16">
+        <section className="bg-brand py-16">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center space-y-6">
             <h2 className="text-2xl md:text-3xl font-bold text-charcoal">
               Ready to book?

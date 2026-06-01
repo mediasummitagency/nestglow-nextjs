@@ -62,14 +62,14 @@ export default function CleaningServicesPage() {
       <main className="pt-[72px]">
         {/* Breadcrumb */}
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center gap-2 text-sm text-charcoal-40">
-          <Link href="/" className="hover:text-gold transition-colors">Home</Link>
+          <Link href="/" className="hover:text-brand transition-colors">Home</Link>
           <ChevronRight size={12} />
           <span className="text-charcoal">Cleaning Services</span>
         </nav>
 
         {/* Hero */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 py-10 space-y-5">
-          <p className="text-sm font-semibold uppercase tracking-widest text-gold">Service Areas</p>
+          <p className="text-sm font-semibold uppercase tracking-widest text-brand">Service Areas</p>
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-charcoal leading-tight">
             House Cleaning Services Across Central New Jersey
           </h1>
@@ -79,11 +79,11 @@ export default function CleaningServicesPage() {
           <div className="flex flex-wrap gap-4 pt-2">
             <Link
               href="/book"
-              className="inline-flex items-center bg-gold text-charcoal font-semibold px-7 py-3.5 rounded-full hover:bg-gold-dark transition-colors text-sm"
+              className="inline-flex items-center bg-brand text-charcoal font-semibold px-7 py-3.5 rounded-full hover:bg-brand-dark transition-colors text-sm"
             >
               Book a Cleaning
             </Link>
-            <PhoneLink className="inline-flex items-center border border-charcoal/20 text-charcoal font-semibold px-7 py-3.5 rounded-full hover:border-gold hover:text-gold transition-colors text-sm" />
+            <PhoneLink className="inline-flex items-center border border-charcoal/20 text-charcoal font-semibold px-7 py-3.5 rounded-full hover:border-brand hover:text-brand transition-colors text-sm" />
           </div>
         </section>
 
@@ -94,7 +94,7 @@ export default function CleaningServicesPage() {
               const Icon = p.icon;
               return (
                 <div key={p.label} className="flex items-center gap-3">
-                  <Icon size={20} className="text-gold shrink-0" />
+                  <Icon size={20} className="text-brand shrink-0" />
                   <span className="text-sm font-medium text-charcoal">{p.label}</span>
                 </div>
               );
@@ -111,7 +111,7 @@ export default function CleaningServicesPage() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 py-14 space-y-6">
               <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
                 <div>
-                  <p className="text-sm font-semibold uppercase tracking-widest text-gold mb-2">
+                  <p className="text-sm font-semibold uppercase tracking-widest text-brand mb-2">
                     {county.name}
                   </p>
                   <h2 className="text-2xl font-bold text-charcoal">
@@ -121,7 +121,7 @@ export default function CleaningServicesPage() {
                 </div>
                 <Link
                   href={`/cleaning-services/${county.slug}`}
-                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-gold hover:text-gold-dark transition-colors shrink-0"
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand hover:text-brand-dark transition-colors shrink-0"
                 >
                   View all {county.name} towns
                   <ChevronRight size={14} />
@@ -133,12 +133,12 @@ export default function CleaningServicesPage() {
                   <Link
                     key={town.slug}
                     href={`/cleaning-services/${town.slug}`}
-                    className="group flex items-center justify-between bg-cream rounded-lg border border-charcoal/5 px-4 py-3 hover:border-gold/30 hover:shadow-sm transition-all"
+                    className="group flex items-center justify-between bg-cream rounded-lg border border-charcoal/5 px-4 py-3 hover:border-brand/30 hover:shadow-sm transition-all"
                   >
-                    <span className="text-sm font-medium text-charcoal group-hover:text-gold transition-colors">
+                    <span className="text-sm font-medium text-charcoal group-hover:text-brand transition-colors">
                       {town.name}
                     </span>
-                    <ChevronRight size={12} className="text-charcoal-40 group-hover:text-gold transition-colors shrink-0" />
+                    <ChevronRight size={12} className="text-charcoal-40 group-hover:text-brand transition-colors shrink-0" />
                   </Link>
                 ))}
               </div>
@@ -147,7 +147,7 @@ export default function CleaningServicesPage() {
         ))}
 
         {/* CTA */}
-        <section className="bg-gold">
+        <section className="bg-brand">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 py-16 text-center space-y-5">
             <h2 className="text-2xl md:text-3xl font-bold text-charcoal">
               Don&apos;t see your town listed?

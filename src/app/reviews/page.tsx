@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ChevronRight, Star } from "lucide-react";
 import { BASE_URL, BUSINESS } from "@/lib/config";
+import { reviews } from "@/lib/reviews";
 
 export const metadata: Metadata = {
   title: "Customer Reviews | NestGlow Co",
@@ -9,49 +10,6 @@ export const metadata: Metadata = {
     "Real reviews from NestGlow Co cleaning clients across Monmouth, Ocean, and Middlesex County, NJ. See what homeowners say about Caroline and her team.",
   alternates: { canonical: `${BASE_URL}/reviews` },
 };
-
-const reviews = [
-  {
-    name: "Eileen S.",
-    date: "2025-10-08",
-    dateDisplay: "October 2025",
-    rating: 5,
-    body: "I'm so happy I scheduled with Caroline and her team. Caroline was so kind and very professional. She arrived promptly right on time at 9 AM. Communication and reminders were sent to keep us updated about our appointment and her arrival time. She was very detailed in cleaning our house top to bottom, and the house sparkled when she was done. I highly recommend NestGlow Co for your cleaning needs.",
-    location: "Monmouth County, NJ",
-  },
-  {
-    name: "Jeffrey R.",
-    date: "2020-01-31",
-    dateDisplay: "January 2020",
-    rating: 5,
-    body: "Caroline is extremely dependable and does a great job. She is very flexible with my schedule and always accommodates my schedule. My house is sparkling after she leaves! I would highly recommend her.",
-    location: "Monmouth County, NJ",
-  },
-  {
-    name: "Greg A.",
-    date: "2020-01-31",
-    dateDisplay: "January 2020",
-    rating: 5,
-    body: "Caroline is punctual, flexible, and dependable! I love walking into my house when she's been here!",
-    location: "Monmouth County, NJ",
-  },
-  {
-    name: "Elena H.",
-    date: "2020-01-29",
-    dateDisplay: "January 2020",
-    rating: 5,
-    body: "Caroline has been cleaning my home for 4+ years. She is professional, reliable, thorough, and always does an exceptional job. She is flexible and easy to communicate with. I look forward to coming home after she has been there. I highly recommend her services!",
-    location: "Monmouth County, NJ",
-  },
-  {
-    name: "Danny H.",
-    date: "2020-01-29",
-    dateDisplay: "January 2020",
-    rating: 5,
-    body: "Caroline is great! She cleans my house bi-weekly and I couldn't be happier. She pays attention to detail and the house is always spotless. I've tried other cleaners in the past and she is by far the best. Highly recommend!",
-    location: "Monmouth County, NJ",
-  },
-];
 
 const aggregateRatingSchema = {
   "@context": "https://schema.org",
@@ -81,7 +39,7 @@ function StarRow({ count }: { count: number }) {
   return (
     <div className="flex items-center gap-0.5">
       {Array.from({ length: count }).map((_, i) => (
-        <Star key={i} size={14} className="text-gold fill-gold" />
+        <Star key={i} size={14} className="text-brand fill-brand" />
       ))}
     </div>
   );
@@ -97,14 +55,14 @@ export default function ReviewsPage() {
       <main className="pt-[72px]">
         {/* Breadcrumb */}
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center gap-2 text-sm text-charcoal-40">
-          <Link href="/" className="hover:text-gold transition-colors">Home</Link>
+          <Link href="/" className="hover:text-brand transition-colors">Home</Link>
           <ChevronRight size={12} />
           <span className="text-charcoal">Reviews</span>
         </nav>
 
         {/* Hero */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 py-10 space-y-4">
-          <p className="text-sm font-semibold uppercase tracking-widest text-gold">Client Reviews</p>
+          <p className="text-sm font-semibold uppercase tracking-widest text-brand">Client Reviews</p>
           <h1 className="text-3xl md:text-4xl font-bold text-charcoal">
             What Our Clients Say
           </h1>
@@ -151,7 +109,7 @@ export default function ReviewsPage() {
             </p>
             <Link
               href="/about"
-              className="inline-flex items-center gap-1.5 text-sm font-semibold text-gold hover:text-gold-dark transition-colors"
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand hover:text-brand-dark transition-colors"
             >
               Learn more about Caroline and her team
               <ChevronRight size={14} />
@@ -160,7 +118,7 @@ export default function ReviewsPage() {
         </section>
 
         {/* CTA */}
-        <section className="bg-gold">
+        <section className="bg-brand">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 py-14 text-center space-y-4">
             <h2 className="text-2xl font-bold text-charcoal">
               Ready to add your name to the list?

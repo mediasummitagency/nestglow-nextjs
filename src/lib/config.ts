@@ -9,6 +9,7 @@ export const BUSINESS = {
   tagline: "Cleaning you can trust. Homes and businesses across Monmouth, Ocean, and Middlesex County.",
   phone: "(732) 614-0192",
   phoneHref: "tel:+17326140192",
+  smsHref: "sms:+17326140192",
   email: "nestglowco@gmail.com",
   emailHref: "mailto:nestglowco@gmail.com",
   yearFounded: 2015, // reflects "10+ years of experience"

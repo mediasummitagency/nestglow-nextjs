@@ -93,13 +93,13 @@
   --color-charcoal: #1a1f36;
   --color-charcoal-70: #4a5568;
   --color-charcoal-40: #8898aa;
-  --color-gold: #4facfe;
-  --color-gold-dark: #1d8fd8;
-  --color-gold-light: #b8e0ff;
+  --color-brand: #4facfe;
+  --color-brand-dark: #1d8fd8;
+  --color-brand-light: #b8e0ff;
   --color-sage: #4b8ef1;
   --color-sage-dark: #2d7bd4;
-  --color-terracotta: #00c2cb;
-  --color-terracotta-dark: #009ba3;
+  --color-teal: #00c2cb;
+  --color-teal-dark: #009ba3;
 
   /* Typography */
   --font-display: var(--font-roboto);

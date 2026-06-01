@@ -1,12 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+import { FAQAccordion } from "@/components/sections/FAQAccordion";
 import { BASE_URL } from "@/lib/config";
 
 export const metadata: Metadata = {
@@ -178,20 +173,20 @@ export default function FAQPage() {
       <main className="pt-[72px]">
         {/* Breadcrumb */}
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center gap-2 text-sm text-charcoal-40">
-          <Link href="/" className="hover:text-gold transition-colors">Home</Link>
+          <Link href="/" className="hover:text-brand transition-colors">Home</Link>
           <ChevronRight size={12} />
           <span className="text-charcoal">FAQ</span>
         </nav>
 
         {/* Hero */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 py-10 space-y-4">
-          <p className="text-sm font-semibold uppercase tracking-widest text-gold">Help Center</p>
+          <p className="text-sm font-semibold uppercase tracking-widest text-brand">Help Center</p>
           <h1 className="text-3xl md:text-4xl font-bold text-charcoal">
             Frequently Asked Questions
           </h1>
           <p className="text-charcoal-70 max-w-2xl leading-relaxed">
             Common questions about our cleaning services, pricing, scheduling, and what to expect. Can&apos;t find your answer?{" "}
-            <Link href="/contact" className="text-gold hover:text-gold-dark underline transition-colors">
+            <Link href="/contact" className="text-brand hover:text-brand-dark underline transition-colors">
               Reach out directly.
             </Link>
           </p>
@@ -204,7 +199,7 @@ export default function FAQPage() {
               <a
                 key={c.title}
                 href={`#${c.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}
-                className="px-3 py-1.5 text-xs font-medium bg-cream border border-charcoal/10 rounded-full text-charcoal hover:border-gold hover:text-gold transition-colors"
+                className="px-3 py-1.5 text-xs font-medium bg-cream border border-charcoal/10 rounded-full text-charcoal hover:border-brand hover:text-brand transition-colors"
               >
                 {c.title}
               </a>
@@ -220,28 +215,16 @@ export default function FAQPage() {
               id={category.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}
             >
               <h2 className="text-xl font-bold text-charcoal mb-6">{category.title}</h2>
-              <Accordion multiple={false} className="space-y-2">
-                {category.faqs.map((faq, i) => (
-                  <AccordionItem
-                    key={i}
-                    value={`${category.title}-${i}`}
-                    className="bg-cream-100 rounded-xl border border-charcoal/10 px-4"
-                  >
-                    <AccordionTrigger className="text-sm font-semibold text-charcoal text-left py-4 hover:text-gold hover:no-underline">
-                      {faq.q}
-                    </AccordionTrigger>
-                    <AccordionContent className="text-sm text-charcoal-70 leading-relaxed pb-4">
-                      {faq.a}
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
+              <FAQAccordion
+                namespace={category.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}
+                items={category.faqs.map((faq) => ({ question: faq.q, answer: faq.a }))}
+              />
             </section>
           ))}
         </div>
 
         {/* CTA */}
-        <section className="bg-gold">
+        <section className="bg-brand">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 py-14 text-center space-y-4">
             <h2 className="text-2xl font-bold text-charcoal">
               Ready to book?

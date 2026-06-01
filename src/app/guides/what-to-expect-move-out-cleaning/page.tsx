@@ -147,9 +147,9 @@ export default function MoveOutCleaningGuidePage() {
       <main className="pt-[72px]">
         {/* Breadcrumb */}
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center gap-2 text-sm text-charcoal-40 flex-wrap">
-          <Link href="/" className="hover:text-gold transition-colors">Home</Link>
+          <Link href="/" className="hover:text-brand transition-colors">Home</Link>
           <ChevronRight size={12} />
-          <Link href="/guides" className="hover:text-gold transition-colors">Guides</Link>
+          <Link href="/guides" className="hover:text-brand transition-colors">Guides</Link>
           <ChevronRight size={12} />
           <span className="text-charcoal">Move-Out Cleaning</span>
         </nav>
@@ -157,7 +157,7 @@ export default function MoveOutCleaningGuidePage() {
         {/* Article header */}
         <article className="max-w-3xl mx-auto px-4 sm:px-6 py-10">
           <header className="space-y-4 mb-10">
-            <p className="text-sm font-semibold uppercase tracking-widest text-gold">Move-Out Guide</p>
+            <p className="text-sm font-semibold uppercase tracking-widest text-brand">Move-Out Guide</p>
             <h1 className="text-3xl md:text-4xl font-bold text-charcoal leading-tight">
               What to Expect from a Professional Move-Out Cleaning
             </h1>
@@ -165,7 +165,7 @@ export default function MoveOutCleaningGuidePage() {
               <span className="flex items-center gap-1.5"><Clock size={13} /> 7 min read</span>
               <span>Updated April 2026</span>
             </div>
-            <p className="text-charcoal-70 text-lg leading-relaxed border-l-4 border-gold pl-4">
+            <p className="text-charcoal-70 text-lg leading-relaxed border-l-4 border-brand pl-4">
               A professional move-out cleaning is a thorough, empty-home deep clean designed to hand a property over in spotless condition — inside cabinets, inside the oven, scrubbed grout, polished fixtures, and cleaned interior windows. It typically takes 4–8 hours for a standard home and costs between $250 and $500 depending on size. For tenants, a professional move-out clean significantly improves your chances of getting the full security deposit back. For sellers and landlords, it creates a strong first impression for buyers or new tenants.
             </p>
           </header>
@@ -335,7 +335,7 @@ export default function MoveOutCleaningGuidePage() {
                 We can also provide a service receipt after the clean — useful for sellers who want to document the condition for buyers, and for tenants who want proof of professional cleaning for their landlord.
               </p>
               <p>
-                If you&apos;re an agent who regularly needs reliable move-out or pre-listing cleans in Monmouth, Ocean, or Middlesex County, <Link href="/contact" className="text-gold hover:text-gold-dark underline transition-colors font-medium">reach out directly</Link> — we work well with agents who need consistent, accountable turnaround.
+                If you&apos;re an agent who regularly needs reliable move-out or pre-listing cleans in Monmouth, Ocean, or Middlesex County, <Link href="/contact" className="text-brand hover:text-brand-dark underline transition-colors font-medium">reach out directly</Link> — we work well with agents who need consistent, accountable turnaround.
               </p>
             </section>
 
@@ -373,7 +373,7 @@ export default function MoveOutCleaningGuidePage() {
             </section>
 
             {/* CTA block */}
-            <div className="bg-gold/10 border border-gold/20 rounded-2xl p-6 space-y-4">
+            <div className="bg-brand/10 border border-brand/20 rounded-2xl p-6 space-y-4">
               <p className="font-bold text-charcoal">Ready to book a move-out clean?</p>
               <p className="text-sm">
                 Submit the booking form with your home details and moving timeline. We return a firm quote within 24 hours and can coordinate with your closing date, final walkthrough, or lease end.
@@ -381,13 +381,13 @@ export default function MoveOutCleaningGuidePage() {
               <div className="flex flex-wrap gap-3">
                 <Link
                   href="/book"
-                  className="inline-flex items-center bg-gold text-charcoal font-semibold px-5 py-2.5 rounded-full hover:bg-gold-dark transition-colors text-sm"
+                  className="inline-flex items-center bg-brand text-charcoal font-semibold px-5 py-2.5 rounded-full hover:bg-brand-dark transition-colors text-sm"
                 >
                   Get a Quote
                 </Link>
                 <Link
                   href="/services/move-in-move-out"
-                  className="inline-flex items-center text-sm font-medium text-gold hover:text-gold-dark transition-colors"
+                  className="inline-flex items-center text-sm font-medium text-brand hover:text-brand-dark transition-colors"
                 >
                   See move-in / move-out service details →
                 </Link>
@@ -399,22 +399,22 @@ export default function MoveOutCleaningGuidePage() {
         {/* Related guides */}
         <section className="bg-cream-100 border-y border-charcoal/5">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 py-10 space-y-4">
-            <p className="text-sm font-semibold uppercase tracking-widest text-gold">Related</p>
+            <p className="text-sm font-semibold uppercase tracking-widest text-brand">Related</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <Link
                 href="/guides/how-much-does-house-cleaning-cost-nj"
-                className="group bg-cream rounded-xl border border-charcoal/10 p-4 hover:border-gold/30 transition-all space-y-1"
+                className="group bg-cream rounded-xl border border-charcoal/10 p-4 hover:border-brand/30 transition-all space-y-1"
               >
-                <p className="font-semibold text-charcoal text-sm group-hover:text-gold transition-colors">
+                <p className="font-semibold text-charcoal text-sm group-hover:text-brand transition-colors">
                   How Much Does House Cleaning Cost in NJ?
                 </p>
                 <p className="text-xs text-charcoal-40">6 min read</p>
               </Link>
               <Link
                 href="/guides/how-to-prepare-home-for-cleaner"
-                className="group bg-cream rounded-xl border border-charcoal/10 p-4 hover:border-gold/30 transition-all space-y-1"
+                className="group bg-cream rounded-xl border border-charcoal/10 p-4 hover:border-brand/30 transition-all space-y-1"
               >
-                <p className="font-semibold text-charcoal text-sm group-hover:text-gold transition-colors">
+                <p className="font-semibold text-charcoal text-sm group-hover:text-brand transition-colors">
                   How to Prepare Your Home for a Cleaner
                 </p>
                 <p className="text-xs text-charcoal-40">5 min read</p>

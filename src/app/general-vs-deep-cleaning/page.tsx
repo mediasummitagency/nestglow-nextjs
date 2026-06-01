@@ -55,14 +55,14 @@ export default function GeneralVsDeepPage() {
       <main className="pt-[72px]">
         {/* Breadcrumb */}
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center gap-2 text-sm text-charcoal-40">
-          <Link href="/" className="hover:text-gold transition-colors">Home</Link>
+          <Link href="/" className="hover:text-brand transition-colors">Home</Link>
           <ChevronRight size={12} />
           <span className="text-charcoal">General vs. Deep Cleaning</span>
         </nav>
 
         {/* Hero */}
         <section className="max-w-3xl mx-auto px-4 sm:px-6 py-10 md:py-16 space-y-6">
-          <p className="text-sm font-semibold uppercase tracking-widest text-gold">
+          <p className="text-sm font-semibold uppercase tracking-widest text-brand">
             Cleaning explained
           </p>
           <h1 className="text-3xl md:text-5xl font-bold text-charcoal leading-tight">
@@ -103,7 +103,7 @@ export default function GeneralVsDeepPage() {
                   ))}
                 </ul>
               </div>
-              <div className="bg-cream rounded-2xl p-8 border border-gold/30 space-y-4">
+              <div className="bg-cream rounded-2xl p-8 border border-brand/30 space-y-4">
                 <h3 className="text-lg font-bold text-charcoal">
                   Choose deep cleaning when&hellip;
                 </h3>
@@ -116,7 +116,7 @@ export default function GeneralVsDeepPage() {
                     "You're preparing for a move in or move out",
                   ].map((item) => (
                     <li key={item} className="flex items-start gap-2 text-sm text-charcoal-70">
-                      <span className="text-gold font-bold mt-0.5">+</span>
+                      <span className="text-brand font-bold mt-0.5">+</span>
                       {item}
                     </li>
                   ))}
@@ -147,7 +147,7 @@ export default function GeneralVsDeepPage() {
                   value={`faq-${i}`}
                   className="bg-cream rounded-xl border border-charcoal/10 px-4"
                 >
-                  <AccordionTrigger className="text-sm font-semibold text-charcoal text-left py-4 hover:text-gold hover:no-underline">
+                  <AccordionTrigger className="text-sm font-semibold text-charcoal text-left py-4 hover:text-brand hover:no-underline">
                     {faq.q}
                   </AccordionTrigger>
                   <AccordionContent className="text-sm text-charcoal-70 leading-relaxed pb-4">
@@ -160,7 +160,7 @@ export default function GeneralVsDeepPage() {
         </section>
 
         {/* CTA */}
-        <section className="bg-gold py-16">
+        <section className="bg-brand py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center space-y-6">
             <h2 className="text-3xl font-bold text-charcoal">
               Ready to book? Tell us about your home.

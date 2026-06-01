@@ -17,22 +17,26 @@ const props = {
     "Recurring and one-time house cleaning for NJ homes. Weekly, bi-weekly, or monthly. Insured, bonded, and guaranteed. Serving Monmouth, Ocean, and Middlesex County.",
   introParagraph:
     "NestGlow Co provides residential cleaning services for homes across Monmouth, Ocean, and Middlesex County, NJ. Our team handles weekly, bi-weekly, and monthly maintenance cleans, as well as one-time deep cleans, with the same care and consistency every visit. We are fully insured and bonded, and every clean is backed by a 24-hour satisfaction guarantee.",
-  whatsIncluded: [
-    "Dusting of all surfaces, including baseboards and door frames",
-    "Kitchen — countertops, appliance exteriors, sink, and floor",
-    "Bathrooms — tub, shower, toilet, sink, and mirrors",
-    "Bedrooms — dusting, vacuuming, and surface polish",
-    "Floors — swept, mopped, and vacuumed throughout",
-    "Trash removed and bins wiped",
+  features: [
+    {
+      badge: "TRANSPARENT PRICING",
+      headline: "Know what you're paying before we show up",
+      subhead: "No hourly estimates. No surprise invoices at the door.",
+      body: "Most cleaning companies give you a ballpark and figure out the rest when they get there. We don't work that way. You tell us about your home — square footage, bedrooms, bathrooms, any specific priorities — and we give you a firm price before a single thing is scheduled. What you're quoted is what you pay. That's it.",
+    },
+    {
+      badge: "EVERY STANDARD CLEAN",
+      headline: "A full clean, not a quick pass",
+      subhead: "Every room. Every visit. No exceptions.",
+      body: "We don't skip the parts that require effort. Your kitchen gets countertops, appliance exteriors, the sink, and the floor — not just a wipe-down. Bathrooms get the tub, shower, toilet, mirrors, and sink scrubbed properly. Every bedroom is dusted and vacuumed, every floor gets swept and mopped, and trash gets pulled and bins wiped before we leave. The same checklist, the same standard, every single time we come through.",
+    },
+    {
+      badge: "WHO THIS IS FOR",
+      headline: "Built for people who actually have lives",
+      subhead: "Flexible scheduling that fits around you, not the other way around.",
+      body: "Our residential clients aren't people with nothing going on — they're busy families, working professionals, hosts, people who just want one less thing to manage. Whether you need weekly maintenance, a bi-weekly rhythm, or a one-time reset before guests arrive, the schedule bends to you. And because we're consistent about who shows up and how we clean, you stop thinking about it after the first visit.",
+    },
   ],
-  bestFor: [
-    "Busy families who want to reclaim their weekends",
-    "Working professionals who value a clean, consistent home",
-    "Hosts preparing for guests or events",
-    "Anyone who wants cleaning off their to-do list for good",
-  ],
-  priceNote:
-    "Residential cleans start around $120 for smaller spaces and scale with bedroom count, bathroom count, and square footage. Our team provides a firm quote after you submit the booking form, before any cleaning begins.",
   faqs: [
     {
       q: "How often should I schedule a cleaning?",

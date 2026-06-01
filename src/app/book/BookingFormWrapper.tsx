@@ -12,6 +12,7 @@ export default function BookingFormWrapper() {
     zip: params.get("zip") ?? undefined,
     propertyType: params.get("property_type") ?? undefined,
     frequency: params.get("frequency") ?? undefined,
+    tier: params.get("tier") ?? undefined,
   };
 
   return <BookingForm prefill={prefill} />;

@@ -43,7 +43,7 @@ export default function ServicesPage() {
       <main className="pt-[72px]">
         {/* Breadcrumb */}
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center gap-2 text-sm text-charcoal-40">
-          <Link href="/" className="hover:text-gold transition-colors">Home</Link>
+          <Link href="/" className="hover:text-brand transition-colors">Home</Link>
           <ChevronRight size={12} />
           <span className="text-charcoal">Services</span>
         </nav>
@@ -67,16 +67,16 @@ export default function ServicesPage() {
                 <Link
                   key={svc.href}
                   href={svc.href}
-                  className="group bg-cream-100 rounded-2xl p-8 border border-transparent hover:border-gold transition-all hover:-translate-y-0.5 space-y-3"
+                  className="group bg-cream-100 rounded-2xl p-8 border border-transparent hover:border-brand transition-all hover:-translate-y-0.5 space-y-3"
                 >
-                  <div className="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center">
-                    <Icon size={18} className="text-gold-dark" />
+                  <div className="w-10 h-10 rounded-full bg-brand/20 flex items-center justify-center">
+                    <Icon size={18} className="text-brand-dark" />
                   </div>
-                  <h2 className="text-xl font-bold text-charcoal group-hover:text-gold transition-colors">
+                  <h2 className="text-xl font-bold text-charcoal group-hover:text-brand transition-colors">
                     {svc.title}
                   </h2>
                   <p className="text-sm text-charcoal-70 leading-relaxed">{svc.copy}</p>
-                  <span className="inline-flex items-center gap-1 text-sm font-semibold text-gold">
+                  <span className="inline-flex items-center gap-1 text-sm font-semibold text-brand">
                     Learn more <ChevronRight size={14} />
                   </span>
                 </Link>
@@ -96,7 +96,7 @@ export default function ServicesPage() {
             </p>
             <Link
               href="/general-vs-deep-cleaning"
-              className="inline-flex items-center gap-2 bg-gold text-charcoal font-semibold px-6 py-3 rounded-full hover:bg-gold-dark transition-colors"
+              className="inline-flex items-center gap-2 bg-brand text-charcoal font-semibold px-6 py-3 rounded-full hover:bg-brand-dark transition-colors"
             >
               See the full comparison <ChevronRight size={14} />
             </Link>
@@ -104,7 +104,7 @@ export default function ServicesPage() {
         </section>
 
         {/* Final CTA */}
-        <section className="bg-gold py-16">
+        <section className="bg-brand py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center space-y-6">
             <h2 className="text-3xl font-bold text-charcoal">Ready to book?</h2>
             <div className="flex flex-wrap items-center justify-center gap-4">

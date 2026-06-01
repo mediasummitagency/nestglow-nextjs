@@ -17,25 +17,26 @@ const props = {
     "Top-to-bottom deep cleaning for NJ homes. First-time cleans, seasonal refreshes, pre-guest and post-construction. Fully insured with a 24-hour satisfaction guarantee.",
   introParagraph:
     "Our deep cleaning service is a thorough, top-to-bottom reset of your home — the kind of clean that hits the spots a regular maintenance clean doesn't cover. It's the right choice for first-time cleans, seasonal refreshes, pre-guest preparation, or any time your home needs more than surface care. Our team handles everything from inside appliances to baseboards to blind slats.",
-  whatsIncluded: [
-    "All surfaces dusted in detail, including ceiling fans and vents",
-    "Baseboards, door frames, and woodwork hand-wiped",
-    "Light switches and doorknobs cleaned and disinfected",
-    "Kitchen — interior microwave, degreased backsplash, cabinet exteriors",
-    "Bathrooms — deep grout scrub, polished fixtures, detailed toilet cleaning",
-    "Bedrooms — under-bed cleaning, closet vacuuming, furniture polish",
-    "Blinds dusted, window sills hand-wiped",
-    "Floors — detailed mopping, edge cleaning",
+  features: [
+    {
+      badge: "TRANSPARENT PRICING",
+      headline: "Priced on what actually needs doing",
+      subhead: "Deep cleans take longer. The quote accounts for that — upfront.",
+      body: "A deep clean takes more time than a standard clean and we price accordingly. The final number depends on your home's size and how long it's been since it was last professionally cleaned. You fill out the booking form, and we give you a firm quote before anything is scheduled. No \"we'll see when we get there.\" The number you receive is the number you pay.",
+    },
+    {
+      badge: "EVERY STANDARD CLEAN",
+      headline: "The areas a regular clean misses",
+      subhead: "Baseboards, grout, ceiling fans, cabinet exteriors — all of it.",
+      body: "A deep clean goes to the places a standard clean skips over. Baseboards and door frames get hand-wiped. Ceiling fans and vents get dusted. The kitchen gets a degreased backsplash and cabinet exteriors scrubbed. Bathrooms get a real grout scrub, not just a surface wipe. Bedrooms get under-bed cleaning and furniture polish. Window sills, blinds, light switches, doorknobs — everything gets touched. It's the reset your home needs before regular service actually works.",
+    },
+    {
+      badge: "WHO THIS IS FOR",
+      headline: "The right starting point before regular service",
+      subhead: "One deep clean changes what \"clean\" means in your home.",
+      body: "Most of our long-term residential clients start with a deep clean before scheduling recurring service — it resets the baseline so every maintenance clean after that actually maintains something. It's also the right call for seasonal refreshes, pre-holiday prep when guests are coming, or post-renovation cleanup when dust gets into everything. If your home hasn't been professionally cleaned in a while, this is where to start.",
+    },
   ],
-  bestFor: [
-    "First-time clients who want a full reset before starting regular service",
-    "Seasonal refreshes (spring cleaning, end-of-summer)",
-    "Pre-holiday prep when guests are coming",
-    "Post-renovation or post-construction cleanup",
-    "Homes that haven't been professionally cleaned in a while",
-  ],
-  priceNote:
-    "Deep cleaning adds approximately $150 to a standard clean and takes longer on-site. Final pricing scales with home size and condition — we'll give you the exact number after you submit the booking form.",
   faqs: [
     {
       q: "How is deep cleaning different from general cleaning?",

@@ -60,7 +60,7 @@ export default function MobileNav({
           </span>
           <button
             onClick={onClose}
-            className="p-2 text-charcoal hover:text-gold transition-colors"
+            className="p-2 text-charcoal hover:text-brand transition-colors"
             aria-label="Close menu"
           >
             <X size={20} />
@@ -74,7 +74,7 @@ export default function MobileNav({
               key={item.href}
               href={item.href}
               onClick={onClose}
-              className="block py-3 text-base font-medium text-charcoal hover:text-gold border-b border-charcoal/5 transition-colors"
+              className="block py-3 text-base font-medium text-charcoal hover:text-brand border-b border-charcoal/5 transition-colors"
             >
               {item.label}
             </Link>
@@ -85,7 +85,7 @@ export default function MobileNav({
         <div className="px-6 py-6 border-t border-charcoal/10 flex flex-col gap-3">
           <a
             href={BUSINESS.phoneHref}
-            className="flex items-center justify-center gap-2 text-sm font-medium text-charcoal hover:text-gold transition-colors"
+            className="flex items-center justify-center gap-2 text-sm font-medium text-charcoal hover:text-brand transition-colors"
           >
             <Phone size={14} />
             {BUSINESS.phone}
@@ -93,7 +93,7 @@ export default function MobileNav({
           <Link
             href="/book"
             onClick={onClose}
-            className="w-full bg-gold text-charcoal text-sm font-semibold px-4 py-3 rounded-full text-center hover:bg-gold-dark transition-colors"
+            className="w-full bg-brand text-charcoal text-sm font-semibold px-4 py-3 rounded-full text-center hover:bg-brand-dark transition-colors"
           >
             Book Cleaning
           </Link>

@@ -5,6 +5,7 @@ import Script from "next/script";
 import { TRACKING, BASE_URL, BUSINESS } from "@/lib/config";
 import SiteNav from "@/components/layout/SiteNav";
 import Footer from "@/components/layout/Footer";
+import MobileStickyBar from "@/components/layout/MobileStickyBar";
 import "./globals.css";
 
 const roboto = Roboto({
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
   description: BUSINESS.tagline,
   openGraph: {
     title: `${BUSINESS.name} | Professional Cleaning in NJ`,
-    description: BUSINESS.tagline,
+    description: `${BUSINESS.tagline} 100% satisfaction guarantee — we'll make it right or it's free.`,
     url: BASE_URL,
     siteName: BUSINESS.name,
     locale: "en_US",
@@ -32,7 +33,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: `${BUSINESS.name} | Professional Cleaning in NJ`,
-    description: BUSINESS.tagline,
+    description: `${BUSINESS.tagline} 100% satisfaction guarantee — we'll make it right or it's free.`,
   },
   robots: { index: true, follow: true },
 };
@@ -65,8 +66,13 @@ export default function RootLayout({
         <Suspense fallback={null}>
           <SiteNav />
         </Suspense>
-        {children}
+        <div className="pb-[72px] md:pb-0">
+          {children}
+        </div>
         <Footer />
+        <Suspense fallback={null}>
+          <MobileStickyBar />
+        </Suspense>
       </body>
     </html>
   );

@@ -43,14 +43,14 @@ export default function GuidesPage() {
       <main className="pt-[72px]">
         {/* Breadcrumb */}
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center gap-2 text-sm text-charcoal-40">
-          <Link href="/" className="hover:text-gold transition-colors">Home</Link>
+          <Link href="/" className="hover:text-brand transition-colors">Home</Link>
           <ChevronRight size={12} />
           <span className="text-charcoal">Guides</span>
         </nav>
 
         {/* Hero */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 py-10 space-y-4">
-          <p className="text-sm font-semibold uppercase tracking-widest text-gold">Resources</p>
+          <p className="text-sm font-semibold uppercase tracking-widest text-brand">Resources</p>
           <h1 className="text-3xl md:text-4xl font-bold text-charcoal">
             Cleaning Guides for NJ Homeowners
           </h1>
@@ -66,10 +66,10 @@ export default function GuidesPage() {
               <Link
                 key={guide.slug}
                 href={`/guides/${guide.slug}`}
-                className="group bg-cream-100 rounded-2xl border border-charcoal/5 p-6 space-y-4 flex flex-col hover:border-gold/30 hover:shadow-sm transition-all"
+                className="group bg-cream-100 rounded-2xl border border-charcoal/5 p-6 space-y-4 flex flex-col hover:border-brand/30 hover:shadow-sm transition-all"
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-semibold uppercase tracking-widest text-gold">
+                  <span className="text-xs font-semibold uppercase tracking-widest text-brand">
                     {guide.category}
                   </span>
                   <span className="flex items-center gap-1 text-xs text-charcoal-40">
@@ -77,13 +77,13 @@ export default function GuidesPage() {
                     {guide.readTime}
                   </span>
                 </div>
-                <h2 className="font-bold text-charcoal text-lg leading-snug group-hover:text-gold transition-colors">
+                <h2 className="font-bold text-charcoal text-lg leading-snug group-hover:text-brand transition-colors">
                   {guide.title}
                 </h2>
                 <p className="text-sm text-charcoal-70 leading-relaxed flex-1">
                   {guide.description}
                 </p>
-                <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-gold group-hover:gap-2.5 transition-all">
+                <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand group-hover:gap-2.5 transition-all">
                   Read guide <ChevronRight size={14} />
                 </span>
               </Link>
@@ -92,7 +92,7 @@ export default function GuidesPage() {
         </section>
 
         {/* CTA */}
-        <section className="bg-gold">
+        <section className="bg-brand">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 py-14 text-center space-y-4">
             <h2 className="text-2xl font-bold text-charcoal">
               Questions not covered here?

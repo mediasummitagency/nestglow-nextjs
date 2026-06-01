@@ -64,20 +64,20 @@ export default function BookPage() {
       <main className="pt-[72px]">
         {/* Breadcrumb */}
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center gap-2 text-sm text-charcoal-40">
-          <Link href="/" className="hover:text-gold transition-colors">Home</Link>
+          <Link href="/" className="hover:text-brand transition-colors">Home</Link>
           <ChevronRight size={12} />
           <span className="text-charcoal">Book Cleaning</span>
         </nav>
 
         {/* Hero */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 py-8 space-y-4">
-          <p className="text-sm font-semibold uppercase tracking-widest text-gold">Booking</p>
+          <p className="text-sm font-semibold uppercase tracking-widest text-brand">Booking</p>
           <h1 className="text-3xl md:text-4xl font-bold text-charcoal">Book Your Cleaning</h1>
           <p className="text-charcoal-70">Tell us about your space. We&apos;ll confirm your appointment within 24 hours.</p>
           <div className="flex flex-wrap gap-4 text-sm text-charcoal-70">
-            <span className="flex items-center gap-1.5"><ShieldCheck size={14} className="text-gold" /> Insured &amp; bonded</span>
-            <span className="flex items-center gap-1.5"><ThumbsUp size={14} className="text-gold" /> Background-checked team</span>
-            <span className="flex items-center gap-1.5"><Award size={14} className="text-gold" /> 24-hour satisfaction guarantee</span>
+            <span className="flex items-center gap-1.5"><ShieldCheck size={14} className="text-brand" /> Insured &amp; bonded</span>
+            <span className="flex items-center gap-1.5"><ThumbsUp size={14} className="text-brand" /> Background-checked team</span>
+            <span className="flex items-center gap-1.5"><Award size={14} className="text-brand" /> 24-hour satisfaction guarantee</span>
           </div>
         </section>
 
@@ -103,7 +103,7 @@ export default function BookPage() {
                     const Icon = p.icon;
                     return (
                       <li key={p.label} className="flex items-center gap-3 text-sm text-charcoal-70">
-                        <Icon size={16} className="text-gold shrink-0" />
+                        <Icon size={16} className="text-brand shrink-0" />
                         {p.label}
                       </li>
                     );
@@ -116,14 +116,14 @@ export default function BookPage() {
                 <h2 className="font-bold text-charcoal text-sm uppercase tracking-widest">
                   Prefer to call?
                 </h2>
-                <PhoneLink className="text-lg font-bold text-gold hover:text-gold-dark transition-colors" />
+                <PhoneLink className="text-lg font-bold text-brand hover:text-brand-dark transition-colors" />
                 <p className="text-xs text-charcoal-40">
                   We answer calls and texts during business hours.
                 </p>
               </div>
 
               {/* Testimonial */}
-              <blockquote className="bg-gold/10 border border-gold/20 rounded-2xl p-6 space-y-3">
+              <blockquote className="bg-brand/10 border border-brand/20 rounded-2xl p-6 space-y-3">
                 <p className="text-sm text-charcoal-70 italic leading-relaxed">
                   &ldquo;Caroline is extremely dependable and does a great job. My house is sparkling after she leaves!&rdquo;
                 </p>
@@ -144,7 +144,7 @@ export default function BookPage() {
                   value={`faq-${i}`}
                   className="bg-cream rounded-xl border border-charcoal/10 px-4"
                 >
-                  <AccordionTrigger className="text-sm font-semibold text-charcoal text-left py-4 hover:text-gold hover:no-underline">
+                  <AccordionTrigger className="text-sm font-semibold text-charcoal text-left py-4 hover:text-brand hover:no-underline">
                     {faq.q}
                   </AccordionTrigger>
                   <AccordionContent className="text-sm text-charcoal-70 leading-relaxed pb-4">

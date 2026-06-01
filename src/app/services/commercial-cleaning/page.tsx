@@ -17,22 +17,26 @@ const props = {
     "Office, retail, and professional suite cleaning across Monmouth, Ocean, and Middlesex County, NJ. After-hours and recurring schedules available. Insured and bonded.",
   introParagraph:
     "NestGlow Co provides commercial cleaning services for offices, retail storefronts, and professional suites in Monmouth, Ocean, and Middlesex County, NJ. We build cleaning schedules around your business hours — including after-hours and weekend service — and provide consistent, professional-grade cleaning backed by full insurance and bonding.",
-  whatsIncluded: [
-    "Shared areas — reception, breakrooms, conference rooms",
-    "Desk and workstation cleaning (as requested)",
-    "Restroom deep cleaning and sanitization",
-    "Kitchen and break-room maintenance",
-    "Floor care — sweeping, mopping, vacuuming",
-    "Trash and recycling removal",
+  features: [
+    {
+      badge: "TRANSPARENT PRICING",
+      headline: "Custom quotes, not guesswork",
+      subhead: "No ballpark numbers. No per-hour estimates that drift.",
+      body: "Commercial cleaning isn't one-size-fits-all, and we don't price it like it is. Your quote depends on square footage, schedule, and what's actually in scope — reception areas, restrooms, break rooms, workstations, or some combination. We do a brief walk-through of your space first, then give you a firm number. No surprises when the month closes.",
+    },
+    {
+      badge: "EVERY STANDARD CLEAN",
+      headline: "Every area that matters to your clients",
+      subhead: "Shared spaces, restrooms, break rooms — covered every visit.",
+      body: "Every commercial clean covers the areas your clients and staff actually see: reception, conference rooms, and shared spaces get cleaned and straightened. Restrooms are deep-cleaned and sanitized. Floors get swept, mopped, and vacuumed throughout. Trash and recycling are pulled. And because we work after hours, your team walks into a ready space every morning without any disruption to the workday.",
+    },
+    {
+      badge: "WHO THIS IS FOR",
+      headline: "For businesses where the space says something",
+      subhead: "Weekly, bi-weekly, or a custom schedule that fits your operation.",
+      body: "A clean office isn't a luxury — for most businesses, it's part of the impression. Whether you run a professional suite, a retail storefront, or a small office with a high-traffic break room, the standard doesn't change. Our commercial clients book recurring service because consistency is the whole point. You shouldn't have to think about it — it should just be done.",
+    },
   ],
-  bestFor: [
-    "Small to mid-sized offices needing weekly or bi-weekly service",
-    "Retail storefronts wanting a customer-ready space every morning",
-    "Professional suites where cleanliness signals professionalism",
-    "Businesses that need after-hours cleaning to avoid disrupting staff",
-  ],
-  priceNote:
-    "Commercial pricing depends on square footage, frequency, and scope. We provide custom quotes after a brief walk-through of your space — not over the phone.",
   faqs: [
     {
       q: "Do you offer after-hours or weekend cleaning?",

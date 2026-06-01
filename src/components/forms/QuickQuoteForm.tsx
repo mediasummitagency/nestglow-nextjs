@@ -60,7 +60,7 @@ export default function QuickQuoteForm() {
         </p>
         <Link
           href="/book"
-          className="inline-block bg-gold text-charcoal font-semibold px-6 py-3 rounded-full hover:bg-gold-dark transition-colors"
+          className="inline-block bg-brand text-charcoal font-semibold px-6 py-3 rounded-full hover:bg-brand-dark transition-colors"
         >
           Book full appointment
         </Link>
@@ -114,7 +114,7 @@ export default function QuickQuoteForm() {
         <div className="space-y-1">
           <Label className="text-sm font-medium text-charcoal">Property type</Label>
           <Select value={propertyType} onValueChange={(v) => setPropertyType(v ?? "")} name="propertyType">
-            <SelectTrigger className="bg-white border-charcoal/20">
+            <SelectTrigger className="w-full bg-white border-charcoal/20">
               <SelectValue placeholder="Select..." />
             </SelectTrigger>
             <SelectContent>
@@ -129,7 +129,7 @@ export default function QuickQuoteForm() {
         <div className="space-y-1">
           <Label className="text-sm font-medium text-charcoal">Frequency</Label>
           <Select value={frequency} onValueChange={(v) => setFrequency(v ?? "")} name="frequency">
-            <SelectTrigger className="bg-white border-charcoal/20">
+            <SelectTrigger className="w-full bg-white border-charcoal/20">
               <SelectValue placeholder="Select..." />
             </SelectTrigger>
             <SelectContent>
@@ -143,7 +143,7 @@ export default function QuickQuoteForm() {
       </div>
 
       {state === "error" && (
-        <p className="text-sm text-terracotta">
+        <p className="text-sm text-teal">
           Something went wrong. Please call us at{" "}
           <a href="tel:+17326140192" className="underline">
             (732) 614-0192
@@ -156,7 +156,7 @@ export default function QuickQuoteForm() {
         <button
           type="submit"
           disabled={state === "submitting"}
-          className="bg-gold text-charcoal font-semibold px-8 py-3 rounded-full hover:bg-gold-dark transition-colors disabled:opacity-60"
+          className="bg-brand text-charcoal font-semibold px-8 py-3 rounded-full hover:bg-brand-dark transition-colors disabled:opacity-60"
         >
           {state === "submitting" ? "Sending..." : "Get a Quick Quote"}
         </button>

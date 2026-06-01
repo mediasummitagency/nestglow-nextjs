@@ -153,9 +153,9 @@ export default function PrepareForCleanerPage() {
       <main className="pt-[72px]">
         {/* Breadcrumb */}
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center gap-2 text-sm text-charcoal-40 flex-wrap">
-          <Link href="/" className="hover:text-gold transition-colors">Home</Link>
+          <Link href="/" className="hover:text-brand transition-colors">Home</Link>
           <ChevronRight size={12} />
-          <Link href="/guides" className="hover:text-gold transition-colors">Guides</Link>
+          <Link href="/guides" className="hover:text-brand transition-colors">Guides</Link>
           <ChevronRight size={12} />
           <span className="text-charcoal">How to Prepare for a Cleaner</span>
         </nav>
@@ -163,7 +163,7 @@ export default function PrepareForCleanerPage() {
         {/* Article header */}
         <article className="max-w-3xl mx-auto px-4 sm:px-6 py-10">
           <header className="space-y-4 mb-10">
-            <p className="text-sm font-semibold uppercase tracking-widest text-gold">Client Guide</p>
+            <p className="text-sm font-semibold uppercase tracking-widest text-brand">Client Guide</p>
             <h1 className="text-3xl md:text-4xl font-bold text-charcoal leading-tight">
               How to Prepare Your Home for a Cleaner (5-Minute Checklist)
             </h1>
@@ -171,7 +171,7 @@ export default function PrepareForCleanerPage() {
               <span className="flex items-center gap-1.5"><Clock size={13} /> 5 min read</span>
               <span>Updated April 2026</span>
             </div>
-            <p className="text-charcoal-70 text-lg leading-relaxed border-l-4 border-gold pl-4">
+            <p className="text-charcoal-70 text-lg leading-relaxed border-l-4 border-brand pl-4">
               Preparing for a cleaner takes about 5 minutes and makes a meaningful difference in the result. Focus on putting away personal items and clutter so surfaces are clear, secure pets in a comfortable space, and leave a note about any specific areas you want prioritized. You don&apos;t need to pre-clean — that&apos;s the cleaner&apos;s job.
             </p>
           </header>
@@ -329,7 +329,7 @@ export default function PrepareForCleanerPage() {
             </section>
 
             {/* CTA block */}
-            <div className="bg-gold/10 border border-gold/20 rounded-2xl p-6 space-y-4">
+            <div className="bg-brand/10 border border-brand/20 rounded-2xl p-6 space-y-4">
               <p className="font-bold text-charcoal">Ready to book?</p>
               <p className="text-sm">
                 Submit the booking form with your home details. We return a firm quote within 24 hours — no payment until the cleaning is done and you&apos;re satisfied.
@@ -337,11 +337,11 @@ export default function PrepareForCleanerPage() {
               <div className="flex flex-wrap gap-3">
                 <Link
                   href="/book"
-                  className="inline-flex items-center bg-gold text-charcoal font-semibold px-5 py-2.5 rounded-full hover:bg-gold-dark transition-colors text-sm"
+                  className="inline-flex items-center bg-brand text-charcoal font-semibold px-5 py-2.5 rounded-full hover:bg-brand-dark transition-colors text-sm"
                 >
                   Book a Cleaning
                 </Link>
-                <PhoneLink className="inline-flex items-center text-sm font-medium text-gold hover:text-gold-dark transition-colors" />
+                <PhoneLink className="inline-flex items-center text-sm font-medium text-brand hover:text-brand-dark transition-colors" />
               </div>
             </div>
           </div>
@@ -350,22 +350,22 @@ export default function PrepareForCleanerPage() {
         {/* Related guides */}
         <section className="bg-cream-100 border-y border-charcoal/5">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 py-10 space-y-4">
-            <p className="text-sm font-semibold uppercase tracking-widest text-gold">Related</p>
+            <p className="text-sm font-semibold uppercase tracking-widest text-brand">Related</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <Link
                 href="/guides/how-much-does-house-cleaning-cost-nj"
-                className="group bg-cream rounded-xl border border-charcoal/10 p-4 hover:border-gold/30 transition-all space-y-1"
+                className="group bg-cream rounded-xl border border-charcoal/10 p-4 hover:border-brand/30 transition-all space-y-1"
               >
-                <p className="font-semibold text-charcoal text-sm group-hover:text-gold transition-colors">
+                <p className="font-semibold text-charcoal text-sm group-hover:text-brand transition-colors">
                   How Much Does House Cleaning Cost in NJ?
                 </p>
                 <p className="text-xs text-charcoal-40">6 min read</p>
               </Link>
               <Link
                 href="/guides/what-to-expect-move-out-cleaning"
-                className="group bg-cream rounded-xl border border-charcoal/10 p-4 hover:border-gold/30 transition-all space-y-1"
+                className="group bg-cream rounded-xl border border-charcoal/10 p-4 hover:border-brand/30 transition-all space-y-1"
               >
-                <p className="font-semibold text-charcoal text-sm group-hover:text-gold transition-colors">
+                <p className="font-semibold text-charcoal text-sm group-hover:text-brand transition-colors">
                   What to Expect from a Move-Out Cleaning
                 </p>
                 <p className="text-xs text-charcoal-40">7 min read</p>

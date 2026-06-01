@@ -120,10 +120,10 @@ export default function TermsOfServicePage() {
               </p>
               <p className="text-sm">
                 {BUSINESS.name}<br />
-                <a href={BUSINESS.emailHref} className="text-gold hover:text-gold-dark underline transition-colors">
+                <a href={BUSINESS.emailHref} className="text-brand hover:text-brand-dark underline transition-colors">
                   {BUSINESS.email}
                 </a><br />
-                <a href={BUSINESS.phoneHref} className="text-gold hover:text-gold-dark underline transition-colors">
+                <a href={BUSINESS.phoneHref} className="text-brand hover:text-brand-dark underline transition-colors">
                   {BUSINESS.phone}
                 </a>
               </p>
@@ -132,7 +132,7 @@ export default function TermsOfServicePage() {
           </div>
 
           <div className="mt-12 pt-8 border-t border-charcoal/10">
-            <Link href="/" className="text-sm text-gold hover:text-gold-dark underline transition-colors">
+            <Link href="/" className="text-sm text-brand hover:text-brand-dark underline transition-colors">
               ← Back to home
             </Link>
           </div>
