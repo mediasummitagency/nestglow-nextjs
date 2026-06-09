@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ChevronRight, Star } from "lucide-react";
 import { BASE_URL, BUSINESS } from "@/lib/config";
 import { reviews } from "@/lib/reviews";
+import { PageHero } from "@/components/layout/PageHero";
 
 export const metadata: Metadata = {
   title: "Customer Reviews | NestGlow Co",
@@ -52,30 +53,25 @@ export default function ReviewsPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(aggregateRatingSchema) }}
       />
-      <main className="pt-[72px]">
-        {/* Breadcrumb */}
-        <nav className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center gap-2 text-sm text-charcoal-40">
-          <Link href="/" className="hover:text-brand transition-colors">Home</Link>
-          <ChevronRight size={12} />
-          <span className="text-charcoal">Reviews</span>
-        </nav>
-
-        {/* Hero */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 py-10 space-y-4">
-          <p className="text-sm font-semibold uppercase tracking-widest text-brand">Client Reviews</p>
-          <h1 className="text-3xl md:text-4xl font-bold text-charcoal">
-            What Our Clients Say
-          </h1>
+      <main>
+        <PageHero
+          eyebrow="Client Reviews"
+          heading="What Our Clients Say"
+          subheading="Every review below is real and unedited — from homeowners across Monmouth County, NJ who have trusted NestGlow Co with their homes."
+          breadcrumbs={[
+            { label: "Home", href: "/" },
+            { label: "Reviews" },
+          ]}
+        >
           <div className="flex items-center gap-3">
-            <StarRow count={5} />
-            <span className="text-charcoal-70 text-sm">
-              5.0 average · {reviews.length} reviews
-            </span>
+            <div className="flex gap-0.5">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star key={i} size={14} className="text-brand fill-brand" />
+              ))}
+            </div>
+            <span className="text-white/70 text-sm">5.0 average · {reviews.length} reviews</span>
           </div>
-          <p className="text-charcoal-70 max-w-2xl leading-relaxed">
-            Every review below is real and unedited — from homeowners across Monmouth County, NJ who have trusted NestGlow Co with their homes.
-          </p>
-        </section>
+        </PageHero>
 
         {/* Reviews grid */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 pb-16">

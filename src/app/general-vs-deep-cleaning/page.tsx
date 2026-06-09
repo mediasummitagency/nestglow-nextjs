@@ -4,6 +4,7 @@ import { ChevronRight } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { BASE_URL, BUSINESS } from "@/lib/config";
 import ComparisonTable from "@/components/sections/ComparisonTable";
+import { PageHero } from "@/components/layout/PageHero";
 
 export const metadata: Metadata = {
   title: "General Cleaning vs. Deep Cleaning — What's the Difference?",
@@ -52,26 +53,16 @@ export default function GeneralVsDeepPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
-      <main className="pt-[72px]">
-        {/* Breadcrumb */}
-        <nav className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center gap-2 text-sm text-charcoal-40">
-          <Link href="/" className="hover:text-brand transition-colors">Home</Link>
-          <ChevronRight size={12} />
-          <span className="text-charcoal">General vs. Deep Cleaning</span>
-        </nav>
-
-        {/* Hero */}
-        <section className="max-w-3xl mx-auto px-4 sm:px-6 py-10 md:py-16 space-y-6">
-          <p className="text-sm font-semibold uppercase tracking-widest text-brand">
-            Cleaning explained
-          </p>
-          <h1 className="text-3xl md:text-5xl font-bold text-charcoal leading-tight">
-            General Cleaning vs. Deep Cleaning: What&apos;s the Difference?
-          </h1>
-          <p className="text-base md:text-lg text-charcoal-70 leading-relaxed">
-            The short answer: a general cleaning keeps your home maintained week to week, while a deep cleaning is a top-to-bottom reset that hits the spots regular cleans don&apos;t cover. General cleans are for ongoing maintenance; deep cleans are for first-time service, seasonal refreshes, or any time your home needs more than surface care. Here&apos;s the full breakdown.
-          </p>
-        </section>
+      <main>
+        <PageHero
+          eyebrow="Cleaning explained"
+          heading="General Cleaning vs. Deep Cleaning: What's the Difference?"
+          subheading="The short answer: a general cleaning keeps your home maintained week to week, while a deep cleaning is a top-to-bottom reset that hits the spots regular cleans don't cover. General cleans are for ongoing maintenance; deep cleans are for first-time service, seasonal refreshes, or any time your home needs more than surface care. Here's the full breakdown."
+          breadcrumbs={[
+            { label: "Home", href: "/" },
+            { label: "General vs. Deep Cleaning" },
+          ]}
+        />
 
         {/* Comparison table */}
         <section className="max-w-5xl mx-auto px-4 sm:px-6 pb-16">

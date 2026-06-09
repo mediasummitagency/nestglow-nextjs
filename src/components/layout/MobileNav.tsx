@@ -15,7 +15,6 @@ const navItems = [
   { label: "Monmouth County", href: "/cleaning-services/monmouth-county" },
   { label: "Ocean County", href: "/cleaning-services/ocean-county" },
   { label: "Middlesex County", href: "/cleaning-services/middlesex-county" },
-  { label: "Guides", href: "/guides" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
   { label: "FAQ", href: "/faq" },

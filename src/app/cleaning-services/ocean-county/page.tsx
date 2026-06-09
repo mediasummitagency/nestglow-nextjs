@@ -7,6 +7,7 @@ import { getTownsByCounty } from "@/lib/towns";
 import PhoneLink from "@/components/PhoneLink";
 import { TrustPillars } from "@/components/sections/TrustPillars";
 import { TrustBadges } from "@/components/sections/TrustBadges";
+import { PageHero } from "@/components/layout/PageHero";
 import Tiers from "@/components/sections/Tiers";
 import { SignatureProcess } from "@/components/sections/SignatureProcess";
 import CtaBlock from "@/components/sections/CtaBlock";
@@ -88,75 +89,39 @@ export default async function OceanCountyPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
-      <main className="pt-[72px]">
-
-        {/* Breadcrumb */}
-        <nav className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center gap-2 text-sm text-charcoal-40 flex-wrap">
-          <Link href="/" className="hover:text-brand transition-colors">Home</Link>
-          <ChevronRight size={12} />
-          <Link href="/cleaning-services" className="hover:text-brand transition-colors">Cleaning Services</Link>
-          <ChevronRight size={12} />
-          <span className="text-charcoal">Ocean County</span>
-          {town && (
-            <>
-              <ChevronRight size={12} />
-              <span className="text-charcoal">{town}</span>
-            </>
-          )}
-        </nav>
-
-        {/* Hero */}
-        <section className="bg-white py-14 md:py-20">
-          <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center space-y-5">
-            <p className="text-sm font-semibold uppercase tracking-widest text-brand">
-              Cleaning services in Ocean County
-            </p>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-charcoal leading-tight">
-              {town
-                ? `Cleaning services for ${town} homes.`
-                : "Cleaning services for Ocean County homes."}
-            </h1>
-            <p className="text-lg text-charcoal-70 leading-relaxed">
-              10+ years of trust serving {place}. Pick your plan below — Glow, Signature Glow, or Full Glow.
-            </p>
+      <main>
+        <PageHero
+          eyebrow="Cleaning services in Ocean County"
+          heading={town ? `Cleaning services for ${town} homes.` : "Cleaning services for Ocean County homes."}
+          subheading={`10+ years of trust serving ${place}. Pick your plan below — Glow, Signature Glow, or Full Glow.`}
+          heroFootnote={
             <div className="flex items-center justify-center gap-1.5">
               {[...Array(5)].map((_, i) => (
                 <Star key={i} size={14} className="fill-brand stroke-brand" />
               ))}
-              <span className="ml-1 text-sm text-charcoal-40">Trusted by homeowners across NJ</span>
+              <span className="ml-1 text-sm text-white/50">Trusted by homeowners across NJ</span>
             </div>
-            <div className="flex flex-wrap justify-center gap-4 pt-2">
-              <Link
-                href="#plans"
-                className="inline-flex items-center bg-brand text-charcoal font-semibold px-7 py-3.5 rounded-full hover:bg-brand-dark transition-colors text-sm"
-              >
-                See plans
-              </Link>
-              <PhoneLink className="inline-flex items-center border border-charcoal/20 text-charcoal font-semibold px-7 py-3.5 rounded-full hover:border-brand hover:text-brand transition-colors text-sm" />
-            </div>
-            <TrustPillars />
+          }
+          centered
+          fullHeight
+        >
+          <div className="flex flex-wrap justify-center gap-4">
+            <Link
+              href="#plans"
+              className="inline-flex items-center justify-center w-44 bg-brand text-charcoal font-semibold py-3.5 rounded-full hover:bg-brand-dark transition-colors text-sm"
+            >
+              See plans
+            </Link>
+            <PhoneLink className="inline-flex items-center justify-center w-44 border border-white/40 text-white font-semibold py-3.5 rounded-full hover:border-brand hover:text-brand transition-colors text-sm" />
           </div>
-        </section>
+          <TrustPillars variant="dark" />
+        </PageHero>
 
         {/* Trust badges */}
         <TrustBadges />
 
-        {/* Tiers */}
-        <section id="plans" className="bg-white py-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <Suspense fallback={null}>
-              <Tiers
-                heading={`Choose the best plan for your ${place} home`}
-                subtitle="Three packages built around how you live. Every one of them a NestGlow Signature Clean."
-                zipOverride={params.zip}
-                townOverride={params.town}
-              />
-            </Suspense>
-          </div>
-        </section>
-
         {/* Signature Process */}
-        <SignatureProcess heading="What's included in every NestGlow visit" />
+        <SignatureProcess heading="What's included in every NestGlow visit" hideCta />
 
         {/* CTA — book */}
         <div className="max-w-3xl mx-auto px-4 sm:px-6 py-10">
@@ -236,11 +201,11 @@ export default async function OceanCountyPage({
             </div>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {towns.map((t) => (
+            {towns.map((t, i) => (
               <Link
                 key={t.slug}
                 href={`/cleaning-services/${t.slug}`}
-                className="group bg-cream-100 rounded-xl border border-charcoal/5 p-5 hover:border-brand/30 hover:shadow-sm transition-all"
+                className={`group bg-cream-100 rounded-xl border border-charcoal/5 p-5 hover:border-brand/30 hover:shadow-sm transition-all${i === towns.length - 1 && towns.length % 3 === 1 ? " lg:col-start-2" : ""}`}
               >
                 <div className="flex items-center justify-between">
                   <div>
@@ -269,11 +234,6 @@ export default async function OceanCountyPage({
           </div>
         </section>
 
-        {/* CTA — phone */}
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 py-6 pb-14">
-          <CtaBlock variant="phone" />
-        </div>
-
         {/* FAQ */}
         <FAQ
           headline="Questions about Ocean County cleaning"
@@ -281,6 +241,20 @@ export default async function OceanCountyPage({
           items={countyFaqs.map((f) => ({ question: f.question, answer: f.answer }))}
           cta={{ label: "See all FAQs", href: "/faq" }}
         />
+
+        {/* Tiers */}
+        <section id="plans" className="bg-white py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6">
+            <Suspense fallback={null}>
+              <Tiers
+                heading={`Choose the best plan for your ${place} home`}
+                subtitle="Three packages built around how you live. Every one of them a NestGlow Signature Clean."
+                zipOverride={params.zip}
+                townOverride={params.town}
+              />
+            </Suspense>
+          </div>
+        </section>
 
       </main>
     </>

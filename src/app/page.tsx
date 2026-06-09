@@ -14,6 +14,7 @@ import { TrustBadges } from "@/components/sections/TrustBadges";
 import { ZipRouter } from "@/components/forms/ZipRouter";
 import Tiers from "@/components/sections/Tiers";
 import { Testimonials } from "@/components/sections/Testimonials";
+import { ScrollHint } from "@/components/ui/ScrollHint";
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -40,14 +41,14 @@ const services = [
     href: "/services/move-in-move-out",
     icon: Truck,
     title: "Move In / Move Out",
-    copy: "Empty-home deep cleans that make the next chapter simpler — for sellers, buyers, and renters.",
+    copy: "Empty-home deep cleans for sellers, buyers, and renters making the next move.",
   },
 ];
 
 const howItWorks = [
-  { step: "1", title: "Enter your ZIP", image: "/how-step-1.jpg", alt: "Homeowner relaxing while booking online", body: "We check your area and show you plans built for your home." },
-  { step: "2", title: "Pick your plan", image: "/how-step-2.jpg", alt: "A NestGlow cleaner at work in a bright home", body: "Glow, Signature Glow, or Full Glow — each one a NestGlow Signature Clean." },
-  { step: "3", title: "Your home glows", image: "/how-step-3.jpg", alt: "A homeowner enjoying a spotless living room", body: "Our insured, background-checked team arrives on time and leaves your space spotless." },
+  { step: "1", title: "Enter your ZIP", image: "/images/home/how-step-1.png", alt: "Homeowner relaxing while booking online", body: "We check your area and show you plans built for your home." },
+  { step: "2", title: "Pick your plan", image: "/images/home/how-step-2.png", alt: "A NestGlow cleaner at work in a bright home", body: "Glow, Signature Glow, or Full Glow. Every one a NestGlow Signature Clean." },
+  { step: "3", title: "Your home glows", image: "/images/home/how-step-3.png", alt: "A homeowner enjoying a spotless living room", body: "Our insured, background-checked team arrives on time and leaves your space spotless." },
 ];
 
 const counties = [
@@ -60,19 +61,19 @@ const counties = [
 const homeFaqs = [
   {
     q: "How much does house cleaning cost in NJ?",
-    a: "Most homes in Monmouth, Ocean, and Middlesex County run between $140 and $400 per clean depending on home size and service type. We provide a firm quote before any work begins — no surprises.",
+    a: "Most homes in Monmouth, Ocean, and Middlesex County run between $140 and $400 per clean depending on home size and service type. We give you a firm quote before any work begins, so there are no surprises.",
   },
   {
     q: "Do I need to be home during the cleaning?",
-    a: "No. Most of our clients leave a key or provide entry instructions. Our team is background-checked and fully insured, so you can go about your day with complete peace of mind.",
+    a: "No. Most of our clients leave a key or provide entry instructions. Our team is background-checked and fully insured, so you can go about your day while we work.",
   },
   {
     q: "What's included in a standard cleaning?",
-    a: "A standard clean covers all living areas, bedrooms, bathrooms, and the kitchen — dusting, vacuuming, mopping, sanitizing, and tidying throughout. Deep cleaning and add-ons are available for a more thorough refresh.",
+    a: "A standard clean covers all living areas, bedrooms, bathrooms, and the kitchen: dusting, vacuuming, mopping, sanitizing, and tidying throughout. Deep cleaning and add-ons are available for a more thorough refresh.",
   },
   {
     q: "Are you insured and bonded?",
-    a: "Yes. NestGlow Co is fully insured and bonded. If anything is ever damaged during a clean, you're covered — no awkward conversations, no out-of-pocket costs on your end.",
+    a: "Yes. NestGlow Co is fully insured and bonded. If anything is ever damaged during a clean, you're covered. No awkward conversations, no out-of-pocket costs on your end.",
   },
   {
     q: "How do I book a cleaning?",
@@ -84,11 +85,11 @@ const homeFaqs = [
   },
   {
     q: "What's the difference between a regular clean and a deep clean?",
-    a: "A regular clean maintains your home week to week. A deep clean goes further — inside the oven, inside the fridge, baseboards, door frames, behind appliances, and more. First-time clients typically start with a deep clean.",
+    a: "A regular clean maintains your home week to week. A deep clean goes further: inside the oven, inside the fridge, baseboards, door frames, behind appliances, and more. First-time clients typically start with a deep clean.",
   },
   {
     q: "What if I'm not satisfied with the cleaning?",
-    a: "We come back. Our 100% satisfaction guarantee means if something wasn't cleaned to your standard, we'll return within 24 hours to make it right — at no extra charge.",
+    a: "We come back. Our 100% satisfaction guarantee means if something wasn't cleaned to your standard, we return within 24 hours to make it right at no extra charge.",
   },
 ];
 
@@ -129,7 +130,7 @@ export default function HomePage() {
         {/* Hero — ZIP-first */}
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
           <Image
-            src="/hero-living-room.jpg"
+            src="/images/home/hero.jpg"
             alt=""
             fill
             priority
@@ -148,9 +149,6 @@ export default function HomePage() {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
               Come home to a place that feels like a fresh start.
             </h1>
-            <p className="text-lg text-white/80 leading-relaxed">
-              Enter your ZIP code to see if we serve your area — 10+ years of trust across Monmouth, Ocean, and Middlesex County.
-            </p>
             <div className="flex items-center justify-center gap-1.5">
               {[...Array(5)].map((_, i) => (
                 <Star key={i} size={14} className="fill-brand stroke-brand" />
@@ -159,20 +157,16 @@ export default function HomePage() {
                 Trusted by homeowners across NJ
               </span>
             </div>
-            <div className="pt-2">
-              <Suspense fallback={null}>
-                <ZipRouter variant="hero" />
-              </Suspense>
-            </div>
             <TrustPillars variant="dark" />
           </div>
+          <ScrollHint />
         </section>
 
         {/* Trust badges — Google Verified + Care.com */}
         {/* TODO: Add additional borrowed-authority badges as Caroline collects them — BBB, local press, chamber, etc. */}
         <TrustBadges />
 
-        <SignatureProcess imageSrc="/signature-clean.png" />
+        <SignatureProcess imageSrc="/images/process/signature-clean.png" />
 
         {/* Tiers teaser */}
         <section className="bg-white py-16">
@@ -206,7 +200,7 @@ export default function HomePage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
                 <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-charcoal/10 bg-cream-100">
                   <Image
-                    src="/why-owner.png"
+                    src="/images/home/why-owner.png"
                     alt="NestGlow Co owner at a client's door"
                     fill
                     className="object-cover"
@@ -218,7 +212,7 @@ export default function HomePage() {
                     A name and a face, not a queue
                   </h3>
                   <p className="text-charcoal-70 leading-relaxed">
-                    With NestGlow, when you have a question or need to move a date, a real local person picks up — you&apos;re talking to the owner, not typing into an app&apos;s chat window or waiting on a national support line. We&apos;re based right here in Monmouth, Ocean, and Middlesex County, and we answer to our neighbors.
+                    With NestGlow, when you have a question or need to move a date, a real local person picks up. You&apos;re talking to the owner, not typing into an app&apos;s chat window or waiting on a national support line. We&apos;re based right here in Monmouth, Ocean, and Middlesex County, and we answer to our neighbors.
                   </p>
                 </div>
               </div>
@@ -227,7 +221,7 @@ export default function HomePage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
                 <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-charcoal/10 bg-cream-100 md:order-2">
                   <Image
-                    src="/why-team.png"
+                    src="/images/home/why-team.png"
                     alt="NestGlow Co cleaning team arriving at a home"
                     fill
                     className="object-cover"
@@ -239,7 +233,7 @@ export default function HomePage() {
                     The same hands, every visit
                   </h3>
                   <p className="text-charcoal-70 leading-relaxed">
-                    Booking apps send whoever&apos;s available — a different stranger in your home each time, re-learning where everything goes and what matters to you. NestGlow sends a consistent team that already knows your home, your preferences, and how you like things left. You shouldn&apos;t have to give the tour twice.
+                    Booking apps send whoever&apos;s available, a different stranger in your home each time, re-learning where everything goes and what matters to you. NestGlow sends a consistent team that already knows your home, your preferences, and how you like things left. You shouldn&apos;t have to give the tour twice.
                   </p>
                 </div>
               </div>
@@ -248,7 +242,7 @@ export default function HomePage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
                 <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-charcoal/10 bg-cream-100">
                   <Image
-                    src="/why-guarantee.png"
+                    src="/images/home/why-guarantee.png"
                     alt="A freshly cleaned, spotless living room"
                     fill
                     className="object-cover"
@@ -257,7 +251,7 @@ export default function HomePage() {
                 </div>
                 <div>
                   <h3 className="text-xl font-semibold text-brand-dark mb-2">
-                    If it&apos;s not right, that&apos;s on us — not on you
+                    If it&apos;s not right, that&apos;s on us
                   </h3>
                   <p className="text-charcoal-70 leading-relaxed">
                     Hire an uninsured cleaner off a marketplace and a broken vase or an on-the-job injury can quietly become your liability. With NestGlow, you&apos;re covered, and every clean is backed by our satisfaction guarantee: if something wasn&apos;t done to your standard, we come back and make it right at no extra cost. No disputes through an app, no chasing anyone down.

@@ -16,13 +16,13 @@ const props = {
   metaDescription:
     "Office, retail, and professional suite cleaning across Monmouth, Ocean, and Middlesex County, NJ. After-hours and recurring schedules available. Insured and bonded.",
   introParagraph:
-    "NestGlow Co provides commercial cleaning services for offices, retail storefronts, and professional suites in Monmouth, Ocean, and Middlesex County, NJ. We build cleaning schedules around your business hours — including after-hours and weekend service — and provide consistent, professional-grade cleaning backed by full insurance and bonding.",
+    "NestGlow Co provides commercial cleaning services for offices, retail storefronts, and professional suites in Monmouth, Ocean, and Middlesex County, NJ. We build cleaning schedules around your business hours, including after-hours and weekend service, and deliver consistent cleaning backed by full insurance and bonding.",
   features: [
     {
       badge: "TRANSPARENT PRICING",
       headline: "Custom quotes, not guesswork",
       subhead: "No ballpark numbers. No per-hour estimates that drift.",
-      body: "Commercial cleaning isn't one-size-fits-all, and we don't price it like it is. Your quote depends on square footage, schedule, and what's actually in scope — reception areas, restrooms, break rooms, workstations, or some combination. We do a brief walk-through of your space first, then give you a firm number. No surprises when the month closes.",
+      body: "Every commercial space is different, and we price each one on its own terms. Your quote depends on square footage, schedule, and what's in scope: reception areas, restrooms, break rooms, workstations, or some combination. We walk through your space first, then give you a firm number. No surprises when the month closes.",
     },
     {
       badge: "EVERY STANDARD CLEAN",
@@ -32,9 +32,9 @@ const props = {
     },
     {
       badge: "WHO THIS IS FOR",
-      headline: "For businesses where the space says something",
+      headline: "For businesses where the space makes an impression",
       subhead: "Weekly, bi-weekly, or a custom schedule that fits your operation.",
-      body: "A clean office isn't a luxury — for most businesses, it's part of the impression. Whether you run a professional suite, a retail storefront, or a small office with a high-traffic break room, the standard doesn't change. Our commercial clients book recurring service because consistency is the whole point. You shouldn't have to think about it — it should just be done.",
+      body: "For most businesses, a clean space is part of the first impression a client or customer forms. Whether you run a professional suite, a retail storefront, or a small office with a high-traffic break room, the standard stays the same. Our commercial clients book recurring service so the space is handled on a schedule and they don't have to think about it.",
     },
   ],
   faqs: [

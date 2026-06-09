@@ -10,6 +10,7 @@ interface TiersProps {
   subtitle?: string;
   zipOverride?: string;
   townOverride?: string;
+  dark?: boolean;
 }
 
 type DataLayerWindow = Window & { dataLayer?: object[] };
@@ -31,6 +32,7 @@ export default function Tiers({
   subtitle = "Pick the plan that fits your home, and we'll handle the rest.",
   zipOverride,
   townOverride,
+  dark = false,
 }: TiersProps) {
   const searchParams = useSearchParams();
   const zip = zipOverride ?? searchParams.get("zip") ?? "";
@@ -38,12 +40,12 @@ export default function Tiers({
 
   return (
     <div className="mt-8">
-      <div className="text-center mb-10">
-        <h2 className="text-3xl md:text-4xl font-bold text-charcoal mb-3">{heading}</h2>
-        <p className="text-charcoal-70 max-w-2xl mx-auto">{subtitle}</p>
+      <div className="text-center mb-16">
+        <h2 className={`text-4xl md:text-5xl lg:text-6xl font-bold mb-3 ${dark ? "text-cream" : "text-charcoal"}`}>{heading}</h2>
+        <p className={`max-w-2xl mx-auto ${dark ? "text-cream/70" : "text-charcoal-70"}`}>{subtitle}</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 max-w-4xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-7 max-w-5xl mx-auto">
         {TIERS.map((tier) => {
           const url =
             `/book?tier=${tier.id}` +
@@ -54,8 +56,8 @@ export default function Tiers({
           const includedExtras = new Set(tier.includedExtraIds);
 
           const cardClass = tier.isPopular
-            ? "relative flex flex-col h-full bg-cream-50 border-2 border-brand shadow-xl rounded-2xl p-5 md:p-6 md:scale-105 transition-all duration-200 hover:-translate-y-3 hover:shadow-[0_16px_60px_rgba(79,172,254,0.45)]"
-            : "relative flex flex-col h-full bg-white border-2 border-brand/25 shadow-sm rounded-2xl p-5 md:p-6 transition-all duration-200 hover:-translate-y-1.5 hover:shadow-xl hover:border-brand/60";
+            ? "relative flex flex-col h-full bg-cream-50 border-2 border-brand shadow-xl rounded-2xl p-6 md:p-7 md:scale-105 transition-all duration-200 hover:-translate-y-3 hover:shadow-[0_16px_60px_rgba(79,172,254,0.45)]"
+            : "relative flex flex-col h-full bg-white border-2 border-brand/25 shadow-sm rounded-2xl p-6 md:p-7 transition-all duration-200 hover:-translate-y-1.5 hover:shadow-xl hover:border-brand/60";
 
           return (
             <Link
@@ -72,15 +74,15 @@ export default function Tiers({
 
               {/* Card header */}
               <div className={`text-center mb-4 ${tier.isPopular ? "mt-5" : ""}`}>
-                <h3 className="text-3xl font-extrabold text-brand">{tier.name}</h3>
-                <p className="text-sm mt-1 text-charcoal-70">{tier.tagline}</p>
-                <p className="text-sm mt-2 text-charcoal">{tier.bestFor}</p>
+                <h3 className="text-[2.05rem] font-extrabold text-brand">{tier.name}</h3>
+                <p className="text-[0.95rem] mt-1 text-charcoal-70">{tier.tagline}</p>
+                <p className="text-[0.95rem] mt-2 text-charcoal">{tier.bestFor}</p>
               </div>
 
-              <hr className="my-4 border-charcoal/10" />
+              <hr className="my-5 border-charcoal/10" />
 
               {/* Rooms */}
-              <p className="text-xs font-bold uppercase tracking-widest mb-5 text-charcoal-70 text-center">
+              <p className="text-[0.825rem] font-bold uppercase tracking-widest mb-6 text-charcoal-70 text-center">
                 What&apos;s included
               </p>
               <ul className="space-y-2">
@@ -89,11 +91,11 @@ export default function Tiers({
                   return (
                     <li
                       key={item.id}
-                      className={`flex items-center gap-2 text-sm ${checked ? "text-charcoal" : "text-charcoal/30"}`}
+                      className={`flex items-center gap-2 text-[0.95rem] ${checked ? "text-charcoal" : "text-charcoal/30"}`}
                     >
                       {checked
-                        ? <CheckCircle size={15} className="shrink-0 text-brand" />
-                        : <Circle size={15} className="shrink-0 text-charcoal/25" />
+                        ? <CheckCircle size={17} className="shrink-0 text-brand" />
+                        : <Circle size={17} className="shrink-0 text-charcoal/25" />
                       }
                       {item.label}
                     </li>
@@ -102,9 +104,9 @@ export default function Tiers({
               </ul>
 
               {/* Deluxe extras */}
-              <div className="mt-4">
-                <hr className="mb-4 border-charcoal/10" />
-                <p className="text-xs font-bold uppercase tracking-widest mb-5 text-charcoal-70 text-center">
+              <div className="mt-5">
+                <hr className="mb-5 border-charcoal/10" />
+                <p className="text-[0.825rem] font-bold uppercase tracking-widest mb-6 text-charcoal-70 text-center">
                   Plus deluxe extras
                 </p>
                 <ul className="space-y-2">
@@ -113,11 +115,11 @@ export default function Tiers({
                     return (
                       <li
                         key={item.id}
-                        className={`flex items-center gap-2 text-sm ${checked ? "text-charcoal" : "text-charcoal/30"}`}
+                        className={`flex items-center gap-2 text-[0.95rem] ${checked ? "text-charcoal" : "text-charcoal/30"}`}
                       >
                         {checked
-                          ? <CheckCircle size={15} className="shrink-0 text-brand" />
-                          : <Circle size={15} className="shrink-0 text-charcoal/25" />
+                          ? <CheckCircle size={17} className="shrink-0 text-brand" />
+                          : <Circle size={17} className="shrink-0 text-charcoal/25" />
                         }
                         {item.label}
                       </li>
@@ -127,7 +129,7 @@ export default function Tiers({
               </div>
 
               {/* CTA */}
-              <div className="mt-6 w-full bg-brand text-white font-semibold py-3.5 rounded-full text-center text-base">
+              <div className="mt-7 w-full bg-brand text-white font-semibold py-4 rounded-full text-center text-[1.1rem]">
                 {tier.ctaLabel}
               </div>
             </Link>

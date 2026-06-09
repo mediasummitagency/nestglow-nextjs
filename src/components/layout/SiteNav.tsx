@@ -38,7 +38,7 @@ function NavDropdown({
       onMouseLeave={() => setOpen(false)}
     >
       <button
-        className="flex items-center gap-1 text-sm font-medium text-white/80 hover:text-brand transition-colors"
+        className="flex items-center gap-1 text-base font-medium text-white/80 hover:text-brand transition-colors whitespace-nowrap"
         aria-expanded={open}
       >
         {label}
@@ -96,24 +96,18 @@ export default function SiteNav() {
 
           {/* Nav — center col, truly centered */}
           {!minimal ? (
-            <nav className="hidden md:flex items-center justify-center gap-6">
+            <nav className="hidden md:flex items-center justify-center gap-4">
               <Link
                 href="/"
-                className="text-sm font-medium text-white/80 hover:text-brand transition-colors"
+                className="text-base font-medium text-white/80 hover:text-brand transition-colors whitespace-nowrap"
               >
                 Home
               </Link>
               <NavDropdown label="Services" links={servicesLinks} />
               <NavDropdown label="Service Areas" links={areasLinks} />
               <Link
-                href="/guides"
-                className="text-sm font-medium text-white/80 hover:text-brand transition-colors"
-              >
-                Guides
-              </Link>
-              <Link
                 href="/about"
-                className="text-sm font-medium text-white/80 hover:text-brand transition-colors"
+                className="text-base font-medium text-white/80 hover:text-brand transition-colors whitespace-nowrap"
               >
                 About
               </Link>

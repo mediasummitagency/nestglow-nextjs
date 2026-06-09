@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ShieldCheck, Award, ThumbsUp, Clock, Sparkles, Eye, Heart, RefreshCw } from "lucide-react";
 import { BASE_URL, BUSINESS } from "@/lib/config";
+import { PageHero } from "@/components/layout/PageHero";
 
 export const metadata: Metadata = {
   title: "About NestGlow Co",
@@ -27,16 +28,12 @@ const values = [
 export default function AboutPage() {
   return (
     <>
-      <main className="pt-[72px]">
-        {/* Hero */}
-        <section className="max-w-3xl mx-auto px-4 sm:px-6 py-16 md:py-24 text-center space-y-6">
-          <h1 className="text-4xl md:text-5xl font-bold text-charcoal leading-tight">
-            Treating your home like our own.
-          </h1>
-          <p className="text-lg text-charcoal-70 leading-relaxed">
-            NestGlow Co is a small team built on a big belief: your home should feel like a refuge, not a chore. For more than a decade, we have been helping NJ homeowners and businesses stay on top of it all.
-          </p>
-        </section>
+      <main>
+        <PageHero
+          heading="Treating your home like our own."
+          subheading="NestGlow Co is a small team built on a big belief: your home should feel like a refuge, not a chore. For more than a decade, we have been helping NJ homeowners and businesses stay on top of it all."
+          centered
+        />
 
         {/* Meet Caroline */}
         <section className="bg-cream-100 py-16">

@@ -4,6 +4,7 @@ import { ChevronRight, ShieldCheck, Award, ThumbsUp, Clock } from "lucide-react"
 import { BASE_URL, BUSINESS } from "@/lib/config";
 import { getTownsByCounty } from "@/lib/towns";
 import PhoneLink from "@/components/PhoneLink";
+import { PageHero } from "@/components/layout/PageHero";
 
 export const metadata: Metadata = {
   title: "House Cleaning Services in NJ | NestGlow Co",
@@ -59,33 +60,26 @@ export default function CleaningServicesPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
-      <main className="pt-[72px]">
-        {/* Breadcrumb */}
-        <nav className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center gap-2 text-sm text-charcoal-40">
-          <Link href="/" className="hover:text-brand transition-colors">Home</Link>
-          <ChevronRight size={12} />
-          <span className="text-charcoal">Cleaning Services</span>
-        </nav>
-
-        {/* Hero */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 py-10 space-y-5">
-          <p className="text-sm font-semibold uppercase tracking-widest text-brand">Service Areas</p>
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-charcoal leading-tight">
-            House Cleaning Services Across Central New Jersey
-          </h1>
-          <p className="text-charcoal-70 text-lg max-w-3xl leading-relaxed">
-            {BUSINESS.name} provides residential and commercial cleaning across Monmouth, Ocean, and Middlesex County, NJ. Our insured, bonded team serves {counties.reduce((acc, c) => acc + c.towns.length, 0)} towns — from the shore to the suburbs.
-          </p>
-          <div className="flex flex-wrap gap-4 pt-2">
+      <main>
+        <PageHero
+          eyebrow="Service Areas"
+          heading="House Cleaning Services Across Central New Jersey"
+          subheading={`${BUSINESS.name} provides residential and commercial cleaning across Monmouth, Ocean, and Middlesex County, NJ. Our insured, bonded team serves ${counties.reduce((acc, c) => acc + c.towns.length, 0)} towns — from the shore to the suburbs.`}
+          breadcrumbs={[
+            { label: "Home", href: "/" },
+            { label: "Cleaning Services" },
+          ]}
+        >
+          <div className="flex flex-wrap gap-4">
             <Link
               href="/book"
               className="inline-flex items-center bg-brand text-charcoal font-semibold px-7 py-3.5 rounded-full hover:bg-brand-dark transition-colors text-sm"
             >
               Book a Cleaning
             </Link>
-            <PhoneLink className="inline-flex items-center border border-charcoal/20 text-charcoal font-semibold px-7 py-3.5 rounded-full hover:border-brand hover:text-brand transition-colors text-sm" />
+            <PhoneLink className="inline-flex items-center border border-white/40 text-white font-semibold px-7 py-3.5 rounded-full hover:border-brand hover:text-brand transition-colors text-sm" />
           </div>
-        </section>
+        </PageHero>
 
         {/* Trust bar */}
         <section className="bg-cream-100 border-y border-charcoal/5">

@@ -22,7 +22,6 @@ NestGlow Co marketing + booking site. Next.js 15/16, React 19, Tailwind 4, shadc
 | `CLAUDE.md` | Re-exports `AGENTS.md` for Claude tooling. |
 | `TASKS.md` | Current open items only — P2 code tasks + human actions pending. |
 | `MIGRATION-NOTES.md` | Hostinger → Vercel migration checklist. Not yet executed. |
-| `README.md` | Next.js boilerplate. Low value. |
 | `MAP.md` | This file. |
 | `package.json` | Deps: Next.js, React 19, Tailwind 4, Framer Motion, Lucide. |
 | `next.config.ts` | Default Next.js config (no overrides). |
@@ -41,17 +40,20 @@ NestGlow Co marketing + booking site. Next.js 15/16, React 19, Tailwind 4, shadc
 | Route | File | Notes |
 |-------|------|-------|
 | `/` | `app/page.tsx` | Homepage. ZipRouter in hero + full marketing content. |
-| `/book-now` | `app/book-now/page.tsx` | Ad landing page. `noindex`. ZipRouter hero → county pages → `/book`. |
+| `/book-now` | `app/book-now/page.tsx` | Ad landing page. `noindex`. ZipRouter hero → service-area pages → `/book`. |
 | `/book` | `app/book/page.tsx` | Full multi-step booking wizard. Submits to Formspree. |
-| `/cleaning-services/[county]` | `app/cleaning-services/[county]/page.tsx` | Dynamic. `[county]` = `monmouth-county` / `ocean-county` / `middlesex-county`. Receives `?zip=` and `?town=` params from ZipRouter. Has QuickQuoteForm. |
+| `/cleaning-services/[town]` | `app/cleaning-services/[town]/page.tsx` | **Dynamic.** Generates all 22 town pages via `generateStaticParams()` from `src/lib/towns.ts`. Receives `?zip=` param. Full Service + Breadcrumb + FAQ schema, local hook, Pro-vs-Independent comparison, town-tagged testimonials, nearby-towns link grid. |
 
-**Static county hubs** (also serve SEO):
+**Service-area hubs** (static — SEO + internal linking):
 
-| Route | File |
-|-------|------|
-| `/cleaning-services/monmouth-county` | `app/cleaning-services/monmouth-county/page.tsx` |
-| `/cleaning-services/ocean-county` | `app/cleaning-services/ocean-county/page.tsx` |
-| `/cleaning-services/middlesex-county` | `app/cleaning-services/middlesex-county/page.tsx` |
+| Route | File | Notes |
+|-------|------|-------|
+| `/cleaning-services` | `app/cleaning-services/page.tsx` | Top hub. Lists all 22 towns grouped by county via `getTownsByCounty()`. |
+| `/cleaning-services/monmouth-county` | `app/cleaning-services/monmouth-county/page.tsx` | Static county hub. |
+| `/cleaning-services/ocean-county` | `app/cleaning-services/ocean-county/page.tsx` | Static county hub. |
+| `/cleaning-services/middlesex-county` | `app/cleaning-services/middlesex-county/page.tsx` | Static county hub. |
+
+> NOTE: There is **no** `[county]` dynamic route — county hubs are static folders. The only dynamic segment under `cleaning-services` is `[town]`.
 
 **Service pages** (SEO content):
 
@@ -66,8 +68,9 @@ NestGlow Co marketing + booking site. Next.js 15/16, React 19, Tailwind 4, shadc
 | `/services/airbnb-cleaning` | `app/services/airbnb-cleaning/page.tsx` |
 | `/services/commercial-cleaning` | `app/services/commercial-cleaning/page.tsx` |
 | `/services/post-construction-cleaning` | `app/services/post-construction-cleaning/page.tsx` |
-| `/cleaning-services` | `app/cleaning-services/page.tsx` |
 | `/general-vs-deep-cleaning` | `app/general-vs-deep-cleaning/page.tsx` |
+
+All `/services/[slug]` pages render through `components/layout/ServicePageLayout.tsx`.
 
 **Content / guides** (SEO content):
 
@@ -110,7 +113,7 @@ NestGlow Co marketing + booking site. Next.js 15/16, React 19, Tailwind 4, shadc
 |-----------|---------|
 | `BookingForm.tsx` | Multi-step booking wizard. Tier select, add-ons, date/time, contact info. POSTs to `FORMS.booking` (Formspree `xnngyenw`). |
 | `QuickQuoteForm.tsx` | Lightweight lead form. `FORMS.quickQuote` endpoint not yet populated — currently falls back. |
-| `ZipRouter.tsx` | ZIP input → `lookupZip()` → redirect to county page. Fires GTM events. Three variants: `hero`, `inline`, `compact`. |
+| `ZipRouter.tsx` | ZIP input → `lookupZip()` → redirect to service-area page. Fires GTM events. Three variants: `hero`, `inline`, `compact`. |
 
 **Layout** (`components/layout/`):
 
@@ -158,7 +161,7 @@ NestGlow Co marketing + booking site. Next.js 15/16, React 19, Tailwind 4, shadc
 | `config.ts` | `BASE_URL`, `BUSINESS`, `TRACKING`, `FORMS` | Site-wide. Single source of truth for all IDs and endpoints. |
 | `tiers.ts` | `TIERS`, `getTierById()`, `recommendTierBySqft()` | `BookingForm`, `Tiers` section, `/book-now`. |
 | `offer.ts` | `ACTIVE_OFFER`, `isOfferActive()` | `OfferBanner`. Current offer: "$25 off first clean," no expiry. |
-| `towns.ts` | Town/service area data | County pages, `ServiceAreasTabs`, sitemap. |
+| `towns.ts` | `towns`, `getTownBySlug()`, `getTownsByCounty()` (22 towns) | `[town]` pages, county hubs, `cleaning-services` hub, `ServiceAreasTabs`, sitemap. |
 | `zipToCounty.ts` | `lookupZip(zip)` → `{county, town}` or `null` | `ZipRouter`. Maps NJ ZIP codes to county slug + town name. |
 | `reviews.ts` | Testimonial data array | `Testimonials` section. |
 | `process.ts` | Process step data | `SignatureProcess` section. |
@@ -173,7 +176,6 @@ NestGlow Co marketing + booking site. Next.js 15/16, React 19, Tailwind 4, shadc
 | `logo.png`, `logo-white.png`, `logo.svg` | Brand logo (dark bg and light bg variants). |
 | `favicon.ico`, `favicon-*.png`, `apple-touch-icon.png`, `android-chrome-*.png` | Full favicon set. |
 | `site.webmanifest` | PWA manifest. |
-| `file.svg`, `globe.svg`, `next.svg`, `vercel.svg`, `window.svg` | Default Next.js placeholder SVGs. Can be deleted. |
 
 No `/assets/img/` folder exists yet. Hero photo and process photos are still placeholders — see open items.
 
@@ -187,8 +189,8 @@ No `/assets/img/` folder exists yet. Hero photo and process photos are still pla
 Paid ad
   └─▶ /book-now  (noindex ad landing page)
         └─▶ ZipRouter → lookupZip(zip)
-              ├─ Match  → /cleaning-services/[county]?zip=ZIP&town=TOWN
-              │              └─▶ QuickQuoteForm (no endpoint yet)  ─▶ /book
+              ├─ Match  → /cleaning-services/[town]?zip=ZIP
+              │              └─▶ Tiers / Book CTA  ─▶ /book
               └─ No match → "out of area" → /contact?reason=waitlist&zip=ZIP
                                               (partial lead capture)
 
@@ -268,8 +270,11 @@ Full task list: `TASKS.md`
 
 ---
 
-## Archive
+## Handoff docs (`HANDOFF-docs/`)
 
-`HANDOFF-docs/_archive/` contains build-time briefs (TASK-00 through TASK-07 + MASTER-PROMPT + README) that shipped and are no longer load-bearing. Safe to delete after Lucas reviews. Kept temporarily for historical reference.
+| File | Status |
+|------|--------|
+| `TASK-09-visual-audit-checklist.md` | Active — page-by-page visual/hierarchy audit. |
+| `TASK-20-seo-skeleton-port.md` | Active — adds RoomChecklist, services cross-link block, add-on cards, extra differentiators (MaidPro-modeled SEO gap-fill). |
 
-`HANDOFF-docs/TASK-09-visual-audit-checklist.md` remains active — not archived.
+The old `_archive/` of shipped build briefs (TASK-00 through TASK-07 + MASTER-PROMPT + README) was removed during the June 2026 repo cleanup. Old site tarball lives at `claude-access/archives/nestglow-old-site-archive-2026-04-20.tar.gz` (see `MIGRATION-NOTES.md`).

@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { ChevronRight, Check, X } from "lucide-react";
 import { BASE_URL, BUSINESS } from "@/lib/config";
 import { towns, getTownBySlug } from "@/lib/towns";
@@ -9,6 +10,8 @@ import PhoneLink from "@/components/PhoneLink";
 import { TrustBadges } from "@/components/sections/TrustBadges";
 import Tiers from "@/components/sections/Tiers";
 import { SignatureProcess } from "@/components/sections/SignatureProcess";
+import { RoomChecklist } from "@/components/sections/RoomChecklist";
+import { ServicesOfferedBlock } from "@/components/sections/ServicesOfferedBlock";
 import CtaBlock from "@/components/sections/CtaBlock";
 import { FAQAccordion } from "@/components/sections/FAQAccordion";
 import { Testimonials } from "@/components/sections/Testimonials";
@@ -51,6 +54,9 @@ const proPoints = [
   "Professional-grade supplies included",
   "100% satisfaction guarantee — we come back if needed",
   "A real team you can reach by phone",
+  "Pet- and kid-safe products on request",
+  "No contracts — cancel or adjust anytime",
+  "Same-day response to every inquiry",
 ];
 
 const indiePoints = [
@@ -127,45 +133,62 @@ export default async function TownPage({ params, searchParams }: TownPageProps) 
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
-      <main className="pt-[72px]">
-
-        {/* Breadcrumb */}
-        <nav className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center gap-2 text-sm text-charcoal-40 flex-wrap">
-          <Link href="/" className="hover:text-brand transition-colors">Home</Link>
-          <ChevronRight size={12} />
-          <Link href="/cleaning-services" className="hover:text-brand transition-colors">Cleaning Services</Link>
-          <ChevronRight size={12} />
-          <Link href={`/cleaning-services/${countySlug}`} className="hover:text-brand transition-colors">
-            {town.county} County
-          </Link>
-          <ChevronRight size={12} />
-          <span className="text-charcoal">{town.name}</span>
-        </nav>
+      <main>
 
         {/* Hero */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 py-10 space-y-5">
-          <p className="text-sm font-semibold uppercase tracking-widest text-brand">
-            {town.county} County, NJ
-          </p>
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-charcoal leading-tight">
-            {town.h1}
-          </h1>
-          <p className="text-charcoal-70 text-lg max-w-3xl leading-relaxed">
-            {town.introParagraph}
-          </p>
-          {town.zipCodes.length > 0 && (
-            <p className="text-sm text-charcoal-40">
-              Serving ZIP code{town.zipCodes.length > 1 ? "s" : ""}: {town.zipCodes.join(", ")}
-            </p>
-          )}
-          <div className="flex flex-wrap gap-4 pt-2">
-            <Link
-              href="#plans"
-              className="inline-flex items-center bg-brand text-charcoal font-semibold px-7 py-3.5 rounded-full hover:bg-brand-dark transition-colors text-sm"
-            >
-              See plans
-            </Link>
-            <PhoneLink className="inline-flex items-center border border-charcoal/20 text-charcoal font-semibold px-7 py-3.5 rounded-full hover:border-brand hover:text-brand transition-colors text-sm" />
+        <section className="relative overflow-hidden">
+          <Image
+            src="/images/shared/hero.jpg"
+            alt=""
+            fill
+            priority
+            quality={85}
+            className="object-cover object-center"
+            sizes="100vw"
+          />
+          <div
+            className="absolute inset-0 z-10"
+            style={{ background: "linear-gradient(rgba(0,0,0,0.52), rgba(0,0,0,0.72))" }}
+          />
+          <div className="relative z-20">
+            {/* Breadcrumb */}
+            <nav className="max-w-7xl mx-auto px-4 sm:px-6 pt-[88px] pb-0 flex items-center gap-2 text-sm text-white/50 flex-wrap">
+              <Link href="/" className="hover:text-brand transition-colors text-white/60">Home</Link>
+              <ChevronRight size={12} />
+              <Link href="/cleaning-services" className="hover:text-brand transition-colors text-white/60">Cleaning Services</Link>
+              <ChevronRight size={12} />
+              <Link href={`/cleaning-services/${countySlug}`} className="hover:text-brand transition-colors text-white/60">
+                {town.county} County
+              </Link>
+              <ChevronRight size={12} />
+              <span className="text-white/80">{town.name}</span>
+            </nav>
+            {/* Hero content */}
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 pb-16 space-y-5">
+              <p className="text-sm font-semibold uppercase tracking-widest text-brand">
+                {town.county} County, NJ
+              </p>
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight">
+                {town.h1}
+              </h1>
+              <p className="text-white/80 text-lg max-w-3xl leading-relaxed">
+                {town.introParagraph}
+              </p>
+              {town.zipCodes.length > 0 && (
+                <p className="text-sm text-white/50">
+                  Serving ZIP code{town.zipCodes.length > 1 ? "s" : ""}: {town.zipCodes.join(", ")}
+                </p>
+              )}
+              <div className="flex flex-wrap gap-4 pt-2">
+                <Link
+                  href="#plans"
+                  className="inline-flex items-center bg-brand text-charcoal font-semibold px-7 py-3.5 rounded-full hover:bg-brand-dark transition-colors text-sm"
+                >
+                  See plans
+                </Link>
+                <PhoneLink className="inline-flex items-center border border-white/40 text-white font-semibold px-7 py-3.5 rounded-full hover:border-brand hover:text-brand transition-colors text-sm" />
+              </div>
+            </div>
           </div>
         </section>
 
@@ -203,6 +226,9 @@ export default async function TownPage({ params, searchParams }: TownPageProps) 
 
         {/* Signature Process */}
         <SignatureProcess heading="What's included in every NestGlow visit" />
+
+        {/* Room-by-room checklist */}
+        <RoomChecklist />
 
         {/* Book CTA */}
         <div className="max-w-3xl mx-auto px-4 sm:px-6 py-10">
@@ -262,6 +288,9 @@ export default async function TownPage({ params, searchParams }: TownPageProps) 
             </div>
           </div>
         </section>
+
+        {/* Services cross-link */}
+        <ServicesOfferedBlock town={town.name} />
 
         {/* Testimonials */}
         <Testimonials currentTown={town.name} currentCounty={town.county} />

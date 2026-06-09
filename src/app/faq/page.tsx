@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { FAQAccordion } from "@/components/sections/FAQAccordion";
 import { BASE_URL } from "@/lib/config";
+import { PageHero } from "@/components/layout/PageHero";
 
 export const metadata: Metadata = {
   title: "Cleaning FAQs | NestGlow Co",
@@ -170,27 +171,23 @@ export default function FAQPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
-      <main className="pt-[72px]">
-        {/* Breadcrumb */}
-        <nav className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center gap-2 text-sm text-charcoal-40">
-          <Link href="/" className="hover:text-brand transition-colors">Home</Link>
-          <ChevronRight size={12} />
-          <span className="text-charcoal">FAQ</span>
-        </nav>
-
-        {/* Hero */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 py-10 space-y-4">
-          <p className="text-sm font-semibold uppercase tracking-widest text-brand">Help Center</p>
-          <h1 className="text-3xl md:text-4xl font-bold text-charcoal">
-            Frequently Asked Questions
-          </h1>
-          <p className="text-charcoal-70 max-w-2xl leading-relaxed">
-            Common questions about our cleaning services, pricing, scheduling, and what to expect. Can&apos;t find your answer?{" "}
-            <Link href="/contact" className="text-brand hover:text-brand-dark underline transition-colors">
-              Reach out directly.
-            </Link>
-          </p>
-        </section>
+      <main>
+        <PageHero
+          eyebrow="Help Center"
+          heading="Frequently Asked Questions"
+          subheading={
+            <>
+              Common questions about our cleaning services, pricing, scheduling, and what to expect. Can&apos;t find your answer?{" "}
+              <Link href="/contact" className="text-brand hover:text-brand-dark underline transition-colors">
+                Reach out directly.
+              </Link>
+            </>
+          }
+          breadcrumbs={[
+            { label: "Home", href: "/" },
+            { label: "FAQ" },
+          ]}
+        />
 
         {/* Category nav */}
         <section className="bg-cream-100 border-y border-charcoal/5">

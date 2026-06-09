@@ -22,10 +22,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/cleaning-services/monmouth-county`, lastModified: D("2026-04-16"), changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE_URL}/cleaning-services/ocean-county`, lastModified: D("2026-04-16"), changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE_URL}/cleaning-services/middlesex-county`, lastModified: D("2026-04-16"), changeFrequency: "monthly", priority: 0.8 },
-    { url: `${BASE_URL}/guides`, lastModified: D("2026-04-16"), changeFrequency: "weekly", priority: 0.7 },
-    { url: `${BASE_URL}/guides/how-much-does-house-cleaning-cost-nj`, lastModified: D("2026-04-16"), changeFrequency: "monthly", priority: 0.7 },
-    { url: `${BASE_URL}/guides/what-to-expect-move-out-cleaning`, lastModified: D("2026-04-16"), changeFrequency: "monthly", priority: 0.7 },
-    { url: `${BASE_URL}/guides/how-to-prepare-home-for-cleaner`, lastModified: D("2026-04-16"), changeFrequency: "monthly", priority: 0.7 },
     { url: `${BASE_URL}/privacy-policy`, lastModified: D("2026-04-16"), changeFrequency: "yearly", priority: 0.2 },
     { url: `${BASE_URL}/terms-of-service`, lastModified: D("2026-04-16"), changeFrequency: "yearly", priority: 0.2 },
     ...towns.map((town) => ({

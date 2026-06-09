@@ -3,12 +3,12 @@ import { BASE_URL } from "@/lib/config";
 import ServicePageLayout from "@/components/layout/ServicePageLayout";
 
 export const metadata: Metadata = {
-  title: "Move-Out Cleaning in NJ — Security Deposit Ready",
+  title: "Move-Out Cleaning in NJ: Security Deposit Ready",
   description:
     "Professional move-out cleaning for Monmouth, Ocean, and Middlesex County, NJ. Landlord-ready standard, same-day scheduling available. Get your deposit back.",
   alternates: { canonical: `${BASE_URL}/services/move-out-cleaning` },
   openGraph: {
-    title: "Move-Out Cleaning in NJ — Security Deposit Ready",
+    title: "Move-Out Cleaning in NJ: Security Deposit Ready",
     description:
       "Professional move-out cleaning for Monmouth, Ocean, and Middlesex County, NJ. Landlord-ready standard, same-day scheduling available. 100% satisfaction guarantee.",
     url: `${BASE_URL}/services/move-out-cleaning`,
@@ -18,11 +18,11 @@ export const metadata: Metadata = {
 const props = {
   slug: "move-out-cleaning",
   h1: "Move-Out Cleaning in Monmouth, Ocean & Middlesex County",
-  metaTitle: "Move-Out Cleaning in NJ — Security Deposit Ready",
+  metaTitle: "Move-Out Cleaning in NJ: Security Deposit Ready",
   metaDescription:
     "Professional move-out cleaning for Monmouth, Ocean, and Middlesex County, NJ. Landlord-ready standard, same-day scheduling available. Get your deposit back.",
   introParagraph:
-    "A move-out clean is one of the highest-stakes cleaning appointments you'll make — your security deposit depends on it. NestGlow Co performs thorough, landlord-ready move-out cleans across Monmouth, Ocean, and Middlesex County, NJ. We know what landlords check and we hit every item: inside cabinets, appliance interiors, grout lines, baseboards, and every surface a walkthrough inspection will catch. Need a move-in clean for your new place? See our move-in cleaning page.",
+    "A move-out clean is one of the highest-stakes cleaning appointments you'll make, because your security deposit depends on it. NestGlow Co performs thorough, landlord-ready move-out cleans across Monmouth, Ocean, and Middlesex County, NJ. We know what landlords check and we hit every item: inside cabinets, appliance interiors, grout lines, baseboards, and every surface a walkthrough inspection will catch. Need a move-in clean for your new place? See our move-in cleaning page.",
   checklist: [
     "Full kitchen deep clean — appliances inside and out",
     "Cabinets and drawers wiped inside",
@@ -41,8 +41,8 @@ const props = {
     {
       badge: "DEPOSIT ON THE LINE",
       headline: "The clean that gets your money back",
-      subhead: "We know what landlords look for — and we cover every item.",
-      body: "Security deposit disputes almost always come down to cleanliness. Landlords look inside cabinets, check the oven, run a finger along baseboards, and inspect the bathroom grout. That's exactly our checklist. We've performed hundreds of move-out cleans and know the difference between a clean that passes and one that doesn't. Our team works empty spaces methodically — every surface, every corner, every detail a landlord will document. We can provide a receipt of service for your records if you need documentation.",
+      subhead: "We know what landlords look for, and we cover every item.",
+      body: "Security deposit disputes almost always come down to cleanliness. Landlords look inside cabinets, check the oven, run a finger along baseboards, and inspect the bathroom grout. That's exactly our checklist. We've performed hundreds of move-out cleans and know the difference between a clean that passes and one that doesn't. Our team works empty spaces room by room, covering every surface, corner, and detail a landlord will document. We can provide a receipt of service for your records if you need documentation.",
     },
     {
       badge: "FLEXIBLE SCHEDULING",

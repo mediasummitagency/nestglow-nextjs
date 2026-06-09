@@ -34,7 +34,7 @@ export default function CtaBlock({
 
   if (variant === "book") {
     return (
-      <div className={`${base} ${className}`}>
+      <div className={`text-center ${className}`}>
         {heading && (
           <h3 className="text-2xl font-bold text-charcoal mb-2">{heading}</h3>
         )}

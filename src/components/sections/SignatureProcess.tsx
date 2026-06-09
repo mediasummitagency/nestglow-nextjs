@@ -37,6 +37,7 @@ interface SignatureProcessProps {
   ctaHref?: string;
   ctaLabel?: string;
   imageSrc?: string;
+  hideCta?: boolean;
 }
 
 export function SignatureProcess({
@@ -46,6 +47,7 @@ export function SignatureProcess({
   ctaHref = "/book",
   ctaLabel = "Book a cleaning",
   imageSrc,
+  hideCta = false,
 }: SignatureProcessProps) {
   const [activeRoom, setActiveRoom] = useState<ProcessCategory | null>(null);
 
@@ -94,10 +96,10 @@ export function SignatureProcess({
                 quality={85}
               />
             ) : (
-              /* Drop /public/signature-clean.jpg and pass imageSrc="/signature-clean.jpg" to activate */
+              /* Drop image at /public/images/process/signature-clean.png and pass imageSrc="/images/process/signature-clean.png" to activate */
               <div className="absolute inset-0 bg-charcoal/6 flex items-center justify-center">
                 <span className="text-sm text-charcoal/30 font-medium text-center px-6">
-                  Photo placeholder — pass imageSrc=&quot;/signature-clean.jpg&quot; when ready
+                  Photo placeholder — pass imageSrc=&quot;/images/process/signature-clean.png&quot; when ready
                 </span>
               </div>
             )}
@@ -133,14 +135,16 @@ export function SignatureProcess({
         </div>
 
         {/* CTA */}
-        <div className="text-center mt-12">
-          <Link
-            href={ctaHref}
-            className="inline-block bg-brand text-charcoal font-semibold px-8 py-3 rounded-full hover:bg-brand-dark transition-colors"
-          >
-            {ctaLabel}
-          </Link>
-        </div>
+        {!hideCta && (
+          <div className="text-center mt-12">
+            <Link
+              href={ctaHref}
+              className="inline-block bg-brand text-charcoal font-semibold px-8 py-3 rounded-full hover:bg-brand-dark transition-colors"
+            >
+              {ctaLabel}
+            </Link>
+          </div>
+        )}
 
         {/* SEO fallback — all 25 items always in SSR HTML, visually hidden */}
         <div className="sr-only">

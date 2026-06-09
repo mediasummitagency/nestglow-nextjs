@@ -1,15 +1,21 @@
 import { Suspense } from "react";
 import Link from "next/link";
-import { ShieldCheck, Award, ThumbsUp, Clock, Star, ChevronRight, Sparkles, Home, FileText, Utensils, Bath, Bed, Monitor, DoorOpen, Briefcase, Truck, CheckCircle } from "lucide-react";
+import Image from "next/image";
+import { ZipRouter } from "@/components/forms/ZipRouter";
+import { ShieldCheck, Award, ThumbsUp, Clock, ChevronRight, Sparkles, Home, FileText, Utensils, Bath, Bed, Monitor, DoorOpen } from "lucide-react";
 import { FAQ } from "@/components/sections/FAQ";
 import { AnimatedStat } from "@/components/sections/StatCards";
 import { ServiceAreasTabs } from "@/components/sections/ServiceAreasTabs";
 import { StickyScrollFeatures, ScrollFeature } from "@/components/layout/StickyScrollFeatures";
 import Tiers from "@/components/sections/Tiers";
 import CtaBlock from "@/components/sections/CtaBlock";
-import { GuaranteeBadge } from "@/components/ui/GuaranteeBadge";
+import { BridgeMarquee } from "@/components/layout/BridgeMarquee";
+import { RoomCarousel } from "@/components/sections/RoomCarousel";
+import { AddOnServices } from "@/components/sections/AddOnServices";
 import { BUSINESS, BASE_URL } from "@/lib/config";
-import { reviews } from "@/lib/reviews";
+import { Testimonials } from "@/components/sections/Testimonials";
+import { services } from "@/lib/services";
+import { ScrollHint } from "@/components/ui/ScrollHint";
 import { ReactNode } from "react";
 
 export type FeatureSection = {
@@ -29,17 +35,8 @@ export type ServicePageProps = {
   faqs: Array<{ q: string; a: string }>;
   schemaServiceType: string;
   checklist?: string[];
+  showAddOns?: boolean;
 };
-
-const services = [
-  { href: "/services/residential-cleaning",        icon: Home,      title: "Residential Cleaning",       copy: "Regular maintenance, deep cleans, and special requests for the homes you live in and love." },
-  { href: "/services/commercial-cleaning",         icon: Briefcase, title: "Commercial Cleaning",         copy: "Offices, storefronts, and professional suites. Schedules built around your business hours." },
-  { href: "/services/deep-cleaning",               icon: Sparkles,  title: "Deep Cleaning",               copy: "Top-to-bottom detailing for first-time cleans, seasonal resets, and pre-guest refreshes." },
-  { href: "/services/move-out-cleaning",           icon: Truck,     title: "Move-Out Cleaning",           copy: "Deposit-ready deep cleans for rentals and homes you're handing back to a landlord." },
-  { href: "/services/move-in-cleaning",            icon: Home,      title: "Move-In Cleaning",            copy: "Start fresh before your furniture arrives. A spotless home from day one." },
-  { href: "/services/airbnb-cleaning",             icon: Star,      title: "Airbnb & STR Cleaning",       copy: "Rapid guest turnovers for Shore rentals — linen handling, restocking, same-day." },
-  { href: "/services/post-construction-cleaning",  icon: Sparkles,  title: "Post-Construction Cleaning",  copy: "Multi-pass fine dust removal, HVAC vents, and contractor-ready scheduling." },
-];
 
 const statNumbers = [
   { value: "10+",  label: "Years Serving NJ" },
@@ -47,8 +44,6 @@ const statNumbers = [
   { value: "5.0",  label: "Average Star Rating" },
   { value: "100%", label: "Satisfaction Guaranteed" },
 ];
-
-const testimonialSnippets = reviews.slice(0, 3);
 
 const trustPillars = [
   { icon: ShieldCheck, label: "Fully insured & bonded" },
@@ -59,34 +54,36 @@ const trustPillars = [
 
 const featureVisuals: ReactNode[] = [
   // Visual 0 — HOW IT WORKS
-  <div key="how-it-works" className="bg-white rounded-2xl shadow-xl border border-charcoal/8 p-8">
-    <p className="text-xs font-semibold tracking-widest text-brand-dark mb-8">HOW IT WORKS</p>
-    <div className="space-y-7">
-      {[
-        { step: '01', label: 'Tell us about your home', icon: Home },
-        { step: '02', label: 'Receive your firm quote', icon: FileText },
-        { step: '03', label: 'We clean, you relax', icon: Sparkles },
-      ].map(({ step, label, icon: Icon }) => (
-        <div key={step} className="flex items-center gap-5">
-          <div className="w-11 h-11 rounded-full bg-brand/20 flex items-center justify-center shrink-0">
-            <Icon size={18} className="text-brand-dark" />
+  <div key="how-it-works" className="bg-white rounded-2xl shadow-xl border border-charcoal/8 p-8 h-full flex flex-col">
+    <p className="text-xs font-semibold tracking-widest text-brand-dark mb-6">HOW IT WORKS</p>
+    <div className="flex-1 flex flex-col justify-between">
+      <div className="space-y-6">
+        {[
+          { step: '01', label: 'Tell us about your home', icon: Home },
+          { step: '02', label: 'Receive your firm quote', icon: FileText },
+          { step: '03', label: 'We clean, you relax', icon: Sparkles },
+        ].map(({ step, label, icon: Icon }) => (
+          <div key={step} className="flex items-center gap-5">
+            <div className="w-11 h-11 rounded-full bg-brand/20 flex items-center justify-center shrink-0">
+              <Icon size={18} className="text-brand-dark" />
+            </div>
+            <div>
+              <p className="text-xs text-charcoal-40 mb-1">{step}</p>
+              <p className="text-base font-medium text-charcoal">{label}</p>
+            </div>
           </div>
-          <div>
-            <p className="text-xs text-charcoal-40 mb-1">{step}</p>
-            <p className="text-base font-medium text-charcoal">{label}</p>
-          </div>
-        </div>
-      ))}
-    </div>
-    <div className="mt-8 pt-6 border-t border-charcoal/5">
-      <p className="text-sm text-charcoal-40 italic">No commitment needed to get your quote.</p>
+        ))}
+      </div>
+      <div className="pt-5 border-t border-charcoal/5">
+        <p className="text-sm text-charcoal-40 italic">No commitment needed to get your quote.</p>
+      </div>
     </div>
   </div>,
 
   // Visual 1 — AREAS WE COVER
-  <div key="areas-we-cover" className="bg-white rounded-2xl shadow-xl border border-charcoal/8 p-8">
-    <p className="text-xs font-semibold tracking-widest text-brand-dark mb-8">AREAS WE COVER</p>
-    <div className="grid grid-cols-2 gap-5">
+  <div key="areas-we-cover" className="bg-white rounded-2xl shadow-xl border border-charcoal/8 p-8 h-full flex flex-col">
+    <p className="text-xs font-semibold tracking-widest text-brand-dark mb-6">AREAS WE COVER</p>
+    <div className="flex-1 grid grid-cols-2 gap-y-0 content-evenly">
       {[
         { icon: Utensils, label: 'Kitchen' },
         { icon: Bath, label: 'Bathrooms' },
@@ -106,9 +103,9 @@ const featureVisuals: ReactNode[] = [
   </div>,
 
   // Visual 2 — WHY CLIENTS TRUST US
-  <div key="why-clients" className="bg-white rounded-2xl shadow-xl border border-charcoal/8 p-8">
-    <p className="text-xs font-semibold tracking-widest text-brand-dark mb-8">WHY CLIENTS TRUST US</p>
-    <div className="space-y-6">
+  <div key="why-clients" className="bg-white rounded-2xl shadow-xl border border-charcoal/8 p-8 h-full flex flex-col">
+    <p className="text-xs font-semibold tracking-widest text-brand-dark mb-6">WHY CLIENTS TRUST US</p>
+    <div className="flex-1 flex flex-col justify-evenly">
       {trustPillars.map(({ icon: Icon, label }) => (
         <div key={label} className="flex items-center gap-4">
           <div className="w-10 h-10 rounded-xl bg-brand/10 flex items-center justify-center shrink-0">
@@ -129,7 +126,7 @@ export default function ServicePageLayout({
   features,
   faqs,
   schemaServiceType,
-  checklist,
+  showAddOns,
 }: ServicePageProps) {
   const serviceSchema = {
     "@context": "https://schema.org",
@@ -157,9 +154,16 @@ export default function ServicePageLayout({
     })),
   };
 
+  const scrollBgImages = [
+    '/images/home/why-owner.png',
+    '/images/home/why-guarantee.png',
+    '/images/home/why-team.png',
+  ];
+
   const scrollFeatures: ScrollFeature[] = features.map((f, i) => ({
     ...f,
     visual: featureVisuals[i] ?? featureVisuals[featureVisuals.length - 1],
+    bgImage: scrollBgImages[i] ?? scrollBgImages[scrollBgImages.length - 1],
   }));
 
   return (
@@ -172,75 +176,59 @@ export default function ServicePageLayout({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
-      <main className="pt-[72px]">
-        {/* Breadcrumb */}
-        <nav className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center gap-2 text-sm text-charcoal-40">
-          <Link href="/" className="hover:text-brand transition-colors">Home</Link>
-          <ChevronRight size={12} />
-          <Link href="/services" className="hover:text-brand transition-colors">Services</Link>
-          <ChevronRight size={12} />
-          <span className="text-charcoal">{h1.split(" in ")[0]}</span>
-        </nav>
-
+      <main>
         {/* Hero */}
-        <section className="max-w-3xl mx-auto px-4 sm:px-6 py-10 md:py-16 text-center">
-          <div className="space-y-4 mb-8">
-            <h1 className="text-3xl md:text-5xl font-bold text-charcoal leading-tight">
-              {h1}
-            </h1>
-            <p className="text-base md:text-lg text-charcoal-70 leading-relaxed">
-              {introParagraph}
-            </p>
+        <section className="relative min-h-screen flex items-center overflow-hidden">
+          <Image
+            src={`/images/services/${slug}/hero.jpg`}
+            alt=""
+            fill
+            priority
+            quality={85}
+            className="object-cover object-center"
+            sizes="100vw"
+          />
+          <div
+            className="absolute inset-0 z-10"
+            style={{ background: "linear-gradient(rgba(0,0,0,0.52), rgba(0,0,0,0.72))" }}
+          />
+          <div className="relative z-20 max-w-3xl mx-auto px-4 sm:px-6 pt-28 pb-12 md:pt-32 md:pb-16 text-center w-full">
+            <div className="mb-8">
+              <h1 className="text-3xl md:text-5xl font-bold text-white leading-tight">
+                {h1}
+              </h1>
+            </div>
+            <div className="flex justify-center mb-8">
+              <Suspense fallback={null}>
+                <ZipRouter variant="hero" />
+              </Suspense>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 transform scale-[0.9] origin-center">
+              {statNumbers.map((s) => (
+                <AnimatedStat key={s.label} {...s} dark />
+              ))}
+            </div>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
-            {statNumbers.map((s) => (
-              <AnimatedStat key={s.label} {...s} />
-            ))}
-          </div>
-          <div className="flex flex-wrap justify-center gap-3 mb-6">
-            <Link
-              href="/book"
-              className="bg-brand text-charcoal font-semibold px-10 py-4 rounded-full hover:bg-brand-dark transition-colors"
-            >
-              Book Cleaning
-            </Link>
-            <Link
-              href="/#quick-quote"
-              className="border border-charcoal/20 text-charcoal font-semibold px-10 py-4 rounded-full hover:bg-cream-100 transition-colors"
-            >
-              Get a Quick Quote
-            </Link>
-          </div>
-          <GuaranteeBadge />
+          <ScrollHint />
         </section>
 
-        {/* Checklist (optional — new service pages) */}
-        {checklist && checklist.length > 0 && (
-          <>
-            <div className="border-t border-charcoal/10" />
-            <section className="max-w-3xl mx-auto px-4 sm:px-6 py-10">
-              <h2 className="text-lg font-bold text-charcoal mb-5 text-center">What&apos;s included</h2>
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                {checklist.map((item) => (
-                  <li key={item} className="flex items-start gap-2 text-sm text-charcoal-70">
-                    <CheckCircle size={14} className="text-brand-dark mt-0.5 shrink-0" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </section>
-            <div className="max-w-3xl mx-auto px-4 sm:px-6 pb-10">
-              <CtaBlock variant="book" heading="Ready to book?" subheading="We confirm within 24 hours. No contract, no commitment." />
-            </div>
-          </>
-        )}
+        <BridgeMarquee />
+        <RoomCarousel />
+        {showAddOns && <AddOnServices />}
+        <div className="flex justify-center pb-14">
+          <Link
+            href="/book"
+            className="inline-block bg-brand text-charcoal font-semibold px-8 py-3 rounded-full hover:bg-brand-dark transition-colors"
+          >
+            Book a cleaning
+          </Link>
+        </div>
 
         <div className="border-t border-charcoal/10" />
 
         {/* Sticky scroll features */}
         <StickyScrollFeatures
           features={scrollFeatures}
-          eyebrow="WHAT'S INCLUDED"
           headline="Everything your home needs, nothing you don't"
           subline="Here's exactly how we work — and why clients stick around."
         />
@@ -252,49 +240,35 @@ export default function ServicePageLayout({
         />
 
         {/* Pricing tiers */}
-        <section id="plans" className="py-16 bg-cream-50 border-t border-charcoal/5">
+        <section id="plans" className="py-16 bg-charcoal">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <Suspense fallback={null}>
-              <Tiers heading="Simple, transparent pricing" subtitle="Three packages built around how you live. All backed by our satisfaction guarantee." />
+              <Tiers heading="Simple, transparent pricing" subtitle="Three packages built around how you live. All backed by our satisfaction guarantee." dark />
             </Suspense>
           </div>
-        </section>
-
-        {/* Phone CTA break */}
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 py-10">
-          <CtaBlock variant="phone" heading="Questions? Just call." subheading="We're a local team — real people pick up." />
-        </div>
-
-        {/* Towns we serve */}
-        <ServiceAreasTabs />
-
-        {/* Testimonials */}
-        <section className="py-14 max-w-7xl mx-auto px-4 sm:px-6">
-          <h2 className="text-2xl md:text-3xl font-bold text-charcoal mb-8 text-center">
-            What clients say
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {testimonialSnippets.map((t) => (
-              <blockquote
-                key={t.name}
-                className="bg-cream-100 rounded-2xl p-6 space-y-3 border border-charcoal/5"
-              >
-                <div className="flex gap-0.5">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={12} className="fill-brand stroke-brand" />
-                  ))}
-                </div>
-                <p className="text-sm text-charcoal-70 italic">&ldquo;{t.quote}&rdquo;</p>
-                <footer className="text-sm font-semibold text-charcoal">{t.name}</footer>
-              </blockquote>
-            ))}
+          <div className="text-center pt-16 space-y-3">
+            <p className="text-lg font-bold text-cream">Questions? Just call or text.</p>
+            <a
+              href={BUSINESS.phoneHref}
+              className="inline-block bg-brand text-charcoal font-semibold px-8 py-3 rounded-full hover:bg-brand-dark transition-colors"
+            >
+              {BUSINESS.phone}
+            </a>
           </div>
         </section>
+
+        {/* Towns we serve — same bg-cream-50, drop the border so it flows seamlessly */}
+        <div className="[&>section]:border-t-0">
+          <ServiceAreasTabs />
+        </div>
+
+        {/* Testimonials */}
+        <Testimonials />
 
         {/* Related services */}
         <section className="bg-cream-50 py-16 border-t border-charcoal/5">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-charcoal mb-2 text-center">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-charcoal mb-2 text-center">
               Other services
             </h2>
             <p className="text-center text-charcoal-70 mb-10">
@@ -329,7 +303,7 @@ export default function ServicePageLayout({
         {/* Final CTA */}
         <section className="bg-white py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center space-y-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-charcoal">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-charcoal">
               Ready to come home to clean?
             </h2>
             <p className="text-charcoal/70 max-w-xl mx-auto">

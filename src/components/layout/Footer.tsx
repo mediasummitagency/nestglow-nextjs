@@ -22,7 +22,6 @@ const areasLinks = [
 
 const companyLinks = [
   { label: "About", href: "/about" },
-  { label: "Guides", href: "/guides" },
   { label: "FAQ", href: "/faq" },
   { label: "Reviews", href: "/reviews" },
   { label: "Contact", href: "/contact" },

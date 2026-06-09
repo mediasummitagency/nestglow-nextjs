@@ -14,7 +14,7 @@ function parseValue(raw: string): { target: number; suffix: string; decimals: nu
   return { target: numeric, suffix, decimals }
 }
 
-export function AnimatedStat({ value, label }: Stat) {
+export function AnimatedStat({ value, label, dark }: Stat & { dark?: boolean }) {
   const { target, suffix, decimals } = parseValue(value)
   const [display, setDisplay] = useState(0)
   const [started, setStarted] = useState(false)
@@ -47,12 +47,22 @@ export function AnimatedStat({ value, label }: Stat) {
   return (
     <div
       ref={ref}
-      className="flex flex-col items-center gap-2 bg-white border border-charcoal/8 rounded-2xl px-6 py-5 shadow-md text-center"
+      className="flex flex-col items-center gap-2 rounded-2xl px-6 py-5 text-center"
+      style={dark ? {
+        background: "rgba(255,255,255,0.12)",
+        backdropFilter: "blur(10px)",
+        WebkitBackdropFilter: "blur(10px)",
+        border: "1px solid rgba(255,255,255,0.25)",
+      } : {
+        background: "#ffffff",
+        border: "1px solid rgba(26,31,54,0.08)",
+        boxShadow: "0 4px 6px -1px rgba(0,0,0,0.1)",
+      }}
     >
-      <p className="text-5xl md:text-6xl font-bold text-brand tabular-nums">
+      <p className="text-3xl md:text-4xl font-bold text-brand tabular-nums">
         {display.toFixed(decimals)}{suffix}
       </p>
-      <p className="text-sm text-charcoal-70 font-medium">{label}</p>
+      <p className={`text-sm font-medium ${dark ? "text-white/70" : "text-charcoal-70"}`}>{label}</p>
     </div>
   )
 }

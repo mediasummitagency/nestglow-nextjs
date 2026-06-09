@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Phone, Mail, MessageSquare } from "lucide-react";
 import { BASE_URL, BUSINESS } from "@/lib/config";
+import { PageHero } from "@/components/layout/PageHero";
 
 export const metadata: Metadata = {
   title: "Contact NestGlow Co",
@@ -48,16 +49,12 @@ export default function ContactPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(speakableSchema) }}
       />
-      <main className="pt-[72px]">
-        {/* Hero */}
-        <section className="max-w-3xl mx-auto px-4 sm:px-6 py-16 md:py-24 text-center space-y-4">
-          <h1 className="text-4xl md:text-5xl font-bold text-charcoal">
-            Let&apos;s get in touch.
-          </h1>
-          <p className="text-lg text-charcoal-70">
-            We respond to all messages within 24 hours. For the fastest response, give us a call.
-          </p>
-        </section>
+      <main>
+        <PageHero
+          heading="Let's get in touch."
+          subheading="We respond to all messages within 24 hours. For the fastest response, give us a call."
+          centered
+        />
 
         {/* Contact methods */}
         <section id="contact-methods" className="bg-cream-100 py-16">
