@@ -13,6 +13,7 @@ import { ZipRouter } from "@/components/forms/ZipRouter";
 import Tiers from "@/components/sections/Tiers";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { ScrollHint } from "@/components/ui/ScrollHint";
+import { WhyNestGlow } from "@/components/sections/WhyNestGlow";
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -100,7 +101,7 @@ export default function HomePage() {
       <main>
 
         {/* Hero — ZIP-first */}
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <section className="relative min-h-screen flex items-start md:items-center justify-center overflow-hidden">
           <Image
             src="/images/home/hero.jpg"
             alt=""
@@ -114,18 +115,20 @@ export default function HomePage() {
             className="absolute inset-0 z-10"
             style={{ background: "linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.70))" }}
           />
-          <div className="relative z-20 max-w-3xl mx-auto px-4 sm:px-6 text-center space-y-6 py-16 md:py-24">
+          <div className="relative z-20 max-w-3xl mx-auto px-4 sm:px-6 text-center space-y-6 pt-20 pb-16 md:py-24">
             <p className="text-sm font-semibold uppercase tracking-widest text-brand">
               Cleaning services across NJ
             </p>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
               Come home to a place that feels like a fresh start.
             </h1>
-            <div className="flex items-center justify-center gap-1.5">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} size={14} className="fill-brand stroke-brand" />
-              ))}
-              <span className="ml-1 text-sm text-white/80">
+            <div className="flex flex-col items-center gap-1">
+              <div className="flex items-center gap-1">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} size={14} className="fill-brand stroke-brand" />
+                ))}
+              </div>
+              <span className="text-sm text-white/80">
                 Trusted by homeowners across NJ
               </span>
             </div>
@@ -138,7 +141,7 @@ export default function HomePage() {
         {/* TODO: Add additional borrowed-authority badges as Caroline collects them — BBB, local press, chamber, etc. */}
         <TrustBadges />
 
-        <SignatureProcess imageSrc="/images/process/signature-clean.png" />
+        <SignatureProcess imageSrc="/images/process/signature-clean.png" hideCta />
 
         {/* Tiers teaser */}
         <section className="bg-white py-16">
@@ -155,95 +158,8 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Why NestGlow — alternating image rows */}
-        <section className="bg-cream-50 py-16">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6">
-
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-charcoal mb-3">
-                Booking a cleaner shouldn&apos;t feel{" "}
-                <span className="text-brand">like a gamble.</span>
-              </h2>
-            </div>
-
-            <div className="space-y-12 md:space-y-16">
-
-              {/* Row 1 — image left / text right */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
-                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-charcoal/10 bg-cream-100">
-                  <Image
-                    src="/images/home/why-owner.png"
-                    alt="NestGlow Co owner at a client's door"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width:768px) 100vw, 50vw"
-                  />
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold text-brand-dark mb-2">
-                    A name and a face, not a queue
-                  </h3>
-                  <p className="text-charcoal-70 leading-relaxed">
-                    With NestGlow, when you have a question or need to move a date, a real local person picks up. You&apos;re talking to the owner, not typing into an app&apos;s chat window or waiting on a national support line. We&apos;re based right here in Monmouth, Ocean, and Middlesex County, and we answer to our neighbors.
-                  </p>
-                </div>
-              </div>
-
-              {/* Row 2 — image right / text left (desktop); image first on mobile via order classes) */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
-                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-charcoal/10 bg-cream-100 md:order-2">
-                  <Image
-                    src="/images/home/why-team.png"
-                    alt="NestGlow Co cleaning team arriving at a home"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width:768px) 100vw, 50vw"
-                  />
-                </div>
-                <div className="md:order-1">
-                  <h3 className="text-xl font-semibold text-brand-dark mb-2">
-                    The same hands, every visit
-                  </h3>
-                  <p className="text-charcoal-70 leading-relaxed">
-                    Booking apps send whoever&apos;s available, a different stranger in your home each time, re-learning where everything goes and what matters to you. NestGlow sends a consistent team that already knows your home, your preferences, and how you like things left. You shouldn&apos;t have to give the tour twice.
-                  </p>
-                </div>
-              </div>
-
-              {/* Row 3 — image left / text right */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
-                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-charcoal/10 bg-cream-100">
-                  <Image
-                    src="/images/home/why-guarantee.png"
-                    alt="A freshly cleaned, spotless living room"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width:768px) 100vw, 50vw"
-                  />
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold text-brand-dark mb-2">
-                    If it&apos;s not right, that&apos;s on us
-                  </h3>
-                  <p className="text-charcoal-70 leading-relaxed">
-                    Hire an uninsured cleaner off a marketplace and a broken vase or an on-the-job injury can quietly become your liability. With NestGlow, you&apos;re covered, and every clean is backed by our satisfaction guarantee: if something wasn&apos;t done to your standard, we come back and make it right at no extra cost. No disputes through an app, no chasing anyone down.
-                  </p>
-                </div>
-              </div>
-
-            </div>
-
-            <div className="text-center mt-12">
-              <Link
-                href="/book"
-                className="inline-block bg-brand text-white font-semibold px-8 py-3 rounded-full hover:bg-brand-dark transition-colors"
-              >
-                Book NestGlow Today
-              </Link>
-            </div>
-
-          </div>
-        </section>
+        {/* Why NestGlow */}
+        <WhyNestGlow />
 
         {/* How it works */}
         <section className="bg-white py-16 border-t border-b border-charcoal/10">
@@ -331,7 +247,7 @@ export default function HomePage() {
                 );
               })}
             </div>
-            <div className="mt-12 text-center space-y-4">
+            <div className="mt-[63px] text-center space-y-4">
               <ZipRouter variant="hero" />
             </div>
           </div>

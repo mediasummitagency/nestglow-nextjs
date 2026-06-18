@@ -39,7 +39,7 @@ export function ServiceAreasTabs() {
         </p>
 
         {/* County tabs */}
-        <div className="flex flex-wrap gap-2 justify-center mb-8">
+        <div className="flex gap-2 justify-center mb-8">
           {COUNTIES.map((c) => (
             <button
               key={c.value}
@@ -61,12 +61,12 @@ export function ServiceAreasTabs() {
             flex-wrap + justify-center: every row (including the partial last row)
             is centered. max-w-[680px] caps at 4 items per row (4×144px + 3×32px gap = 672px).
           */}
-          <div className="max-w-[780px] mx-auto flex flex-wrap justify-center gap-x-[37px] gap-y-[14px]">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-3 max-w-[780px] mx-auto">
             {towns.map((town) => (
               <Link
                 key={town.slug}
                 href={`/cleaning-services/${town.slug}`}
-                className="w-[166px] text-center text-[1rem] text-charcoal-70 hover:text-brand transition-colors"
+                className="text-center text-[1rem] text-charcoal-70 hover:text-brand transition-colors"
               >
                 {town.name}
               </Link>

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Suspense } from "react";
 import { Roboto } from "next/font/google";
 import Script from "next/script";
@@ -14,6 +14,11 @@ const roboto = Roboto({
   variable: "--font-roboto",
   display: "swap",
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
@@ -63,10 +68,12 @@ export default function RootLayout({
             })(window,document,'script','dataLayer','${TRACKING.gtmId}');
           `}</Script>
         )}
-        <Suspense fallback={null}>
-          <SiteNav />
-        </Suspense>
-        <div className="pb-[72px] md:pb-0">
+        <div className="hidden md:block">
+          <Suspense fallback={null}>
+            <SiteNav />
+          </Suspense>
+        </div>
+        <div className="pb-[88px] md:pb-0">
           {children}
         </div>
         <Footer />

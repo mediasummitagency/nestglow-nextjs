@@ -66,7 +66,7 @@ export function ZipRouter({ variant, className }: ZipRouterProps) {
         onSubmit={handleSubmit}
         className={cn(
           "flex gap-3",
-          isHero ? "flex-col sm:flex-row sm:justify-center" : "flex-row"
+          isHero ? "flex-col items-center sm:flex-row sm:justify-center" : "flex-row"
         )}
       >
         <input

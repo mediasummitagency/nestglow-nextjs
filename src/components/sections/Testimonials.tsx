@@ -1,4 +1,6 @@
-import Link from "next/link";
+"use client";
+
+import { useState } from "react";
 import { ChevronRight } from "lucide-react";
 import { reviews, type Review } from "@/lib/reviews";
 
@@ -14,6 +16,8 @@ function relevanceScore(r: Review, currentTown?: string, currentCounty?: string)
 }
 
 export function Testimonials({ currentTown, currentCounty }: TestimonialsProps) {
+  const [showAll, setShowAll] = useState(false);
+
   const sorted = [...reviews].sort(
     (a, b) =>
       relevanceScore(b, currentTown, currentCounty) -
@@ -36,14 +40,16 @@ export function Testimonials({ currentTown, currentCounty }: TestimonialsProps) 
 
         {/* 5 editorial cards — 3 col grid, last row 2 cards centered */}
         <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-5">
-          {sorted.map((t) => (
+          {sorted.map((t, i) => (
             <blockquote
               key={t.name}
-              className="flex flex-col bg-white border-2 border-charcoal/20 rounded-2xl shadow-md p-7"
+              className={`flex flex-col bg-white border-2 border-charcoal/20 rounded-2xl shadow-md p-7 ${
+                i >= 3 && !showAll ? "hidden sm:flex" : "flex"
+              }`}
             >
               <div className="flex gap-1.5 mb-6">
-                {[...Array(5)].map((_, i) => (
-                  <span key={i} className="text-charcoal text-sm leading-none">●</span>
+                {[...Array(5)].map((_, j) => (
+                  <span key={j} className="text-charcoal text-sm leading-none">●</span>
                 ))}
               </div>
               <p className="text-base text-charcoal-70 leading-relaxed flex-1">
@@ -58,14 +64,18 @@ export function Testimonials({ currentTown, currentCounty }: TestimonialsProps) 
           ))}
         </div>
 
-        <div className="text-center mt-10">
-          <Link
-            href="/reviews"
-            className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand hover:text-brand-dark transition-colors"
-          >
-            Read all reviews <ChevronRight size={14} />
-          </Link>
-        </div>
+        {/* Show more — mobile only */}
+        {!showAll && (
+          <div className="mt-6 text-center sm:hidden">
+            <button
+              onClick={() => setShowAll(true)}
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand hover:text-brand-dark transition-colors"
+            >
+              Show more reviews <ChevronRight size={14} />
+            </button>
+          </div>
+        )}
+
 
       </div>
     </section>

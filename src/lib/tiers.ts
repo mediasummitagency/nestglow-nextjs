@@ -39,6 +39,7 @@ export interface Tier {
   isPopular: boolean;
   ctaLabel: string;
   sizeFitMaxSqft: number | null;
+  photoSrc?: string;
 }
 
 export const TIERS: Tier[] = [
@@ -60,6 +61,7 @@ export const TIERS: Tier[] = [
     isPopular: false,
     ctaLabel: "Select this Glow",
     sizeFitMaxSqft: 1500,
+    photoSrc: undefined,
   },
   {
     id: "signature-glow",
@@ -89,6 +91,7 @@ export const TIERS: Tier[] = [
     isPopular: true,
     ctaLabel: "Select this Glow",
     sizeFitMaxSqft: 2800,
+    photoSrc: undefined,
   },
   {
     id: "full-glow",
@@ -134,6 +137,7 @@ export const TIERS: Tier[] = [
     isPopular: false,
     ctaLabel: "Select this Glow",
     sizeFitMaxSqft: null,
+    photoSrc: undefined,
   },
 ];
 

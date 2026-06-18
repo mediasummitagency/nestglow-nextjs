@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
-import { X, ChevronDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const services = [
@@ -33,15 +33,15 @@ function Accordion({
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="border-b border-charcoal/5">
+    <div className="border-b border-charcoal/5 last:border-0">
       <button
-        className="flex items-center justify-between w-full py-3 text-base font-medium text-charcoal hover:text-brand transition-colors"
+        className="flex items-center justify-between w-full py-3 text-sm font-medium text-charcoal"
         onClick={() => setOpen((v) => !v)}
       >
         {label}
         <ChevronDown
-          size={16}
-          className={cn("transition-transform text-charcoal/50", open && "rotate-180")}
+          size={14}
+          className={cn("transition-transform text-charcoal/40", open && "rotate-180")}
         />
       </button>
       {open && (
@@ -51,7 +51,7 @@ function Accordion({
               key={item.href}
               href={item.href}
               onClick={onClose}
-              className="py-2.5 text-sm text-charcoal/70 hover:text-brand transition-colors"
+              className="py-2 text-sm text-charcoal/60 hover:text-brand transition-colors"
             >
               {item.label}
             </Link>
@@ -69,51 +69,35 @@ export default function MobileNav({
   open: boolean;
   onClose: () => void;
 }) {
-  useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
-  }, [open]);
-
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50">
-      <div
-        className="absolute inset-0 bg-charcoal/40"
-        onClick={onClose}
-        aria-hidden="true"
-      />
+    <>
+      {/* Invisible tap-outside layer */}
+      <div className="fixed inset-0 z-[59]" onClick={onClose} />
 
+      {/* Popover panel — floats above the dock, centered */}
       <div
-        className="absolute top-4 left-4 right-4 bg-cream rounded-2xl flex flex-col shadow-xl"
-        style={{ animation: "menu-open 0.18s ease-out forwards" }}
+        className="fixed z-[60] w-64 bg-cream rounded-2xl shadow-2xl overflow-hidden"
+        style={{
+          bottom: "calc(env(safe-area-inset-bottom, 0px) + 96px)",
+          left: "calc(50% - 128px)",
+          animation: "menu-from-point 0.25s cubic-bezier(0.34, 1.2, 0.64, 1) forwards",
+          transformOrigin: "bottom center",
+        }}
       >
-        {/* Header */}
-        <div className="flex items-center justify-between px-5 h-14 border-b border-charcoal/10">
-          <span className="font-display font-semibold text-base text-charcoal">Menu</span>
-          <button
-            onClick={onClose}
-            className="p-1.5 text-charcoal hover:text-brand transition-colors"
-            aria-label="Close menu"
-          >
-            <X size={18} />
-          </button>
-        </div>
-
-        {/* Nav */}
-        <nav className="py-2 px-5">
+        <nav className="py-1 px-4">
           <Link
             href="/"
             onClick={onClose}
-            className="block py-3 text-base font-medium text-charcoal hover:text-brand border-b border-charcoal/5 transition-colors"
+            className="block py-3 text-sm font-medium text-charcoal hover:text-brand border-b border-charcoal/5 transition-colors"
           >
             Home
           </Link>
-
           <Accordion label="Services" items={services} onClose={onClose} />
           <Accordion label="Areas We Serve" items={areas} onClose={onClose} />
         </nav>
       </div>
-    </div>
+    </>
   );
 }

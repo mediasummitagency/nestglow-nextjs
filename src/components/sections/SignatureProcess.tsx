@@ -68,7 +68,7 @@ export function SignatureProcess({
   }, [activeRoom]);
 
   return (
-    <section className="py-20 bg-white border-t border-charcoal/5">
+    <section className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
 
         {/* Two-column grid — text top-aligns with image */}
@@ -76,16 +76,16 @@ export function SignatureProcess({
 
           {/* LEFT — copy only */}
           <div className="space-y-6">
-            <p className="text-sm font-semibold tracking-widest text-brand uppercase">
+            <p className="text-xl text-center tracking-widest font-semibold text-brand uppercase sm:text-sm sm:text-left">
               {SIGNATURE_PROCESS_NAME}
             </p>
 
             <p className="text-charcoal-70 leading-relaxed">{body1}</p>
-            <p className="text-charcoal-70 leading-relaxed">{body2}</p>
+            <p className="hidden sm:block text-charcoal-70 leading-relaxed">{body2}</p>
           </div>
 
-          {/* RIGHT — image */}
-          <div className="relative aspect-[4/3] rounded-2xl overflow-hidden order-first lg:order-last">
+          {/* RIGHT — image (hidden on mobile, visible lg+) */}
+          <div className="relative aspect-[4/3] rounded-2xl overflow-hidden hidden lg:block">
             {imageSrc ? (
               <Image
                 src={imageSrc}
@@ -107,8 +107,8 @@ export function SignatureProcess({
 
         </div>
 
-        {/* Full-width tile row */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4 items-stretch mt-10">
+        {/* Tile row — single col on mobile, 3-col sm, 5-col lg */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4 items-stretch mt-10 max-w-xs mx-auto sm:max-w-none">
           {SIGNATURE_PROCESS.map((category) => {
             const Icon = ICON_MAP[category.icon];
             return (
