@@ -14,6 +14,8 @@ const servicesLinks = [
   { label: "Commercial Cleaning", href: "/services/commercial-cleaning" },
   { label: "Deep Cleaning", href: "/services/deep-cleaning" },
   { label: "Move In / Move Out", href: "/services/move-in-move-out" },
+  { label: "Airbnb & STR Cleaning", href: "/services/airbnb-cleaning" },
+  { label: "Post-Construction Cleaning", href: "/services/post-construction-cleaning" },
 ];
 
 const areasLinks = [
@@ -117,7 +119,7 @@ export default function SiteNav() {
           )}
 
           {/* Right col — CTA (desktop) or hamburger (mobile) */}
-          <div className="flex items-center justify-end gap-4">
+          <div className="flex items-center justify-end gap-4 col-start-3">
             {!minimal && (
               <>
                 <a

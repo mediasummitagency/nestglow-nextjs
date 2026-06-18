@@ -1,24 +1,66 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { X, Phone } from "lucide-react";
-import { BUSINESS } from "@/lib/config";
+import { X, ChevronDown } from "lucide-react";
+import { cn } from "@/lib/utils";
 
-const navItems = [
-  { label: "Home", href: "/" },
-  { label: "Residential Cleaning", href: "/services/residential-cleaning" },
-  { label: "Commercial Cleaning", href: "/services/commercial-cleaning" },
-  { label: "Deep Cleaning", href: "/services/deep-cleaning" },
-  { label: "Move In / Move Out", href: "/services/move-in-move-out" },
-  { label: "All Service Areas", href: "/cleaning-services" },
-  { label: "Monmouth County", href: "/cleaning-services/monmouth-county" },
-  { label: "Ocean County", href: "/cleaning-services/ocean-county" },
-  { label: "Middlesex County", href: "/cleaning-services/middlesex-county" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
-  { label: "FAQ", href: "/faq" },
+const services = [
+  { label: "Residential Cleaning",       href: "/services/residential-cleaning" },
+  { label: "Commercial Cleaning",        href: "/services/commercial-cleaning" },
+  { label: "Deep Cleaning",              href: "/services/deep-cleaning" },
+  { label: "Move In / Move Out",         href: "/services/move-in-move-out" },
+  { label: "Airbnb & STR Cleaning",      href: "/services/airbnb-cleaning" },
+  { label: "Post-Construction Cleaning", href: "/services/post-construction-cleaning" },
 ];
+
+const areas = [
+  { label: "All Service Areas",  href: "/cleaning-services" },
+  { label: "Monmouth County",    href: "/cleaning-services/monmouth-county" },
+  { label: "Ocean County",       href: "/cleaning-services/ocean-county" },
+  { label: "Middlesex County",   href: "/cleaning-services/middlesex-county" },
+];
+
+function Accordion({
+  label,
+  items,
+  onClose,
+}: {
+  label: string;
+  items: { label: string; href: string }[];
+  onClose: () => void;
+}) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div className="border-b border-charcoal/5">
+      <button
+        className="flex items-center justify-between w-full py-3 text-base font-medium text-charcoal hover:text-brand transition-colors"
+        onClick={() => setOpen((v) => !v)}
+      >
+        {label}
+        <ChevronDown
+          size={16}
+          className={cn("transition-transform text-charcoal/50", open && "rotate-180")}
+        />
+      </button>
+      {open && (
+        <div className="pb-2 pl-3 flex flex-col">
+          {items.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              onClick={onClose}
+              className="py-2.5 text-sm text-charcoal/70 hover:text-brand transition-colors"
+            >
+              {item.label}
+            </Link>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function MobileNav({
   open,
@@ -27,76 +69,50 @@ export default function MobileNav({
   open: boolean;
   onClose: () => void;
 }) {
-  // Lock body scroll when open
   useEffect(() => {
-    if (open) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
   }, [open]);
 
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex">
-      {/* Backdrop */}
+    <div className="fixed inset-0 z-50">
       <div
         className="absolute inset-0 bg-charcoal/40"
         onClick={onClose}
         aria-hidden="true"
       />
 
-      {/* Drawer */}
-      <div className="relative ml-auto w-full max-w-sm h-full bg-cream flex flex-col shadow-xl">
+      <div
+        className="absolute top-4 left-4 right-4 bg-cream rounded-2xl flex flex-col shadow-xl"
+        style={{ animation: "menu-open 0.18s ease-out forwards" }}
+      >
         {/* Header */}
-        <div className="flex items-center justify-between px-6 h-[72px] border-b border-charcoal/10">
-          <span className="font-display font-semibold text-lg text-charcoal">
-            Menu
-          </span>
+        <div className="flex items-center justify-between px-5 h-14 border-b border-charcoal/10">
+          <span className="font-display font-semibold text-base text-charcoal">Menu</span>
           <button
             onClick={onClose}
-            className="p-2 text-charcoal hover:text-brand transition-colors"
+            className="p-1.5 text-charcoal hover:text-brand transition-colors"
             aria-label="Close menu"
           >
-            <X size={20} />
+            <X size={18} />
           </button>
         </div>
 
-        {/* Nav links */}
-        <nav className="flex-1 overflow-y-auto py-4 px-6">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              onClick={onClose}
-              className="block py-3 text-base font-medium text-charcoal hover:text-brand border-b border-charcoal/5 transition-colors"
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-
-        {/* Bottom CTA */}
-        <div className="px-6 py-6 border-t border-charcoal/10 flex flex-col gap-3">
-          <a
-            href={BUSINESS.phoneHref}
-            className="flex items-center justify-center gap-2 text-sm font-medium text-charcoal hover:text-brand transition-colors"
-          >
-            <Phone size={14} />
-            {BUSINESS.phone}
-          </a>
+        {/* Nav */}
+        <nav className="py-2 px-5">
           <Link
-            href="/book"
+            href="/"
             onClick={onClose}
-            className="w-full bg-brand text-charcoal text-sm font-semibold px-4 py-3 rounded-full text-center hover:bg-brand-dark transition-colors"
+            className="block py-3 text-base font-medium text-charcoal hover:text-brand border-b border-charcoal/5 transition-colors"
           >
-            Book Cleaning
+            Home
           </Link>
-        </div>
+
+          <Accordion label="Services" items={services} onClose={onClose} />
+          <Accordion label="Areas We Serve" items={areas} onClose={onClose} />
+        </nav>
       </div>
     </div>
   );

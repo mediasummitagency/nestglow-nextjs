@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 
 const props = {
   slug: "deep-cleaning",
+  serviceKind: "deep" as const,
   h1: "Deep Cleaning in Monmouth, Ocean & Middlesex County, NJ",
   metaTitle: "Deep House Cleaning Services in NJ",
   metaDescription:
@@ -19,19 +20,19 @@ const props = {
     "Our deep cleaning service is a thorough reset of your home that reaches the spots a regular maintenance clean doesn't cover. It's the right choice for first-time cleans, seasonal refreshes, pre-guest preparation, or any time your home needs more than surface care. Our team handles everything from inside appliances to baseboards to blind slats.",
   features: [
     {
-      badge: "TRANSPARENT PRICING",
+      badge: "PRICED FOR THE WORK",
       headline: "Priced on what actually needs doing",
       subhead: "Deep cleans take longer. The quote accounts for that — upfront.",
       body: "A deep clean takes more time than a standard clean and we price accordingly. The final number depends on your home's size and how long it's been since it was last cleaned by a professional. You fill out the booking form, and we give you a firm quote before anything is scheduled. The number you receive is the number you pay.",
     },
     {
-      badge: "EVERY STANDARD CLEAN",
+      badge: "WHAT A DEEP CLEAN REACHES",
       headline: "The areas a regular clean misses",
       subhead: "Baseboards, grout, ceiling fans, cabinet exteriors — all of it.",
       body: "A deep clean reaches the places a standard clean skips over. Baseboards and door frames get hand-wiped. Ceiling fans and vents get dusted. The kitchen gets a degreased backsplash and cabinet exteriors scrubbed. Bathrooms get a real grout scrub, not just a surface wipe. Bedrooms get under-bed cleaning and furniture polish. Window sills, blinds, light switches, and doorknobs all get cleaned. It's the reset your home needs before recurring service can keep up.",
     },
     {
-      badge: "WHO THIS IS FOR",
+      badge: "THE RIGHT STARTING POINT",
       headline: "The right starting point before regular service",
       subhead: "One deep clean changes what \"clean\" means in your home.",
       body: "Most of our long-term residential clients start with a deep clean before scheduling recurring service. It resets the baseline so every maintenance clean after that has less to catch up on. It's also the right call for seasonal refreshes, pre-holiday prep when guests are coming, or post-renovation cleanup when dust gets into everything. If your home hasn't had a professional clean in a while, this is where to start.",

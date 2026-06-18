@@ -11,12 +11,13 @@ export const metadata: Metadata = {
 
 const props = {
   slug: "residential-cleaning",
+  serviceKind: "residential" as const,
   h1: "Residential Cleaning in Monmouth, Ocean & Middlesex County",
   metaTitle: "Residential House Cleaning in NJ",
   metaDescription:
     "Recurring and one-time house cleaning for NJ homes. Weekly, bi-weekly, or monthly. Insured, bonded, and guaranteed. Serving Monmouth, Ocean, and Middlesex County.",
   introParagraph:
-    "NestGlow Co provides residential cleaning services for homes across Monmouth, Ocean, and Middlesex County, NJ. Our team handles weekly, bi-weekly, and monthly maintenance cleans, plus one-time deep cleans, to the same standard every visit. We are fully insured and bonded, and every clean is backed by a 24-hour satisfaction guarantee.",
+    "NestGlow Co provides residential cleaning services for homes across Monmouth, Ocean, and Middlesex County, NJ. Our team handles weekly, bi-weekly, and monthly maintenance cleans, plus one-time deep cleans, to the same standard every visit. We are fully insured and bonded, and every clean is backed by a 24-hour satisfaction guarantee. First-time client or haven't had a professional clean in a while? Most clients start with a one-time deep clean to reset the baseline, then move into a recurring schedule.",
   features: [
     {
       badge: "TRANSPARENT PRICING",
@@ -25,7 +26,7 @@ const props = {
       body: "Most cleaning companies give you a ballpark and figure out the rest when they get there. We don't work that way. You tell us about your home (square footage, bedrooms, bathrooms, any specific priorities) and we give you a firm price before anything is scheduled. What you're quoted is what you pay.",
     },
     {
-      badge: "EVERY STANDARD CLEAN",
+      badge: "WHAT EVERY CLEAN INCLUDES",
       headline: "A full clean, not a quick pass",
       subhead: "Every room. Every visit. No exceptions.",
       body: "We don't skip the parts that require effort. Your kitchen gets countertops, appliance exteriors, the sink, and the floor, not just a wipe-down. Bathrooms get the tub, shower, toilet, mirrors, and sink scrubbed properly. Every bedroom is dusted and vacuumed, every floor gets swept and mopped, and trash gets pulled and bins wiped before we leave. The same checklist and the same standard every time we come through.",

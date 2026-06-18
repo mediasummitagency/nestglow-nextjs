@@ -1,11 +1,9 @@
 import { Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  Star,
-  Home, Briefcase, Sparkles, Truck, ChevronRight,
-} from "lucide-react";
+import { Star, ChevronRight } from "lucide-react";
 import { BUSINESS, BASE_URL } from "@/lib/config";
+import { services } from "@/lib/services";
 import { FAQ } from "@/components/sections/FAQ";
 import { ServiceAreasTabs } from "@/components/sections/ServiceAreasTabs";
 import { SignatureProcess } from "@/components/sections/SignatureProcess";
@@ -18,32 +16,6 @@ import { ScrollHint } from "@/components/ui/ScrollHint";
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
-const services = [
-  {
-    href: "/services/residential-cleaning",
-    icon: Home,
-    title: "Residential Cleaning",
-    copy: "Regular maintenance, deep cleans, and special requests for the homes you live in and love.",
-  },
-  {
-    href: "/services/commercial-cleaning",
-    icon: Briefcase,
-    title: "Commercial Cleaning",
-    copy: "Offices, storefronts, and professional suites. Schedules built around your business hours.",
-  },
-  {
-    href: "/services/deep-cleaning",
-    icon: Sparkles,
-    title: "Deep Cleaning",
-    copy: "Top-to-bottom detailing for first-time cleans, seasonal resets, and pre-guest refreshes.",
-  },
-  {
-    href: "/services/move-in-move-out",
-    icon: Truck,
-    title: "Move In / Move Out",
-    copy: "Empty-home deep cleans for sellers, buyers, and renters making the next move.",
-  },
-];
 
 const howItWorks = [
   { step: "1", title: "Enter your ZIP", image: "/images/home/how-step-1.png", alt: "Homeowner relaxing while booking online", body: "We check your area and show you plans built for your home." },
@@ -336,7 +308,7 @@ export default function HomePage() {
             <p className="text-center text-charcoal-70 mb-10">
               Every service is backed by our satisfaction guarantee.
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {services.map((svc) => {
                 const Icon = svc.icon;
                 return (

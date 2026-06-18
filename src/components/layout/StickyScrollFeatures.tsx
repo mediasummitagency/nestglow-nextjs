@@ -13,9 +13,9 @@ export type ScrollFeature = {
 }
 
 // Scroll track height per feature (vh).
-const PANEL_VH = 120
+const PANEL_VH = 85
 // Extra vh of scroll before card animation begins — gives the section time to settle centred.
-const LEAD_IN_VH = 15
+const LEAD_IN_VH = 5
 
 export function StickyScrollFeatures({
   features,
@@ -79,7 +79,7 @@ export function StickyScrollFeatures({
               className="object-cover object-center"
               sizes="100vw"
             />
-            <div className="absolute inset-0 bg-black/65" />
+            <div className="absolute inset-0 bg-black/75" />
             <div className="relative z-10 px-4 sm:px-6 py-14 space-y-6">
               {/* Section header only on first panel */}
               {i === 0 && (eyebrow || headline || subline) && (
@@ -102,8 +102,8 @@ export function StickyScrollFeatures({
                   {f.badge}
                 </span>
                 <h2 className="text-2xl font-bold text-white mb-2 leading-tight">{f.headline}</h2>
-                <p className="text-base text-white/60 mb-4">{f.subhead}</p>
-                <p className="text-base text-white/80 leading-relaxed">{f.body}</p>
+                <p className="text-base text-white/80 mb-4">{f.subhead}</p>
+                <p className="text-base text-white leading-relaxed">{f.body}</p>
               </div>
               <div>{f.visual}</div>
             </div>
@@ -117,7 +117,7 @@ export function StickyScrollFeatures({
         className="hidden md:block"
         style={{ height: `${features.length * PANEL_VH + LEAD_IN_VH}vh` }}
       >
-        <div className="sticky top-[72px] h-[calc(100vh-72px)] relative overflow-hidden">
+        <div className="sticky top-0 h-screen relative overflow-hidden">
           {/* Background images — crossfade with active panel */}
           {features.map((f, i) => (
             <div
@@ -130,14 +130,15 @@ export function StickyScrollFeatures({
                 src={f.bgImage}
                 alt=""
                 fill
+                quality={90}
                 className="object-cover object-center"
                 sizes="100vw"
                 priority={i === 0}
               />
             </div>
           ))}
-          {/* Dark overlay */}
-          <div className="absolute inset-0 bg-black/65 z-10" />
+          {/* Dark overlay — left-biased so text column has more contrast */}
+          <div className="absolute inset-0 z-10" style={{ background: "linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.65) 50%, rgba(0,0,0,0.40) 100%)" }} />
 
           {/* Content */}
           <div className="relative z-20 h-full px-[17%] flex flex-col">
@@ -165,8 +166,8 @@ export function StickyScrollFeatures({
             {/* 2-col scroll content — text pushed left, card pushed right */}
             <div className="flex-1 flex items-center justify-between gap-8">
               {/* Left: text cross-fades in place */}
-              <div className="w-[45%] max-w-[600px] shrink-0">
-                <div className="relative w-full min-h-[360px]">
+              <div className="w-[42%] max-w-[560px] shrink-0">
+                <div className="relative w-full min-h-[420px]">
                   {features.map((f, i) => (
                     <div
                       key={i}
@@ -180,15 +181,15 @@ export function StickyScrollFeatures({
                         {f.badge}
                       </span>
                       <h2 className="text-4xl font-bold text-white mb-3 leading-tight">{f.headline}</h2>
-                      <p className="text-lg text-white/60 mb-6">{f.subhead}</p>
-                      <p className="text-lg text-white/80 leading-relaxed">{f.body}</p>
+                      <p className="text-lg text-white/80 mb-6">{f.subhead}</p>
+                      <p className="text-lg text-white leading-relaxed">{f.body}</p>
                     </div>
                   ))}
                 </div>
               </div>
 
               {/* Right: cards scroll physically (translateY driven by scroll progress) */}
-              <div className="relative overflow-hidden shrink-0 w-[40%] max-w-[520px] h-[400px]">
+              <div className="relative overflow-hidden shrink-0 w-[46%] max-w-[560px] h-[480px]">
                 {features.map((f, i) => (
                   <div
                     key={i}

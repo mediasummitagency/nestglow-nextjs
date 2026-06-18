@@ -17,6 +17,7 @@ export const metadata: Metadata = {
 
 const props = {
   slug: "airbnb-cleaning",
+  serviceKind: "airbnb" as const,
   h1: "Airbnb & Short-Term Rental Cleaning in Ocean & Monmouth County",
   metaTitle: "Airbnb & Short-Term Rental Cleaning in Ocean & Monmouth County NJ",
   metaDescription:

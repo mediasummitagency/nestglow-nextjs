@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Home, Briefcase, Sparkles, Truck, ChevronRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import { BASE_URL, BUSINESS } from "@/lib/config";
+import { services } from "@/lib/services";
 
 export const metadata: Metadata = {
   title: "Cleaning Services",
@@ -9,33 +10,6 @@ export const metadata: Metadata = {
     "Residential, commercial, deep cleaning, and move in/out services across Monmouth, Ocean, and Middlesex County, NJ. Transparent pricing and a satisfaction guarantee.",
   alternates: { canonical: `${BASE_URL}/services` },
 };
-
-const services = [
-  {
-    href: "/services/residential-cleaning",
-    icon: Home,
-    title: "Residential Cleaning",
-    copy: "Regular maintenance cleans, one-time deep cleans, and special add-ons for the homes you live in and love. Weekly, bi-weekly, and monthly schedules available.",
-  },
-  {
-    href: "/services/commercial-cleaning",
-    icon: Briefcase,
-    title: "Commercial Cleaning",
-    copy: "Offices, storefronts, and professional suites. After-hours and weekend service available. Schedules built around your business, not ours.",
-  },
-  {
-    href: "/services/deep-cleaning",
-    icon: Sparkles,
-    title: "Deep Cleaning",
-    copy: "Top-to-bottom detailing that covers what regular cleans miss — inside appliances, ceiling fans, baseboards, grout, and more. Right for first-time clients and seasonal resets.",
-  },
-  {
-    href: "/services/move-in-move-out",
-    icon: Truck,
-    title: "Move In / Move Out",
-    copy: "Empty-home deep cleans for sellers, buyers, landlords, and tenants. We cover inside cabinets, appliances, and all the spots that matter for inspections and handovers.",
-  },
-];
 
 export default function ServicesPage() {
   return (

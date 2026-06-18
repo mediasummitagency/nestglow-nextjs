@@ -17,6 +17,7 @@ export const metadata: Metadata = {
 
 const props = {
   slug: "post-construction-cleaning",
+  serviceKind: "postconstruction" as const,
   h1: "Post-Construction Cleaning in Monmouth, Ocean & Middlesex County",
   metaTitle: "Post-Construction Cleaning in NJ — Fine Dust Removal Specialists",
   metaDescription:

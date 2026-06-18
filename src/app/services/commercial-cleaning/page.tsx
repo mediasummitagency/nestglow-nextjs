@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 
 const props = {
   slug: "commercial-cleaning",
+  serviceKind: "commercial" as const,
   h1: "Commercial Cleaning for NJ Offices, Retail, and Professional Suites",
   metaTitle: "Commercial Cleaning Services in NJ",
   metaDescription:
@@ -19,19 +20,19 @@ const props = {
     "NestGlow Co provides commercial cleaning services for offices, retail storefronts, and professional suites in Monmouth, Ocean, and Middlesex County, NJ. We build cleaning schedules around your business hours, including after-hours and weekend service, and deliver consistent cleaning backed by full insurance and bonding.",
   features: [
     {
-      badge: "TRANSPARENT PRICING",
+      badge: "CUSTOM QUOTES",
       headline: "Custom quotes, not guesswork",
       subhead: "No ballpark numbers. No per-hour estimates that drift.",
       body: "Every commercial space is different, and we price each one on its own terms. Your quote depends on square footage, schedule, and what's in scope: reception areas, restrooms, break rooms, workstations, or some combination. We walk through your space first, then give you a firm number. No surprises when the month closes.",
     },
     {
-      badge: "EVERY STANDARD CLEAN",
+      badge: "WHAT WE COVER EACH VISIT",
       headline: "Every area that matters to your clients",
       subhead: "Shared spaces, restrooms, break rooms — covered every visit.",
       body: "Every commercial clean covers the areas your clients and staff actually see: reception, conference rooms, and shared spaces get cleaned and straightened. Restrooms are deep-cleaned and sanitized. Floors get swept, mopped, and vacuumed throughout. Trash and recycling are pulled. And because we work after hours, your team walks into a ready space every morning without any disruption to the workday.",
     },
     {
-      badge: "WHO THIS IS FOR",
+      badge: "BUILT FOR YOUR BUSINESS",
       headline: "For businesses where the space makes an impression",
       subhead: "Weekly, bi-weekly, or a custom schedule that fits your operation.",
       body: "For most businesses, a clean space is part of the first impression a client or customer forms. Whether you run a professional suite, a retail storefront, or a small office with a high-traffic break room, the standard stays the same. Our commercial clients book recurring service so the space is handled on a schedule and they don't have to think about it.",
@@ -60,6 +61,7 @@ const props = {
     },
   ],
   schemaServiceType: "Commercial Cleaning Service",
+  heroImage: "/images/services/commercial-cleaning/hero.png",
 };
 
 export default function CommercialCleaningPage() {

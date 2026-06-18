@@ -17,6 +17,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/services/commercial-cleaning`, lastModified: D("2026-04-16"), changeFrequency: "monthly", priority: 0.9 },
     { url: `${BASE_URL}/services/deep-cleaning`, lastModified: D("2026-04-16"), changeFrequency: "monthly", priority: 0.9 },
     { url: `${BASE_URL}/services/move-in-move-out`, lastModified: D("2026-04-16"), changeFrequency: "monthly", priority: 0.9 },
+    { url: `${BASE_URL}/services/airbnb-cleaning`, lastModified: D("2026-04-16"), changeFrequency: "monthly", priority: 0.9 },
+    { url: `${BASE_URL}/services/post-construction-cleaning`, lastModified: D("2026-04-16"), changeFrequency: "monthly", priority: 0.9 },
     { url: `${BASE_URL}/general-vs-deep-cleaning`, lastModified: D("2026-04-16"), changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE_URL}/cleaning-services`, lastModified: D("2026-04-16"), changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE_URL}/cleaning-services/monmouth-county`, lastModified: D("2026-04-16"), changeFrequency: "monthly", priority: 0.8 },
