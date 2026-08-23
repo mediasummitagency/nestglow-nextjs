@@ -158,15 +158,20 @@ export function ContactForm() {
       {isWaitlist ? (
         <div className="mb-6 rounded-lg border border-brand/30 bg-cream-100 px-4 py-3">
           <p className="text-sm text-charcoal">
-            <strong>We&apos;re not in {incomingZip} yet.</strong> Leave your details and we&apos;ll
-            let you know as soon as we cover your area.
+            {/* {" "} not a bare space: JSX trims each line's trailing
+                whitespace, so a space before a newline is stripped at build
+                time and this renders as "yet.Leave". */}
+            <strong>We&apos;re not in {incomingZip} yet.</strong>{" "}
+            Leave your details and we&apos;ll let you know as soon as we cover
+            your area.
           </p>
         </div>
       ) : matched ? (
         <div className="mb-6 rounded-lg border border-brand/30 bg-cream-100 px-4 py-3">
           <p className="text-sm text-charcoal">
-            <strong>Good news — we clean in {matched.town}.</strong> Tell us about the job and
-            Caroline will come back with a firm price.
+            <strong>Good news, we clean in {matched.town}.</strong>{" "}
+            Tell us about the job and Caroline will come back with a firm
+            price.
           </p>
         </div>
       ) : null}
@@ -198,9 +203,9 @@ export function ContactForm() {
           <>
             <input type="hidden" name="tier" value={tier.name} />
             <p className="rounded-xl border border-brand/30 bg-brand/8 px-4 py-3 text-sm text-charcoal">
-              Quoting the <strong className="font-semibold">{tier.name}</strong> plan
-              — {tier.tagline.toLowerCase()}. Tell us about the place and Caroline will
-              confirm the price.
+              Quoting the <strong className="font-semibold">{tier.name}</strong>{" "}
+              plan: {tier.tagline.toLowerCase()}. Tell us about the place and
+              Caroline will confirm the price.
             </p>
           </>
         )}

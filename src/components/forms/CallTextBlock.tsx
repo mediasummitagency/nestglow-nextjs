@@ -73,8 +73,11 @@ export function CallTextBlock() {
           </p>
           <p className="mt-2 text-[0.9375rem] leading-relaxed text-white/75">
             Caroline isn&rsquo;t at the phone right now.{" "}
-            <strong className="font-semibold text-white">Send the form below</strong> and
-            she&rsquo;ll pick it up <CtaNext />.
+            {/* The {" "} is load-bearing: JSX trims whitespace at the end of
+                each line, so a bare space after </strong> is stripped at build
+                time and this rendered as "belowand". */}
+            <strong className="font-semibold text-white">Send the form below</strong>{" "}
+            and she&rsquo;ll pick it up <CtaNext />.
           </p>
         </div>
       </CtaClosed>
