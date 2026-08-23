@@ -112,8 +112,14 @@ export default function ContactPage() {
           </div>
         </section>
 
-        {/* Contact methods */}
-        <section id="contact-methods" className="bg-cream-100 py-12">
+        {/* Contact methods — TABLET AND UP ONLY (2026-08-23).
+            On a phone this duplicated the CallTextBlock sitting above the form,
+            so the same three numbers appeared twice on one screen. It stays for
+            wider viewports because CallTextBlock is `sm:hidden`, and without it
+            /contact would carry no contact details at all outside the footer.
+            The two hide at the same breakpoint, so exactly one of them renders
+            at every width. */}
+        <section id="contact-methods" className="hidden bg-cream-100 py-12 sm:block">
           <div className="mx-auto max-w-3xl px-4 sm:px-6">
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
               {contactMethods.map((method) => {

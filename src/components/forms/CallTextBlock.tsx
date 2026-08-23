@@ -20,8 +20,8 @@ import { CtaClosed, CtaNext, CtaOpen } from "@/components/ui/CtaVariant";
  * Exactly one primary action at any hour, with text visibly smaller than it in
  * both states:
  *
- *   during answered hours →  CALL is primary, text secondary
- *   outside them          →  THE FORM is primary, text secondary
+ *   during answered hours →  CALL is primary, text + email secondary
+ *   outside them          →  THE FORM is primary, text + email secondary
  *
  * After hours there is deliberately NO button pointing at the form. The form is
  * the very next thing on the page, so a button that scrolls sixty pixels is
@@ -71,23 +71,46 @@ export function CallTextBlock() {
         </div>
       </CtaClosed>
 
-      {/* SECONDARY in both states. A row, not a card, and never the same weight
-          as the primary above it. */}
-      <a
-        href={BUSINESS.smsHref}
-        className="group flex items-center gap-2 py-1 text-sm text-white/60 transition-colors hover:text-white/85"
-      >
-        <span className="text-white/40 transition-colors group-hover:text-brand-light">
-          <TextIcon />
-        </span>
-        <span>
-          Or text us —{" "}
-          <span className="font-semibold text-white/80 group-hover:text-brand-light">
+      {/* SECONDARY in both states — one container, two rows, visibly lighter
+          than the primary above. Label left, value right: the email address is
+          long enough to wrap a phone column, and right-aligning it against a
+          fixed label keeps both rows on one line each (with `truncate` as the
+          backstop rather than a hopeful guess about width). */}
+      <div className="overflow-hidden rounded-2xl border border-white/15 bg-white/5">
+        <a
+          href={BUSINESS.smsHref}
+          className="group flex items-center gap-3 px-5 py-3.5 transition-colors hover:bg-white/5"
+        >
+          <span className="text-white/40 transition-colors group-hover:text-brand-light">
+            <TextIcon />
+          </span>
+          <span className="text-sm text-white/60">Text</span>
+          <span className="ml-auto truncate text-sm font-semibold text-white/85 transition-colors group-hover:text-brand-light">
             {BUSINESS.phone}
           </span>
-        </span>
-      </a>
+        </a>
+        <a
+          href={BUSINESS.emailHref}
+          className="group flex items-center gap-3 border-t border-white/10 px-5 py-3.5 transition-colors hover:bg-white/5"
+        >
+          <span className="text-white/40 transition-colors group-hover:text-brand-light">
+            <MailIcon />
+          </span>
+          <span className="text-sm text-white/60">Email</span>
+          <span className="ml-auto truncate text-sm font-semibold text-white/85 transition-colors group-hover:text-brand-light">
+            {BUSINESS.email}
+          </span>
+        </a>
+      </div>
     </div>
+  );
+}
+
+function MailIcon() {
+  return (
+    <svg className="size-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4.2-8 4.8-8-4.8V6l8 4.8L20 6v2.2z" />
+    </svg>
   );
 }
 
