@@ -14,10 +14,10 @@
  * script is emitted and there is nothing to test, which the run reports rather
  * than silently passing.
  *
- * ⚠️ THE HOURS THESE CASES ASSERT ARE A PLACEHOLDER (Mon-Fri 8-5, Sat 9-1,
- * Sunday closed). When Caroline's real hours land in `lib/hours.ts`, the
- * expectations below have to be rewritten to match — a green run against the
- * old numbers would mean nothing.
+ * The cases below assert Caroline's CONFIRMED hours (Lucas, 2026-08-23):
+ * Mon-Fri 8am-6pm, Sat-Sun 8am-12pm, Eastern. If those ever change, rewrite the
+ * expectations here in the same commit — a green run against stale numbers
+ * means nothing.
  *
  * ── WHAT IT CANNOT SEE ───────────────────────────────────────────────────
  * Everything except a real browser. TCG shipped this feature with 16/16 of
@@ -113,25 +113,24 @@ function check(name, actual, expected) {
    change cannot silently shift the whole schedule by an hour. */
 const CASES = [
   // [label, UTC instant, expected mode, expected phrase or null to skip]
-  // ── weekdays, 08:00-17:00 ────────────────────────────────────────────────
+  // ── weekdays, 08:00-18:00 ────────────────────────────────────────────────
   ["Mon 07:59 EDT — one minute before opening", "2026-08-17T11:59:00Z", "closed", "at 8:00 AM this morning"],
   ["Mon 08:00 EDT — opening minute", "2026-08-17T12:00:00Z", "open", null],
   ["Mon 12:00 EDT — midday", "2026-08-17T16:00:00Z", "open", null],
-  ["Mon 16:59 EDT — one minute before closing", "2026-08-17T20:59:00Z", "open", null],
-  ["Mon 17:00 EDT — closing minute", "2026-08-17T21:00:00Z", "closed", "first thing tomorrow"],
+  ["Mon 17:59 EDT — one minute before closing", "2026-08-17T21:59:00Z", "open", null],
+  ["Mon 18:00 EDT — closing minute", "2026-08-17T22:00:00Z", "closed", "first thing tomorrow"],
   ["Mon 02:00 EDT — middle of the night", "2026-08-17T06:00:00Z", "closed", "at 8:00 AM this morning"],
-  // ── Saturday, 09:00-13:00. The short Saturday is the whole reason the config
-  //    is a per-day map: under one flat Mon-Fri window every case here is wrong.
-  ["Sat 08:59 EDT — before the Saturday window", "2026-08-22T12:59:00Z", "closed", "at 9:00 AM this morning"],
-  ["Sat 09:00 EDT — Saturday opening minute", "2026-08-22T13:00:00Z", "open", null],
-  ["Sat 12:59 EDT — last minute of the Saturday window", "2026-08-22T16:59:00Z", "open", null],
-  ["Sat 13:00 EDT — Saturday closing minute", "2026-08-22T17:00:00Z", "closed", "first thing Monday"],
-  ["Sat 15:00 EDT — Saturday afternoon (open under weekday hours)", "2026-08-22T19:00:00Z", "closed", "first thing Monday"],
-  // ── Sunday is closed all day. Unlike BDF, where every day is answered, the
-  //    weekday-naming branch is REACHABLE here — these two prove it.
-  ["Sun 10:00 EDT — Sunday morning is NOT answered", "2026-08-23T14:00:00Z", "closed", "first thing tomorrow"],
-  ["Sun 15:00 EDT — Sunday afternoon", "2026-08-23T19:00:00Z", "closed", "first thing tomorrow"],
-  ["Fri 17:00 EDT — closes into an ANSWERED Saturday", "2026-08-21T21:00:00Z", "closed", "first thing tomorrow"],
+  // ── weekend, 08:00-12:00 — the half-day is the whole reason the config is a
+  //    per-day map. A single Mon-Fri window would call all five of these wrong
+  //    in one direction or the other.
+  ["Sat 07:59 EDT — before the weekend window", "2026-08-22T11:59:00Z", "closed", "at 8:00 AM this morning"],
+  ["Sat 08:00 EDT — weekend opening minute", "2026-08-22T12:00:00Z", "open", null],
+  ["Sat 11:59 EDT — last minute of the weekend window", "2026-08-22T15:59:00Z", "open", null],
+  ["Sat 12:00 EDT — weekend closing minute", "2026-08-22T16:00:00Z", "closed", "first thing tomorrow"],
+  ["Sat 14:00 EDT — weekend afternoon (open under weekday hours)", "2026-08-22T18:00:00Z", "closed", "first thing tomorrow"],
+  ["Sun 10:00 EDT — Sunday morning is answered", "2026-08-23T14:00:00Z", "open", null],
+  ["Sun 14:00 EDT — Sunday afternoon", "2026-08-23T18:00:00Z", "closed", "first thing tomorrow"],
+  ["Fri 18:00 EDT — closes into an ANSWERED Saturday", "2026-08-21T22:00:00Z", "closed", "first thing tomorrow"],
   // ── timezone: the visitor's clock must never decide this ─────────────────
   ["Visitor 4pm Pacific Mon = 7pm New Jersey — closed", "2026-08-17T23:00:00Z", "closed", null],
   ["Visitor 9am Central Mon = 10am New Jersey — open", "2026-08-17T14:00:00Z", "open", null],
@@ -181,8 +180,9 @@ console.log("\n── one-off closures (HOURS.closedDates) ──");
 console.log("\n── forced modes (?cta=) ──");
 {
   const env = makeEnv({ search: "?cta=open" });
-  // A Sunday, which is closed — the override has to win anyway.
-  check("?cta=open forces open on a closed Sunday", run(env, new Date("2026-08-23T19:00:00Z")).mode, "open");
+  // A Sunday afternoon, which is closed under the 8-12 weekend window — the
+  // override has to win anyway.
+  check("?cta=open forces open on a closed Sunday afternoon", run(env, new Date("2026-08-23T18:00:00Z")).mode, "open");
 }
 {
   const env = makeEnv({ search: "?cta=closed" });

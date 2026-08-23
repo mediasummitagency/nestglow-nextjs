@@ -31,10 +31,10 @@ import { HOURS, toMinutes } from "@/lib/hours";
  *    hero is a ZIP router into /contact and carries no phone CTA — so the only
  *    surfaces that switch are the desktop header, the mobile dock, and the
  *    contact page's method cards.
- * 3. **Sunday is genuinely closed in the placeholder shape**, unlike BDF where
- *    every day is answered. That means "first thing Monday" is reachable here,
- *    so the weekday-naming branch of `nextPhrase` is live code rather than the
- *    unreachable leftover it is on BDF.
+ * 3. **Every day of the week is answered** (Mon-Fri 8-6, Sat-Sun 8-12,
+ *    confirmed 2026-08-23), same as TCG and BDF. So "first thing tomorrow" is
+ *    always literally tomorrow and the weekday-naming branch of `nextPhrase` is
+ *    unreachable — until a day is dropped or a `closedDates` entry lands.
  * 4. **No response-time promise is invented in either state.** The site already
  *    says "we reply within one business day", which is equally true at 2pm and
  *    2am and is left alone. `CtaNext` only ever restates the hours in

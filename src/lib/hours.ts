@@ -9,31 +9,31 @@
  * `suppressHydrationWarning` on `CtaNext`, and `nextPhrase` respecting
  * `closedDates`). Porting from TCG would have re-introduced two known bugs.
  *
- * ── SHIPPING DARK — READ BEFORE TOUCHING `ENABLED` ───────────────────────
- * `ENABLED` is false and the `windows` below are a PLACEHOLDER. Nobody has
- * told us when Caroline actually answers her phone — it is not in `config.ts`,
- * not in the client folder, not in `progress.md`. A guess about when a human
- * picks up is exactly the claim that must never reach a live page.
+ * ── LIVE SINCE 2026-08-23 ────────────────────────────────────────────────
+ * Built dark against a placeholder earlier the same session, then switched on
+ * once Lucas confirmed: **Mon-Fri 8am-6pm, Sat-Sun 8am-12pm, Eastern** —
+ * identical to TCG and BDF, so the per-day map shape was already right. The
+ * flag exists so an unverified guess about when someone answers the phone can
+ * never reach a live page, which is exactly the path TCG and BDF each took.
  *
- * While the flag is off this is a genuine no-op, not a styled-away one:
- * `CtaClosed` renders nothing, `CtaOpen` renders its children bare, and
- * `CtaMode` emits no script at all. The built HTML contains zero `cta-variant`
- * markup. That is what makes it safe to leave in the repo half-finished.
+ * The off state stays a genuine no-op if it is ever needed again: `CtaClosed`
+ * renders nothing, `CtaOpen` renders its children bare, `CtaMode` emits no
+ * script, and the built HTML contains zero `cta-variant` markup.
  *
- * TO TURN IT ON: replace `windows` with Caroline's real hours, set
- * `ENABLED: true`, and add a matching `BUSINESS.hours` to `config.ts` if the
- * footer or contact page ever renders the hours as text. TCG and BDF both did
- * exactly this in a single session once Lucas confirmed.
+ * IF THE HOURS CHANGE: update `windows` below AND any human-readable copy that
+ * names them, AND the expectations in `_workspace/tools/cta-clock-test.mjs` —
+ * a green run against stale numbers means nothing. Nothing derives one from
+ * another, and a page that says one thing while the buttons behave like
+ * another is worse than either alone.
  *
- * IF THE HOURS CHANGE LATER: update `windows` AND any human-readable copy that
- * names them. Nothing derives one from the other, and a page that says one
- * thing while the buttons behave like another is worse than either alone.
+ * Nothing on this site renders the hours as text today. If that changes, add
+ * `BUSINESS.hours` to `config.ts` and keep it in step with `windows` by hand.
  */
 
 export const HOURS = {
-  /** OFF — the `windows` below are invented. Do not flip this to true until
-   *  Caroline's real hours are confirmed and pasted in. See the header. */
-  ENABLED: false,
+  /** ON since 2026-08-23 — the hours below are Lucas-confirmed, not a guess.
+   *  Do not flip this back on placeholder values if they ever change. */
+  ENABLED: true,
 
   /**
    * Always the business's clock, never the visitor's.
@@ -48,23 +48,27 @@ export const HOURS = {
    * ISO-8601 weekday (1 = Monday … 7 = Sunday) → [open, close] as 24h "HH:MM".
    * A day absent from this map is closed all day.
    *
-   * ⚠️ PLACEHOLDER — NOT CONFIRMED BY ANYONE. Shaped as a plausible cleaning
-   * schedule (weekdays plus a short Saturday) purely so the mechanism can be
-   * exercised and tested while the flag is off.
+   * CONFIRMED by Lucas 2026-08-23: **Mon-Fri 8-6, Sat-Sun 8-12** — the same
+   * shape TCG and BDF both turned out to have. This is why the config is a
+   * per-day map and not the single open/close pair Gorsegner uses: flattened to
+   * one window, a Saturday 2pm visitor would be pointed at a phone nobody is
+   * answering. Do not flatten it back.
    *
-   * The per-day map is the right shape even so, and should not be flattened to
-   * a single open/close pair: a Saturday-afternoon visitor and a Tuesday-
-   * afternoon visitor are not in the same state, and flattening would point the
-   * Saturday one at a phone nobody is answering.
+   * Consequence worth knowing before reading the after-hours copy: every day of
+   * the week is answered, so "first thing tomorrow" is always literally
+   * tomorrow, and the "first thing <weekday>" phrasing the script can still
+   * produce is unreachable with these values. Left in because it costs nothing
+   * and becomes correct again the moment a day is removed — or the moment a
+   * one-off closure lands in `closedDates` below.
    */
   windows: {
-    1: ["08:00", "17:00"],
-    2: ["08:00", "17:00"],
-    3: ["08:00", "17:00"],
-    4: ["08:00", "17:00"],
-    5: ["08:00", "17:00"],
-    6: ["09:00", "13:00"],
-    // 7 (Sunday) absent = closed all day.
+    1: ["08:00", "18:00"],
+    2: ["08:00", "18:00"],
+    3: ["08:00", "18:00"],
+    4: ["08:00", "18:00"],
+    5: ["08:00", "18:00"],
+    6: ["08:00", "12:00"],
+    7: ["08:00", "12:00"],
   } as Record<number, [string, string]>,
 
   /** One-off closures, "YYYY-MM-DD". A date listed here is after-hours all day,
@@ -73,9 +77,8 @@ export const HOURS = {
   closedDates: [] as string[],
 
   /** Human-readable, for any copy that names the hours. Nothing renders it yet.
-   *  Kept here so the two are visibly the same claim when someone updates one.
-   *  Placeholder, same as `windows`. */
-  display: "Mon–Fri 8am–5pm · Sat 9am–1pm",
+   *  Kept here so the two are visibly the same claim when someone updates one. */
+  display: "Mon–Fri 8am–6pm · Sat–Sun 8am–12pm",
 } as const;
 
 /** Minutes past midnight for an "HH:MM" string. */
