@@ -13,6 +13,17 @@ import { useState } from "react"
  *
  * When the town pages come back, swap these arrays for `getTownsByCounty()`
  * and make each name a link again.
+ *
+ * ── EVERY COUNTY'S TOWNS ARE IN THE HTML, ALWAYS (2026-08-23) ────────────
+ * This used to render only the ACTIVE county — `towns.map()` over one array —
+ * so 11 of the 22 town names existed nowhere in the served markup until a human
+ * clicked a tab. Crawlers do not click tabs, so Ocean and Middlesex, two of the
+ * three counties this business serves, were invisible to local search. Verified
+ * against the built HTML: 10/10 Monmouth present, 0/6 Ocean, 0/5 Middlesex.
+ *
+ * All three panels now render and the inactive ones carry the `hidden`
+ * attribute. Google indexes content hidden behind tabs; it cannot index content
+ * that was never emitted. Do not go back to conditionally rendering one panel.
  */
 const COUNTIES = [
   {
@@ -42,8 +53,6 @@ const COUNTIES = [
 
 export function ServiceAreasTabs() {
   const [active, setActive] = useState<"Monmouth" | "Ocean" | "Middlesex">("Monmouth")
-  const activeCounty = COUNTIES.find((c) => c.value === active)!
-  const towns = [...activeCounty.towns].sort((a, b) => a.localeCompare(b))
 
   return (
     <section id="areas" className="scroll-mt-24 bg-cream-50 py-[4.6rem] border-t border-charcoal/5">
@@ -60,8 +69,10 @@ export function ServiceAreasTabs() {
           {COUNTIES.map((c) => (
             <button
               key={c.value}
+              id={`county-tab-${c.value}`}
               role="tab"
               aria-selected={active === c.value}
+              aria-controls={`county-panel-${c.value}`}
               onClick={() => setActive(c.value)}
               className={
                 active === c.value
@@ -75,23 +86,51 @@ export function ServiceAreasTabs() {
         </div>
 
         <div className="flex flex-col min-h-[160px]">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-3 max-w-[780px] mx-auto">
-            {towns.map((town) => (
-              <span key={town} className="text-center text-[1rem] text-charcoal-70">
-                {town}
-              </span>
-            ))}
-          </div>
+          {/* One panel per county, ALL of them in the markup. The inactive ones
+              are `hidden` rather than absent — see the note at the top of this
+              file. */}
+          {COUNTIES.map((c) => (
+            <div
+              key={c.value}
+              id={`county-panel-${c.value}`}
+              role="tabpanel"
+              aria-labelledby={`county-tab-${c.value}`}
+              hidden={active !== c.value}
+              // The `hidden` ATTRIBUTE alone is not enough here: it works via
+              // the UA rule `[hidden] { display: none }`, which any class
+              // setting `display` outranks — so a bare `grid` class would leave
+              // all three panels visible at once. The class is swapped instead,
+              // and the attribute is kept for the accessibility tree.
+              className={
+                active === c.value
+                  ? "grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-3 max-w-[780px] mx-auto"
+                  : "hidden"
+              }
+            >
+              {[...c.towns]
+                .sort((a, b) => a.localeCompare(b))
+                .map((town) => (
+                  <span key={town} className="text-center text-[1rem] text-charcoal-70">
+                    {town}
+                  </span>
+                ))}
+            </div>
+          ))}
 
           <div className="mt-auto pt-8 text-center">
-            <p className="text-[1rem] text-charcoal-70">
+            {/* `text-balance` spreads this over two even lines on a phone
+                instead of orphaning the last word on its own. The em dash it
+                used to carry is gone per the house copy rule — periods, not
+                dashes, as sentence connectors in client-facing copy. */}
+            <p className="mx-auto max-w-md text-balance text-[1rem] text-charcoal-70">
               Don&apos;t see your town?{" "}
               <a
                 href="/contact"
                 className="font-semibold text-brand hover:text-brand-dark transition-colors"
               >
-                Ask us — we may still cover you.
+                Ask us
               </a>
+              . We may still cover you.
             </p>
           </div>
         </div>

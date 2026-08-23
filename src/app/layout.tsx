@@ -55,7 +55,16 @@ export default function RootLayout({
     // suppresses the WARNING only — it does NOT stop React stripping the
     // attribute during hydration, which is why CtaMode carries its own
     // MutationObserver. See CtaMode.tsx.
-    <html lang="en" suppressHydrationWarning>
+    //
+    // data-scroll-behavior="smooth" pairs with `scroll-behavior: smooth` in
+    // globals.css (line 184). Without it Next issues its route-change scroll
+    // reset as a SMOOTH scroll, and WebKit discards it — so every client-side
+    // navigation on iPhone keeps the previous page's scroll offset. Tap Quote
+    // from halfway down the home page and you land halfway down /contact.
+    // Broke gorsegner-nextjs sitewide, mobile only, and is invisible in
+    // Chromium; already fixed on bdf-nextjs. Next itself warns about this in
+    // the dev console, which is how it surfaced here (2026-08-23).
+    <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
         {/* Must stay in <head> and stay synchronous — the attribute has to be
             on <html> before the parser reaches the first CTA in <body>, or the
