@@ -3,7 +3,7 @@
 import { useState, useEffect, type FormEvent } from "react";
 import Link from "next/link";
 import { CheckCircle2 } from "lucide-react";
-import { FORMS, BUSINESS } from "@/lib/config";
+import { BUSINESS } from "@/lib/config";
 import { lookupZip } from "@/lib/zipToCounty";
 import { TIERS } from "@/lib/tiers";
 
@@ -101,7 +101,13 @@ export function ContactForm() {
     data.append("out_of_area", isWaitlist ? "yes" : "no");
 
     try {
-      const res = await fetch(FORMS.booking, {
+      // Posts to our own route rather than straight to Formspree (changed
+      // 2026-08-23). The route still forwards to Formspree — that path is
+      // proven and Caroline receives those emails — and additionally sends the
+      // customer their confirmation via Resend, which needs an API key that can
+      // never be exposed to the browser. It answers 502 only if the FORMSPREE
+      // leg fails, so a missing receipt never shows the visitor an error.
+      const res = await fetch("/api/lead", {
         method: "POST",
         body: data,
         headers: { Accept: "application/json" },
