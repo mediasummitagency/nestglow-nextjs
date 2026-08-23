@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
-import { Phone, Mail, MessageSquare, ShieldCheck, Clock, BadgeCheck, Sparkles } from "lucide-react";
+import { ShieldCheck, Clock, BadgeCheck } from "lucide-react";
 import { BASE_URL, BUSINESS } from "@/lib/config";
 import { PageHero } from "@/components/layout/PageHero";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { CallTextBlock } from "@/components/forms/CallTextBlock";
-import { CtaOpen, CtaClosed, CtaNext } from "@/components/ui/CtaVariant";
 
 export const metadata: Metadata = {
   // No brand suffix here — the root layout template appends "| NestGlow Co".
@@ -25,32 +24,13 @@ const contactSchema = {
     email: BUSINESS.email,
     areaServed: BUSINESS.areaServed.map((a) => ({ "@type": "Place", name: a })),
   },
+  // #contact-methods is on the CallTextBlock above the form (it moved there
+  // when the duplicate card row was deleted, 2026-08-23). Keep the two in step.
   speakable: {
     "@type": "SpeakableSpecification",
     cssSelector: ["#contact-methods"],
   },
 };
-
-/**
- * Three cards at any hour. `when` swaps the first one:
- *
- *   answered hours -> Call us   · Text us · Email us
- *   after hours    -> Send it now (jumps to the form) · Text us · Email us
- *
- * The phone is not offered when nobody is answering it. The form takes its
- * place rather than the grid dropping to two cards, both because the form IS
- * the after-hours path Lucas asked for and because a 3-column grid holding two
- * items reads as something failing to load.
- *
- * Text and email survive in both states: both sit in an inbox until morning,
- * so neither makes a promise the hour can break.
- */
-const contactMethods = [
-  { icon: Phone, label: "Call us", value: BUSINESS.phone, href: BUSINESS.phoneHref, when: "open" as const },
-  { icon: Sparkles, label: "Send it now", value: "Quote request", href: "#quote-form", when: "closed" as const },
-  { icon: MessageSquare, label: "Text us", value: BUSINESS.phone, href: BUSINESS.smsHref, when: null },
-  { icon: Mail, label: "Email us", value: BUSINESS.email, href: BUSINESS.emailHref, when: null },
-];
 
 const reassurances = [
   { icon: Clock, text: "We reply within one business day" },
@@ -84,10 +64,12 @@ export default function ContactPage() {
           centered
         >
           <div className="mx-auto mt-6 max-w-2xl space-y-4 text-left md:mt-8">
-            {/* Phone only. Since the page went form-first the form is the first
-                thing here, so a visitor who would rather call had nothing to
-                call until they scrolled past all of it. */}
-            <CallTextBlock />
+            {/* The page's ONE contact surface, at every width. Since /contact
+                went form-first the form is the first thing here, so without
+                this a visitor who would rather call has nothing to call until
+                they have scrolled past all of it. Carries #contact-methods for
+                the schema's speakable selector. */}
+            <CallTextBlock id="contact-methods" />
             <div id="quote-form" className="scroll-mt-24">
               <ContactForm />
             </div>
@@ -109,61 +91,6 @@ export default function ContactPage() {
                 );
               })}
             </ul>
-          </div>
-        </section>
-
-        {/* Contact methods — TABLET AND UP ONLY (2026-08-23).
-            On a phone this duplicated the CallTextBlock sitting above the form,
-            so the same three numbers appeared twice on one screen. It stays for
-            wider viewports because CallTextBlock is `sm:hidden`, and without it
-            /contact would carry no contact details at all outside the footer.
-            The two hide at the same breakpoint, so exactly one of them renders
-            at every width. */}
-        <section id="contact-methods" className="hidden bg-cream-100 py-12 sm:block">
-          <div className="mx-auto max-w-3xl px-4 sm:px-6">
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
-              {contactMethods.map((method) => {
-                const Icon = method.icon;
-                const card = (
-                  <a
-                    key={method.label}
-                    href={method.href}
-                    className="group flex flex-col items-center gap-2 rounded-2xl border border-charcoal/10 bg-white p-6 text-center shadow transition-all hover:-translate-y-0.5 hover:border-brand hover:shadow-lg"
-                  >
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-brand/20">
-                      <Icon size={20} className="text-brand-dark" />
-                    </div>
-                    <p className="text-xs font-semibold uppercase tracking-widest text-charcoal-40">
-                      {method.label}
-                    </p>
-                    <p className="font-semibold text-charcoal transition-colors group-hover:text-brand">
-                      {method.value}
-                    </p>
-                  </a>
-                );
-
-                // `display: contents` on the wrapper, so the card stays a
-                // direct grid item and keeps its column.
-                return method.when === "open" ? (
-                  <CtaOpen key={method.label}>{card}</CtaOpen>
-                ) : method.when === "closed" ? (
-                  <CtaClosed key={method.label}>{card}</CtaClosed>
-                ) : (
-                  card
-                );
-              })}
-            </div>
-
-            {/* Says when the PHONE is answered again — not when a human replies.
-                The site's existing "within one business day" promise is true at
-                every hour and is deliberately left alone. Always mounted, so
-                the CtaMode script can fill it; see CtaNext in CtaVariant.tsx. */}
-            <CtaClosed>
-              <p className="mt-6 text-center text-sm text-charcoal-70">
-                Caroline is away from the phone right now — send the form above
-                and she will pick it up <CtaNext />.
-              </p>
-            </CtaClosed>
           </div>
         </section>
 

@@ -11,8 +11,15 @@ import { CtaClosed, CtaNext, CtaOpen } from "@/components/ui/CtaVariant";
  * the first thing on the page, so without this a phone visitor who would rather
  * call has nothing to call until they scroll past the whole form.
  *
- * Phone only (`sm:hidden`). It disappears at exactly the width where the contact
- * cards below become a real 3-across row and the number is visible anyway.
+ * EVERY width since 2026-08-23. It started phone-only, sitting above the form
+ * while a separate 3-card row carried the same details further down the page for
+ * desktop. Lucas asked for desktop to match, so this is now the single contact
+ * surface at all widths and that card row is gone — one place for the details,
+ * one set of time-aware rules, above the form on every screen.
+ *
+ * It carries `id="contact-methods"`, which the ContactPage schema's speakable
+ * cssSelector points at. That id moved here from the deleted section; if this
+ * block is ever renamed, update the schema in `app/contact/page.tsx` with it.
  *
  * Styled for a dark ground — it renders on the hero photo.
  *
@@ -44,9 +51,9 @@ import { CtaClosed, CtaNext, CtaOpen } from "@/components/ui/CtaVariant";
  * leave a voicemail, they hit back and call the next cleaner. Driven by
  * `lib/hours.ts`; renders the open-hours card only while `HOURS.ENABLED` is off.
  */
-export function CallTextBlock() {
+export function CallTextBlock({ id }: { id?: string }) {
   return (
-    <div className="flex flex-col gap-3 sm:hidden">
+    <div id={id} className="flex flex-col gap-3">
       {/* PRIMARY, answered hours. */}
       <CtaOpen>
         <a
@@ -87,7 +94,7 @@ export function CallTextBlock() {
           long enough to wrap a phone column, and right-aligning it against a
           fixed label keeps both rows on one line each (with `truncate` as the
           backstop rather than a hopeful guess about width). */}
-      <div className="overflow-hidden rounded-2xl border border-white/20 bg-charcoal/70 shadow-lg shadow-black/25 backdrop-blur-md">
+      <div className="overflow-hidden rounded-2xl border border-white/20 bg-charcoal/70 shadow-lg shadow-black/25 backdrop-blur-md sm:grid sm:grid-cols-2">
         <a
           href={BUSINESS.smsHref}
           className="group flex items-center gap-3 px-5 py-3.5 transition-colors hover:bg-white/10"
@@ -102,7 +109,7 @@ export function CallTextBlock() {
         </a>
         <a
           href={BUSINESS.emailHref}
-          className="group flex items-center gap-3 border-t border-white/15 px-5 py-3.5 transition-colors hover:bg-white/10"
+          className="group flex items-center gap-3 border-t border-white/15 px-5 py-3.5 transition-colors hover:bg-white/10 sm:border-l sm:border-t-0"
         >
           <span className="text-white/40 transition-colors group-hover:text-brand-light">
             <MailIcon />
