@@ -132,6 +132,17 @@ export default function Footer() {
             <Link href="/terms-of-service" className="hover:text-brand transition-colors">
               Terms of Service
             </Link>
+            {/* Agency credit + backlink. Followed on purpose (no rel="nofollow")
+                — it's a genuine "built by" credit to Summit Media, the studio
+                behind the site. Subtle, in the legal bar, on every page. */}
+            <a
+              href="https://summitmedia.co"
+              target="_blank"
+              rel="noopener"
+              className="hover:text-brand transition-colors"
+            >
+              Powered by Summit Media
+            </a>
           </div>
         </div>
       </div>
