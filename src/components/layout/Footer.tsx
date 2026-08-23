@@ -18,11 +18,6 @@ const areasLinks = BUSINESS.areaServed.map((label) => ({
   href: "/#areas",
 }));
 
-const companyLinks = [
-  { label: "Contact", href: "/contact" },
-  { label: "Get a Quote", href: "/contact" },
-];
-
 export default function Footer() {
   const year = new Date().getFullYear();
 
@@ -31,9 +26,9 @@ export default function Footer() {
     <footer className="bg-charcoal text-cream dock-clearance">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-16 pb-8">
         {/* 5-column grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-cream/10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-cream/10">
           {/* Brand */}
-          <div className="lg:col-span-1">
+          <div>
             <Image
               src="/logo-white.png"
               alt="NestGlow Co"
@@ -89,25 +84,6 @@ export default function Footer() {
             </h3>
             <ul className="space-y-2">
               {areasLinks.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-cream/70 hover:text-brand transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Company */}
-          <div>
-            <h3 className="text-xs font-semibold uppercase tracking-widest text-cream/40 mb-4">
-              Company
-            </h3>
-            <ul className="space-y-2">
-              {companyLinks.map((link) => (
                 <li key={link.label}>
                   <Link
                     href={link.href}

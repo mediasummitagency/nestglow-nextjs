@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Phone } from "lucide-react";
 import { BUSINESS } from "@/lib/config";
@@ -18,22 +18,44 @@ const navLinks = [
   { label: "Contact", href: "/contact" },
 ];
 
+// Routes whose first section is a dark hero image. The bar's links are white, so
+// it can only stay translucent where something dark sits behind it — everywhere
+// else it needs its own opaque background or the text lands on white.
+const DARK_HERO_ROUTES = ["/", "/contact"];
+
 export default function SiteNav() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   const hideQuoteCta = pathname === "/contact";
 
+  // The bar is fixed, so it outlives the hero it was designed against. Past the
+  // first few pixels of scroll it is over page content, which is cream on every
+  // route — hence the opaque treatment below.
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll(); // a reload can restore mid-page scroll before any event fires
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const solid = scrolled || !DARK_HERO_ROUTES.includes(pathname);
+
   return (
     <>
-      <header className="absolute top-0 left-0 right-0 z-40 h-[72px] flex items-center px-4 sm:px-6">
+      <header className="fixed top-0 left-0 right-0 z-40 h-[72px] flex items-center px-4 sm:px-6">
         <div className="max-w-7xl mx-auto w-full">
           <div
-            className="grid grid-cols-3 items-center rounded-full border px-5 h-14 shadow-lg shadow-black/20"
+            className="grid grid-cols-3 items-center rounded-full border px-5 h-14 shadow-lg shadow-black/20 transition-colors duration-300"
             style={{
-              background: "rgba(255,255,255,0.08)",
+              background: solid
+                ? "rgba(26,31,54,0.92)"
+                : "rgba(255,255,255,0.08)",
               backdropFilter: "blur(12px)",
               WebkitBackdropFilter: "blur(12px)",
-              borderColor: "rgba(255,255,255,0.15)",
+              borderColor: solid
+                ? "rgba(255,255,255,0.12)"
+                : "rgba(255,255,255,0.15)",
             }}
           >
             {/* Logo — left col */}
