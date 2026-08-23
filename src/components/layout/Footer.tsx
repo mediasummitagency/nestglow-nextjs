@@ -13,11 +13,10 @@ const servicesLinks = [
   { label: "Airbnb & Rental Turnovers", href: "/#services" },
 ];
 
-const areasLinks = [
-  { label: "Monmouth County, NJ", href: "/#areas" },
-  { label: "Ocean County, NJ", href: "/#areas" },
-  { label: "Middlesex County, NJ", href: "/#areas" },
-];
+const areasLinks = BUSINESS.areaServed.map((label) => ({
+  label,
+  href: "/#areas",
+}));
 
 const companyLinks = [
   { label: "Contact", href: "/contact" },
@@ -142,13 +141,6 @@ export default function Footer() {
                 >
                   {BUSINESS.email}
                 </a>
-              </li>
-              <li className="pt-2 text-cream/50 leading-relaxed">
-                Monmouth County, NJ
-                <br />
-                Ocean County, NJ
-                <br />
-                Middlesex County, NJ
               </li>
             </ul>
           </div>
