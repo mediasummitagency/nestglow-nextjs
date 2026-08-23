@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useSnapCarousel } from "@/lib/useSnapCarousel";
+import { PrimaryCta } from "@/components/ui/PrimaryCta";
 
 const rows = [
   {
@@ -132,12 +133,7 @@ export function WhyNestGlow() {
         </div>
 
         <div className="text-center mt-12">
-          <Link
-            href="/contact"
-            className="inline-block bg-brand text-white font-semibold px-8 py-3 rounded-full hover:bg-brand-dark transition-colors"
-          >
-            Book NestGlow Today
-          </Link>
+          <PrimaryCta label="Book NestGlow Today" className="inline-block bg-brand text-white font-semibold px-8 py-3 rounded-full hover:bg-brand-dark transition-colors" />
         </div>
 
       </div>

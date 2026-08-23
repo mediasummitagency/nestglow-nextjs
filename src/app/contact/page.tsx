@@ -34,7 +34,7 @@ const contactSchema = {
  * Three cards at any hour. `when` swaps the first one:
  *
  *   answered hours -> Call us   · Text us · Email us
- *   after hours    -> Send it now (the form below) · Text us · Email us
+ *   after hours    -> Send it now (jumps to the form) · Text us · Email us
  *
  * The phone is not offered when nobody is answering it. The form takes its
  * place rather than the grid dropping to two cards, both because the form IS
@@ -65,11 +65,45 @@ export default function ContactPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(contactSchema) }}
       />
       <main>
+        {/* FORM-FIRST, 2026-08-23. The page used to be hero -> contact cards
+            -> form, so the only fillable thing on a page called "contact" was
+            the third screen down. Anyone who clicked "contact" has already
+            decided; make them scroll twice and some of them leave instead.
+            Same fix gorsegner-local-test-build specs for its own /contact/ in
+            `_workspace/next-implementation/gorsegner-contact-routing-and-showroom.md`
+            section 2 — collapse the hero into the form rather than stacking one
+            above the other.
+
+            The form is a self-contained white card, so it sits on the hero
+            image without any restyling. `text-left` because the hero container
+            is `text-center` and form labels must not inherit it. */}
         <PageHero
           heading="Get your free quote."
-          subheading="Tell us about the place and Caroline will come back with a firm price. Prefer to talk? Call or text — we answer."
+          subheading="Tell us about the place and Caroline will come back with a firm price."
           centered
-        />
+        >
+          <div id="quote-form" className="mx-auto mt-8 max-w-2xl scroll-mt-24 text-left">
+            <ContactForm />
+          </div>
+        </PageHero>
+
+        {/* Reassurances sit just under the form, on light ground — they are
+            charcoal text and would not read on the hero image. */}
+        <section className="bg-white py-10">
+          <div className="mx-auto max-w-2xl px-4 sm:px-6">
+            <ul className="flex flex-wrap items-center justify-center gap-x-7 gap-y-3">
+              {reassurances.map((r) => {
+                const Icon = r.icon;
+                return (
+                  <li key={r.text} className="flex items-center gap-2 text-sm text-charcoal-70">
+                    <Icon size={16} className="shrink-0 text-brand-dark" />
+                    {r.text}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </section>
 
         {/* Contact methods */}
         <section id="contact-methods" className="bg-cream-100 py-12">
@@ -113,29 +147,10 @@ export default function ContactPage() {
                 the CtaMode script can fill it; see CtaNext in CtaVariant.tsx. */}
             <CtaClosed>
               <p className="mt-6 text-center text-sm text-charcoal-70">
-                Caroline is away from the phone right now — send the form below
+                Caroline is away from the phone right now — send the form above
                 and she will pick it up <CtaNext />.
               </p>
             </CtaClosed>
-          </div>
-        </section>
-
-        {/* The form */}
-        <section id="quote-form" className="bg-white py-16">
-          <div className="mx-auto max-w-2xl px-4 sm:px-6">
-            <ContactForm />
-
-            <ul className="mt-8 flex flex-wrap items-center justify-center gap-x-7 gap-y-3">
-              {reassurances.map((r) => {
-                const Icon = r.icon;
-                return (
-                  <li key={r.text} className="flex items-center gap-2 text-sm text-charcoal-70">
-                    <Icon size={16} className="shrink-0 text-brand-dark" />
-                    {r.text}
-                  </li>
-                );
-              })}
-            </ul>
           </div>
         </section>
 

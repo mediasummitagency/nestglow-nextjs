@@ -12,6 +12,7 @@ import { SignatureProcess } from "@/components/sections/SignatureProcess";
 import { TrustPillars } from "@/components/sections/TrustPillars";
 import { TrustBadges } from "@/components/sections/TrustBadges";
 import { ZipRouter } from "@/components/forms/ZipRouter";
+import { PrimaryCta } from "@/components/ui/PrimaryCta";
 import Tiers from "@/components/sections/Tiers";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { ScrollHint } from "@/components/ui/ScrollHint";
@@ -199,12 +200,7 @@ export default function HomePage() {
               ))}
             </div>
             <div className="mt-12 text-center">
-              <Link
-                href="/contact"
-                className="inline-block bg-brand text-white font-semibold px-8 py-3 rounded-full hover:bg-brand-dark transition-colors"
-              >
-                Get started
-              </Link>
+              <PrimaryCta label="Get started" className="inline-block bg-brand text-white font-semibold px-8 py-3 rounded-full hover:bg-brand-dark transition-colors" />
             </div>
           </div>
         </section>

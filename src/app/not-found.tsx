@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { PrimaryCta } from "@/components/ui/PrimaryCta";
 
 export default function NotFound() {
   return (
@@ -19,12 +20,10 @@ export default function NotFound() {
             >
               Back to Home
             </Link>
-            <Link
-              href="/contact"
+            <PrimaryCta
+              label="Book a Cleaning"
               className="border border-charcoal/20 text-charcoal font-semibold px-6 py-3 rounded-full hover:bg-cream-100 transition-colors"
-            >
-              Book a Cleaning
-            </Link>
+            />
           </div>
         </div>
       </main>
