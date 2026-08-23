@@ -83,7 +83,7 @@ export default function ContactPage() {
           subheading="Tell us about the place and Caroline will come back with a firm price."
           centered
         >
-          <div className="mx-auto mt-8 max-w-2xl space-y-4 text-left">
+          <div className="mx-auto mt-6 max-w-2xl space-y-4 text-left md:mt-8">
             {/* Phone only. Since the page went form-first the form is the first
                 thing here, so a visitor who would rather call had nothing to
                 call until they scrolled past all of it. */}
@@ -96,7 +96,7 @@ export default function ContactPage() {
 
         {/* Reassurances sit just under the form, on light ground — they are
             charcoal text and would not read on the hero image. */}
-        <section className="bg-white py-10">
+        <section className="bg-white py-8 md:py-10">
           <div className="mx-auto max-w-2xl px-4 sm:px-6">
             <ul className="flex flex-wrap items-center justify-center gap-x-7 gap-y-3">
               {reassurances.map((r) => {
@@ -168,7 +168,7 @@ export default function ContactPage() {
         </section>
 
         {/* Service area */}
-        <section className="border-t border-charcoal/10 bg-cream py-14">
+        <section className="border-t border-charcoal/10 bg-cream py-10 md:py-14">
           <div className="mx-auto max-w-3xl px-4 text-center sm:px-6">
             <h2 className="mb-3 text-2xl font-bold text-charcoal md:text-3xl">Where we clean</h2>
             <p className="mx-auto max-w-xl text-charcoal-70">

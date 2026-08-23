@@ -56,7 +56,11 @@ export function PageHero({ heading, subheading, eyebrow, topContent, heroFootnot
           className={cn(
             "mx-auto px-4 sm:px-6 space-y-5",
             centered ? "max-w-3xl text-center" : "max-w-7xl",
-            breadcrumbs ? "py-10 pb-16" : "pt-28 pb-16"
+            // `pt-28` is clearance for the fixed header — which only exists
+            // from `md` up, since SiteNav is `hidden md:block` and phones
+            // navigate from the bottom dock instead. Reserving it on a phone
+            // was 112px of empty hero above the heading.
+            breadcrumbs ? "py-10 pb-16" : "pt-10 pb-12 md:pt-28 md:pb-16"
           )}
         >
           {topContent}

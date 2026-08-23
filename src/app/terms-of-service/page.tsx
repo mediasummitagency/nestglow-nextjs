@@ -12,7 +12,8 @@ export const metadata: Metadata = {
 export default function TermsOfServicePage() {
   return (
     <>
-      <main className="pt-[72px]">
+      {/* Header clearance only from `md` up — SiteNav is `hidden md:block`. */}
+      <main className="pt-8 md:pt-[72px]">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 py-12">
           <header className="mb-10 space-y-3">
             <h1 className="text-3xl font-bold text-charcoal">Terms of Service</h1>

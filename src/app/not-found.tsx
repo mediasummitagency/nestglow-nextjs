@@ -4,7 +4,7 @@ import { PrimaryCta } from "@/components/ui/PrimaryCta";
 export default function NotFound() {
   return (
     <>
-      <main className="pt-[72px] min-h-[60vh] flex items-center">
+      <main className="pt-8 md:pt-[72px] min-h-[60vh] flex items-center">
         <div className="max-w-xl mx-auto px-4 sm:px-6 py-24 text-center space-y-6">
           <p className="text-6xl font-bold text-brand/40">404</p>
           <h1 className="text-3xl md:text-4xl font-bold text-charcoal">
