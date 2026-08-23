@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Output dir for verification builds run alongside a live dev server.
+.next-verify
