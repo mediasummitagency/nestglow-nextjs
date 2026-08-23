@@ -6,7 +6,9 @@ export const BASE_URL = "https://nestglowco.com";
 export const BUSINESS = {
   name: "NestGlow Co",
   legalName: "NestGlow Co LLC",
-  tagline: "Cleaning you can trust. Homes and businesses across Monmouth, Ocean, and Middlesex County.",
+  // "Homes and businesses" until 2026-08-22 — changed because Caroline does not sell
+  // commercial cleaning. Short-term rentals are the second real service, not offices.
+  tagline: "Cleaning you can trust. Homes and short-term rentals across Monmouth, Ocean, and Middlesex County.",
   phone: "(732) 614-0192",
   phoneHref: "tel:+17326140192",
   smsHref: "sms:+17326140192",
@@ -27,11 +29,14 @@ export const BUSINESS = {
 } as const;
 
 export const TRACKING = {
-  // Placeholder — Lucas will populate after Ads / GA4 property is set up.
-  // Leave blank strings to disable rendering of the script tag.
+  // ONE id, on purpose. GA4 and Google Ads conversions are configured as tags
+  // INSIDE the GTM container on every Summit Media build — they are never loaded
+  // from the site directly, so there is no ga4Id / googleAdsId here to fill in.
+  // Every event on this site pushes to `dataLayer` and GTM routes it onward.
+  //
+  // No container for NestGlow yet (Lucas, 2026-08-22), so this stays blank and
+  // the loader in layout.tsx renders nothing. Blank = tracking is off entirely.
   gtmId: "", // e.g. "GTM-XXXXXXX"
-  ga4Id: "", // e.g. "G-XXXXXXXXXX"
-  googleAdsId: "", // e.g. "AW-XXXXXXXXXX"
 } as const;
 
 export const FORMS = {

@@ -17,10 +17,21 @@ function pushEvent(event: string) {
   w.dataLayer.push({ event });
 }
 
+/**
+ * 64px of bar, plus however tall the home-indicator strip is on the device.
+ * Baking the inset into the height (rather than padding the <nav>, which would
+ * shrink its content box) means the white surface always reaches the physical
+ * bottom edge while the icons stay clear of the indicator.
+ *
+ * The matching page clearance is `.dock-clearance` in `globals.css` — 64px + the
+ * same inset + breathing room. Keep the two in step by hand.
+ */
+const DOCK_H = "h-[calc(64px+env(safe-area-inset-bottom,0px))]";
+
 const NAV_ITEMS = [
   { label: "Home", icon: Home,     href: "/",                type: "link"   as const, event: "mobile_sticky_home_click" },
   { label: "Call", icon: Phone,    href: BUSINESS.phoneHref, type: "a"      as const, event: "mobile_sticky_call_click" },
-  { label: "Book", icon: Sparkles, href: "/book",            type: "link"   as const, event: "mobile_sticky_quote_click" },
+  { label: "Quote", icon: Sparkles, href: "/contact",        type: "link"   as const, event: "mobile_sticky_quote_click" },
   { label: "Menu", icon: Menu,     href: null,               type: "button" as const, event: "mobile_sticky_menu_click" },
 ];
 
@@ -28,62 +39,86 @@ export default function MobileStickyBar() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
 
-  if (pathname === "/book") return null;
+  // Shown on every page since 2026-08-22. It used to return null on /contact,
+  // which made the bar look broken rather than deliberate: tap Quote, land on
+  // /contact, and the nav you just used has vanished.
+  //
+  // EDGE TO EDGE as of 2026-08-22, matching gorsegner-nextjs's `MobileDock`.
+  // It was a floating pill inset 48px each side with a rounded white capsule and
+  // a blur; the page ran underneath it on both sides, so it read as a widget
+  // sitting on the page rather than as the bottom of the app. Now it owns the
+  // full bottom edge: square, opaque white, hairline on top plus an upward
+  // shadow so it separates from a white section as well as a dark one.
+  //
+  // The safe-area inset is padding on the ITEMS, never on the <nav>: the nav is
+  // `box-sizing: border-box`, so padding there shrinks the content box the flex
+  // items live in instead of making the bar taller. Here each item stretches the
+  // full height and paints its own background right down to the physical edge,
+  // while its icon and label sit above the home indicator. (gorsegner-nextjs's
+  // MobileDock documents the same trap — its accent slot stopped ~34px short of
+  // the bottom on a notched iPhone when the padding was in the wrong place.)
+  //
+  // `touch-manipulation` tells the browser these can never be double-tapped to
+  // zoom, so there is no window where a tap waits on a possible second one.
+  const itemBase =
+    "flex flex-1 flex-col items-center justify-center gap-1 px-0.5 pb-[env(safe-area-inset-bottom,0px)] text-[10px] font-medium transition-colors touch-manipulation active:bg-charcoal/5";
 
   return (
     <>
       <MobileNav open={menuOpen} onClose={() => setMenuOpen(false)} />
 
-      <div
-        className="fixed bottom-0 left-0 right-0 z-50 md:hidden flex justify-center px-12"
-        style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 16px)" }}
+      <nav
+        aria-label="Quick actions"
+        className={cn(
+          "fixed inset-x-0 bottom-0 z-50 flex items-stretch border-t border-charcoal/10 bg-white shadow-[0_-2px_10px_rgba(0,0,0,0.06)] md:hidden",
+          DOCK_H,
+        )}
       >
-        <div className="w-full rounded-full px-3 py-2.5 bg-white/50 backdrop-blur-xl border border-white/25 shadow-lg shadow-black/10">
-          <div className="grid grid-cols-4">
-            {NAV_ITEMS.map(({ label, icon: Icon, type, event, href }) => {
-              const isActive =
-                type === "button"
-                  ? menuOpen
-                  : href === "/"
-                  ? pathname === "/"
-                  : pathname.startsWith(href as string);
+        {NAV_ITEMS.map(({ label, icon: Icon, type, event, href }) => {
+          const isActive =
+            type === "button"
+              ? menuOpen
+              : href === "/"
+              ? pathname === "/"
+              : pathname.startsWith(href as string);
 
-              const content = (
-                <>
-                  <Icon size={20} className={cn(isActive ? "text-brand" : "text-charcoal/55")} />
-                  <span className={cn("text-[10px] font-medium", isActive ? "text-brand" : "text-charcoal/55")}>
-                    {label}
-                  </span>
-                </>
-              );
+          const tone = isActive ? "text-brand" : "text-charcoal/55";
 
-              if (type === "button") {
-                return (
-                  <button
-                    key={label}
-                    className="flex flex-col items-center gap-0.5 py-2 rounded-full transition-colors active:opacity-70"
-                    onClick={() => { pushEvent(event); setMenuOpen(true); }}
-                  >
-                    {content}
-                  </button>
-                );
-              }
+          const content = (
+            <>
+              <Icon size={20} className={tone} />
+              <span className={tone}>{label}</span>
+            </>
+          );
 
-              const Wrapper = type === "link" ? Link : "a";
-              return (
-                <Wrapper
-                  key={label}
-                  href={href as string}
-                  className="flex flex-col items-center gap-0.5 py-2 rounded-full transition-colors active:opacity-70"
-                  onClick={() => pushEvent(event)}
-                >
-                  {content}
-                </Wrapper>
-              );
-            })}
-          </div>
-        </div>
-      </div>
+          if (type === "button") {
+            return (
+              <button
+                key={label}
+                type="button"
+                aria-expanded={menuOpen}
+                className={itemBase}
+                onClick={() => { pushEvent(event); setMenuOpen(true); }}
+              >
+                {content}
+              </button>
+            );
+          }
+
+          const Wrapper = type === "link" ? Link : "a";
+          return (
+            <Wrapper
+              key={label}
+              href={href as string}
+              aria-current={isActive ? "page" : undefined}
+              className={itemBase}
+              onClick={() => pushEvent(event)}
+            >
+              {content}
+            </Wrapper>
+          );
+        })}
+      </nav>
     </>
   );
 }

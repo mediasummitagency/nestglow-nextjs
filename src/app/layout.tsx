@@ -23,7 +23,9 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
-    default: `${BUSINESS.name} | Professional Cleaning in Monmouth, Ocean & Middlesex County, NJ`,
+    // Kept under ~60 chars so Google does not truncate it. The counties live in
+    // the description and on the page, not in the title.
+    default: `House Cleaning in Monmouth, Ocean & Middlesex County NJ`,
     template: `%s | ${BUSINESS.name}`,
   },
   description: BUSINESS.tagline,
@@ -73,9 +75,11 @@ export default function RootLayout({
             <SiteNav />
           </Suspense>
         </div>
-        <div className="pb-[88px] md:pb-0">
-          {children}
-        </div>
+        {children}
+        {/* Footer carries `dock-clearance` itself. The dock is fixed over the
+            page and the footer is the last thing on every route, so the padding
+            has to live inside it — a wrapper around it would clear the bar but
+            leave a white band under the dark footer. */}
         <Footer />
         <Suspense fallback={null}>
           <MobileStickyBar />

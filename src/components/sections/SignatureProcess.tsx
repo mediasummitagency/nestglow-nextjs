@@ -44,7 +44,7 @@ export function SignatureProcess({
   heading = "Every room, done right — every single visit.",
   body1 = "You shouldn't have to wonder what got cleaned and what got skipped. Every NestGlow visit follows the same Signature Clean — a fixed 25-point routine across your kitchen, bathrooms, bedrooms, and living spaces, finished with the small touches most cleaners rush past.",
   body2 = "It's the same standard whether it's your first deep clean or your fiftieth recurring visit. Tap any room below to see exactly what's included — no vague promises, just the checklist we actually work from.",
-  ctaHref = "/book",
+  ctaHref = "/contact",
   ctaLabel = "Book a cleaning",
   imageSrc,
   hideCta = false,

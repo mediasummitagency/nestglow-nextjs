@@ -1,5 +1,10 @@
 "use client";
 
+// NOT ROUTED — kept only as a reference for the field set (see MAP.md).
+// If this is ever revived, strip the commercial branch first: Caroline does not sell
+// commercial cleaning (confirmed 2026-08-22), and this form still asks for office type,
+// commercial service checkboxes and a `commercial_booking` form_type.
+
 import { useState, useRef, FormEvent } from "react";
 import { Plus, Minus, Check } from "lucide-react";
 import { GuaranteeBadge } from "@/components/ui/GuaranteeBadge";

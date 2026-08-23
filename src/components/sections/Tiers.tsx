@@ -58,8 +58,13 @@ export default function Tiers({
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-7 max-w-[88%] mx-auto md:max-w-5xl">
         {TIERS.map((tier) => {
+          // /book is parked (see parked-for-phase-2/), so these went to a 404 —
+          // on all three plans, on the site's main pricing CTA, desktop and
+          // mobile. Next prefetches these links, so it was 404ing on page load
+          // even before anyone clicked. Points at /contact now, carrying the
+          // chosen plan so Caroline sees which one they picked.
           const url =
-            `/book?tier=${tier.id}` +
+            `/contact?tier=${tier.id}` +
             (zip ? `&zip=${zip}` : "") +
             (town ? `&town=${encodeURIComponent(town)}` : "");
 

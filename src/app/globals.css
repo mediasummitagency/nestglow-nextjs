@@ -227,3 +227,17 @@
   from { transform: translateX(0); }
   to   { transform: translateX(-25%); }
 }
+
+/* Clearance for the fixed mobile dock.
+   A flat pb-[88px] was 3px short of the bar in the browser and would have been
+   ~34px short on an iPhone, where the home-indicator inset pushes the bar up —
+   so the bottom of the footer sat under it. This tracks the safe-area inset
+   instead of guessing at it. Breakpoint matches the dock's own `md:hidden`. */
+.dock-clearance {
+  /* 64px of bar + the home-indicator inset + 16px of breathing room. Must track
+     DOCK_H in MobileStickyBar.tsx. */
+  padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 80px);
+}
+@media (min-width: 768px) {
+  .dock-clearance { padding-bottom: 0; }
+}

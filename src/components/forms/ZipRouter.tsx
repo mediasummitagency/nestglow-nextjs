@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { lookupZip } from "@/lib/zipToCounty";
 import { cn } from "@/lib/utils";
 
@@ -41,9 +40,7 @@ export function ZipRouter({ variant, className }: ZipRouterProps) {
           town: match.town,
         });
       }
-      router.push(
-        `/cleaning-services/${match.county}?zip=${zip}&town=${encodeURIComponent(match.town)}`
-      );
+      router.push(`/contact?zip=${zip}`);
     } else {
       if (typeof window !== "undefined" && "dataLayer" in window) {
         (window as unknown as { dataLayer: unknown[] }).dataLayer.push({
@@ -51,14 +48,9 @@ export function ZipRouter({ variant, className }: ZipRouterProps) {
           zip,
         });
       }
-      setIsRouting(false);
-      setError(`out-of-area:${zip}`);
+      router.push(`/contact?zip=${zip}&reason=waitlist`);
     }
   }
-
-  const isOutOfArea = error?.startsWith("out-of-area:");
-  const missedZip = isOutOfArea ? error!.split(":")[1] : null;
-  const displayError = isOutOfArea ? null : error;
 
   return (
     <div className={cn("w-full", className)}>
@@ -102,21 +94,7 @@ export function ZipRouter({ variant, className }: ZipRouterProps) {
         </button>
       </form>
 
-      {displayError && (
-        <p className="text-sm text-red-600 mt-2">{displayError}</p>
-      )}
-
-      {isOutOfArea && missedZip && (
-        <p className="text-sm text-charcoal-70 mt-2">
-          We don&apos;t currently serve {missedZip}.{" "}
-          <Link
-            href={`/contact?reason=waitlist&zip=${missedZip}`}
-            className="font-semibold text-brand hover:text-brand-dark underline underline-offset-2 transition-colors"
-          >
-            Want to join our waitlist?
-          </Link>
-        </p>
-      )}
+      {error && <p className="text-sm text-red-600 mt-2">{error}</p>}
     </div>
   );
 }

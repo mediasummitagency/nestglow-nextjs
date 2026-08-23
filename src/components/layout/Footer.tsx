@@ -2,57 +2,34 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
 import { BUSINESS } from "@/lib/config";
 
+// Services and Areas are home-page sections while the standalone pages are
+// parked for phase 2, so these point at anchors rather than routes.
 const servicesLinks = [
-  { label: "Residential Cleaning", href: "/services/residential-cleaning" },
-  { label: "Commercial Cleaning", href: "/services/commercial-cleaning" },
-  { label: "Deep Cleaning", href: "/services/deep-cleaning" },
-  { label: "Move In / Move Out", href: "/services/move-in-move-out" },
-  { label: "General vs. Deep Clean", href: "/general-vs-deep-cleaning" },
+  { label: "Regular Home Cleaning", href: "/#services" },
+  { label: "Deep Cleaning", href: "/#services" },
+  { label: "Move In / Move Out", href: "/#services" },
+  { label: "Airbnb & Rental Turnovers", href: "/#services" },
 ];
 
 const areasLinks = [
-  { label: "All Service Areas", href: "/cleaning-services" },
-  { label: "Monmouth County, NJ", href: "/cleaning-services/monmouth-county" },
-  { label: "Ocean County, NJ", href: "/cleaning-services/ocean-county" },
-  { label: "Middlesex County, NJ", href: "/cleaning-services/middlesex-county" },
+  { label: "Monmouth County, NJ", href: "/#areas" },
+  { label: "Ocean County, NJ", href: "/#areas" },
+  { label: "Middlesex County, NJ", href: "/#areas" },
 ];
 
 const companyLinks = [
-  { label: "About", href: "/about" },
-  { label: "FAQ", href: "/faq" },
-  { label: "Reviews", href: "/reviews" },
   { label: "Contact", href: "/contact" },
-  { label: "Book Cleaning", href: "/book" },
+  { label: "Get a Quote", href: "/contact" },
 ];
 
 export default function Footer() {
   const year = new Date().getFullYear();
-  const pathname = usePathname();
-  const minimal = pathname === "/book-now";
 
-  if (minimal) {
-    return (
-      <footer className="bg-charcoal text-cream">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-cream/40">
-          <p suppressHydrationWarning>© {year} NestGlow Co. All rights reserved.</p>
-          <div className="flex items-center gap-4">
-            <a href={BUSINESS.phoneHref} className="hover:text-brand transition-colors">
-              {BUSINESS.phone}
-            </a>
-            <Link href="/privacy-policy" className="hover:text-brand transition-colors">
-              Privacy Policy
-            </Link>
-          </div>
-        </div>
-      </footer>
-    );
-  }
 
   return (
-    <footer className="bg-charcoal text-cream">
+    <footer className="bg-charcoal text-cream dock-clearance">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-16 pb-8">
         {/* 5-column grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-cream/10">

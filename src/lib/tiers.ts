@@ -39,6 +39,12 @@ export interface Tier {
   isPopular: boolean;
   ctaLabel: string;
   sizeFitMaxSqft: number | null;
+  /**
+   * Photo in the circle above the card. Was `undefined` on all three tiers until
+   * 2026-08-22, which rendered an empty pale-blue disc on desktop and mobile —
+   * it read as a broken image, not as decoration. Room shots chosen to match
+   * each tier's scope: one room, the kitchen, the whole home.
+   */
   photoSrc?: string;
 }
 
@@ -61,7 +67,7 @@ export const TIERS: Tier[] = [
     isPopular: false,
     ctaLabel: "Select this Glow",
     sizeFitMaxSqft: 1500,
-    photoSrc: undefined,
+    photoSrc: "/images/services/residential-cleaning/living-areas.png",
   },
   {
     id: "signature-glow",
@@ -91,7 +97,7 @@ export const TIERS: Tier[] = [
     isPopular: true,
     ctaLabel: "Select this Glow",
     sizeFitMaxSqft: 2800,
-    photoSrc: undefined,
+    photoSrc: "/images/services/residential-cleaning/kitchen.png",
   },
   {
     id: "full-glow",
@@ -137,7 +143,7 @@ export const TIERS: Tier[] = [
     isPopular: false,
     ctaLabel: "Select this Glow",
     sizeFitMaxSqft: null,
-    photoSrc: undefined,
+    photoSrc: "/images/services/residential-cleaning/bedrooms.png",
   },
 ];
 

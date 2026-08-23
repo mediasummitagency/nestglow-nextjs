@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -6,6 +7,7 @@ import { BUSINESS, BASE_URL } from "@/lib/config";
 import { services } from "@/lib/services";
 import { FAQ } from "@/components/sections/FAQ";
 import { ServiceAreasTabs } from "@/components/sections/ServiceAreasTabs";
+import { ServicesCarousel } from "@/components/sections/ServicesCarousel";
 import { SignatureProcess } from "@/components/sections/SignatureProcess";
 import { TrustPillars } from "@/components/sections/TrustPillars";
 import { TrustBadges } from "@/components/sections/TrustBadges";
@@ -14,6 +16,12 @@ import Tiers from "@/components/sections/Tiers";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { ScrollHint } from "@/components/ui/ScrollHint";
 import { WhyNestGlow } from "@/components/sections/WhyNestGlow";
+
+export const metadata: Metadata = {
+  // Title/description come from the root layout defaults; this exists so the
+  // home page declares a canonical like every other route does.
+  alternates: { canonical: BASE_URL },
+};
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -25,9 +33,9 @@ const howItWorks = [
 ];
 
 const counties = [
-  { name: "Monmouth County", href: "/cleaning-services/monmouth-county", towns: 10 },
-  { name: "Ocean County", href: "/cleaning-services/ocean-county", towns: 7 },
-  { name: "Middlesex County", href: "/cleaning-services/middlesex-county", towns: 6 },
+  { name: "Monmouth County", href: "/#areas", towns: 10 },
+  { name: "Ocean County", href: "/#areas", towns: 7 },
+  { name: "Middlesex County", href: "/#areas", towns: 6 },
 ];
 
 
@@ -192,7 +200,7 @@ export default function HomePage() {
             </div>
             <div className="mt-12 text-center">
               <Link
-                href="/book"
+                href="/contact"
                 className="inline-block bg-brand text-white font-semibold px-8 py-3 rounded-full hover:bg-brand-dark transition-colors"
               >
                 Get started
@@ -212,11 +220,11 @@ export default function HomePage() {
           headline="Common questions"
           subtitle="Everything you need to know before booking."
           items={homeFaqs.map((faq) => ({ question: faq.q, answer: faq.a }))}
-          cta={{ label: "See all FAQs", href: "/faq" }}
+          cta={{ label: "Still have a question? Ask us", href: "/contact" }}
         />
 
         {/* Services grid + CTA */}
-        <section className="bg-white py-16 border-t border-charcoal/10">
+        <section id="services" className="scroll-mt-24 bg-white py-16 border-t border-charcoal/10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <h2 className="text-3xl md:text-4xl font-bold text-charcoal mb-2 text-center">
               What we clean
@@ -224,29 +232,7 @@ export default function HomePage() {
             <p className="text-center text-charcoal-70 mb-10">
               Every service is backed by our satisfaction guarantee.
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {services.map((svc) => {
-                const Icon = svc.icon;
-                return (
-                  <Link
-                    key={svc.href}
-                    href={svc.href}
-                    className="group bg-cream rounded-2xl p-6 border border-charcoal/10 shadow hover:border-brand hover:shadow-lg transition-all hover:-translate-y-0.5 space-y-3"
-                  >
-                    <div className="w-10 h-10 rounded-full bg-brand/20 flex items-center justify-center">
-                      <Icon size={18} className="text-brand-dark" />
-                    </div>
-                    <h3 className="text-lg font-bold text-charcoal group-hover:text-brand transition-colors">
-                      {svc.title}
-                    </h3>
-                    <p className="text-sm text-charcoal-70 leading-relaxed">{svc.copy}</p>
-                    <span className="inline-flex items-center gap-1 text-sm font-semibold text-brand">
-                      Learn more <ChevronRight size={14} />
-                    </span>
-                  </Link>
-                );
-              })}
-            </div>
+            <ServicesCarousel />
             <div className="mt-[63px] text-center space-y-4">
               <ZipRouter variant="hero" />
             </div>

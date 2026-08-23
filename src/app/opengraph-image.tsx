@@ -1,16 +1,52 @@
 import { ImageResponse } from "next/og";
+import { BUSINESS } from "@/lib/config";
 
 export const runtime = "nodejs";
 export const alt = "NestGlow Co — Professional Cleaning in NJ";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
+// Brand tokens, mirrored from globals.css. Satori can't read CSS custom
+// properties, so these have to be literals — keep them in step with
+// --color-brand / --color-charcoal if the palette moves again.
+const BRAND = "#4FACFE";
+const BRAND_DARK = "#1D8FD8";
+const NAVY = "#1A1F36";
+const SLATE = "#4A5568";
+const PALE = "#F0F8FF";
+
+const POINTS = ["Insured & bonded", "10+ years experience", "Satisfaction guaranteed"];
+
+/**
+ * A drawn tick, not the "✓" character.
+ *
+ * Satori has no glyph for U+2713 in the default font and tries to fetch one at
+ * render time; that request 400s, the build logs a warning it does not fail on,
+ * and the shipped card renders three tofu boxes. An inline SVG has no font
+ * dependency, so it always draws.
+ */
+function Tick() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" style={{ display: "flex" }}>
+      <circle cx="12" cy="12" r="12" fill={BRAND} />
+      <path
+        d="M7 12.5l3.2 3.2L17 9"
+        stroke="#FFFFFF"
+        strokeWidth="2.4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fill="none"
+      />
+    </svg>
+  );
+}
+
 export default function Image() {
   return new ImageResponse(
     (
       <div
         style={{
-          background: "#FBF8F3",
+          background: "#FFFFFF",
           width: "100%",
           height: "100%",
           display: "flex",
@@ -21,15 +57,15 @@ export default function Image() {
           position: "relative",
         }}
       >
-        {/* Gold accent bar top */}
+        {/* Brand bar, top */}
         <div
           style={{
             position: "absolute",
             top: 0,
             left: 0,
             right: 0,
-            height: "8px",
-            background: "#E8B86A",
+            height: "10px",
+            background: BRAND,
             display: "flex",
           }}
         />
@@ -39,95 +75,91 @@ export default function Image() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            gap: "24px",
+            gap: "22px",
           }}
         >
           <div
             style={{
-              fontSize: "80px",
-              fontWeight: "700",
-              color: "#1F1B16",
+              fontSize: "82px",
+              fontWeight: 700,
+              color: NAVY,
               letterSpacing: "-2px",
-              fontFamily: "Georgia, serif",
-            }}
-          >
-            NestGlow Co
-          </div>
-          <div
-            style={{
-              fontSize: "32px",
-              color: "#4A443D",
-              textAlign: "center",
-              maxWidth: "700px",
-            }}
-          >
-            Cleaning you can trust. NJ.
-          </div>
-          <div
-            style={{
               display: "flex",
-              gap: "32px",
-              marginTop: "16px",
             }}
           >
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "8px",
-                color: "#4A443D",
-                fontSize: "22px",
-              }}
-            >
-              ✓ Insured &amp; bonded
-            </div>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "8px",
-                color: "#4A443D",
-                fontSize: "22px",
-              }}
-            >
-              ✓ 10+ years experience
-            </div>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "8px",
-                color: "#4A443D",
-                fontSize: "22px",
-              }}
-            >
-              ✓ Satisfaction guaranteed
-            </div>
+            {BUSINESS.name}
+          </div>
+
+          <div
+            style={{
+              fontSize: "34px",
+              color: SLATE,
+              textAlign: "center",
+              maxWidth: "760px",
+              display: "flex",
+            }}
+          >
+            Home &amp; short-term rental cleaning across the Jersey Shore
+          </div>
+
+          <div style={{ display: "flex", gap: "34px", marginTop: "18px" }}>
+            {POINTS.map((p) => (
+              <div
+                key={p}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "10px",
+                  color: NAVY,
+                  fontSize: "23px",
+                  background: PALE,
+                  borderRadius: "999px",
+                  padding: "10px 20px",
+                }}
+              >
+                <Tick />
+                {p}
+              </div>
+            ))}
           </div>
         </div>
 
         <div
           style={{
             position: "absolute",
-            bottom: "32px",
+            bottom: "34px",
+            left: "48px",
+            fontSize: "21px",
+            color: SLATE,
+            display: "flex",
+          }}
+        >
+          Monmouth · Ocean · Middlesex County, NJ
+        </div>
+
+        <div
+          style={{
+            position: "absolute",
+            bottom: "34px",
             right: "48px",
-            fontSize: "20px",
-            color: "#8A837B",
+            fontSize: "21px",
+            fontWeight: 600,
+            color: BRAND_DARK,
             display: "flex",
           }}
         >
           nestglowco.com
         </div>
 
-        {/* Gold accent bar bottom */}
+        {/* Brand bar, bottom */}
         <div
           style={{
             position: "absolute",
             bottom: 0,
             left: 0,
             right: 0,
-            height: "8px",
-            background: "#E8B86A",
+            height: "10px",
+            background: BRAND,
             display: "flex",
           }}
         />

@@ -20,7 +20,7 @@ export default function NotFound() {
               Back to Home
             </Link>
             <Link
-              href="/book"
+              href="/contact"
               className="border border-charcoal/20 text-charcoal font-semibold px-6 py-3 rounded-full hover:bg-cream-100 transition-colors"
             >
               Book a Cleaning

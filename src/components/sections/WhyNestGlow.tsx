@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useSnapCarousel } from "@/lib/useSnapCarousel";
 
 const rows = [
   {
@@ -30,7 +30,11 @@ const rows = [
 ];
 
 export function WhyNestGlow() {
-  const [current, setCurrent] = useState(0);
+  // Was a `translateX(-current * 100%)` slider driven only by the arrows and
+  // dots, so it looked swipeable on a phone and ignored the swipe. Now a native
+  // scroll-snap track: finger, arrows and dots all move the same scroll
+  // position, and the active slide is read back off the DOM.
+  const { trackRef, active, goTo } = useSnapCarousel(rows.length);
 
   return (
     <section className="bg-cream-50 py-16">
@@ -45,13 +49,12 @@ export function WhyNestGlow() {
 
         {/* ── Mobile carousel ── */}
         <div className="md:hidden relative">
-          <div className="overflow-hidden">
-            <div
-              className="flex transition-transform duration-300 ease-in-out"
-              style={{ transform: `translateX(-${current * 100}%)` }}
-            >
+          <div
+            ref={trackRef}
+            className="no-scrollbar flex snap-x snap-mandatory overflow-x-auto scroll-smooth"
+          >
               {rows.map((row, i) => (
-                <div key={i} className="w-full flex-shrink-0 px-2">
+                <div key={i} className="w-full shrink-0 snap-center px-2">
                   <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-charcoal/10 bg-cream-100 mb-5">
                     <Image
                       src={row.image}
@@ -65,15 +68,14 @@ export function WhyNestGlow() {
                   <p className="text-charcoal-70 leading-relaxed text-sm">{row.body}</p>
                 </div>
               ))}
-            </div>
           </div>
 
           {/* Arrows + dots row */}
           <div className="flex items-center justify-center gap-3 mt-5">
             <button
-              onClick={() => setCurrent((c) => Math.max(0, c - 1))}
+              onClick={() => goTo(active - 1)}
               aria-label="Previous"
-              disabled={current === 0}
+              disabled={active === 0}
               className="w-8 h-8 rounded-full bg-white shadow-md flex items-center justify-center text-charcoal transition-opacity disabled:opacity-25 disabled:pointer-events-none"
             >
               <ChevronLeft size={16} />
@@ -83,19 +85,20 @@ export function WhyNestGlow() {
               {rows.map((_, i) => (
                 <button
                   key={i}
-                  onClick={() => setCurrent(i)}
+                  onClick={() => goTo(i)}
                   aria-label={`Go to slide ${i + 1}`}
+                  aria-current={i === active}
                   className={`rounded-full transition-all duration-200 ${
-                    i === current ? "w-4 h-2 bg-brand" : "w-2 h-2 bg-charcoal/20"
+                    i === active ? "w-4 h-2 bg-brand" : "w-2 h-2 bg-charcoal/20"
                   }`}
                 />
               ))}
             </div>
 
             <button
-              onClick={() => setCurrent((c) => Math.min(rows.length - 1, c + 1))}
+              onClick={() => goTo(active + 1)}
               aria-label="Next"
-              disabled={current === rows.length - 1}
+              disabled={active === rows.length - 1}
               className="w-8 h-8 rounded-full bg-white shadow-md flex items-center justify-center text-charcoal transition-opacity disabled:opacity-25 disabled:pointer-events-none"
             >
               <ChevronRight size={16} />
@@ -130,7 +133,7 @@ export function WhyNestGlow() {
 
         <div className="text-center mt-12">
           <Link
-            href="/book"
+            href="/contact"
             className="inline-block bg-brand text-white font-semibold px-8 py-3 rounded-full hover:bg-brand-dark transition-colors"
           >
             Book NestGlow Today

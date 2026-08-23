@@ -1,35 +1,52 @@
 "use client"
 
 import { useState } from "react"
-import Link from "next/link"
-import { getTownsByCounty } from "@/lib/towns"
 
+/**
+ * Towns we serve, by county.
+ *
+ * This list used to be derived from `src/lib/towns.ts`, which also carried the
+ * per-town page content. That file is parked with the town pages for phase 2,
+ * so the names live here instead — the section is now a plain statement of
+ * coverage rather than a link grid. Manalapan sits under Monmouth, which is
+ * where it actually is; the parked town data had it filed under Middlesex.
+ *
+ * When the town pages come back, swap these arrays for `getTownsByCounty()`
+ * and make each name a link again.
+ */
 const COUNTIES = [
   {
     label: "Monmouth",
     value: "Monmouth" as const,
-    href: "/cleaning-services/monmouth-county",
+    towns: [
+      "Asbury Park", "Bradley Beach", "Colts Neck", "Freehold", "Holmdel",
+      "Manalapan", "Marlboro", "Middletown", "Neptune", "Neptune City", "Red Bank",
+    ],
   },
   {
     label: "Ocean",
     value: "Ocean" as const,
-    href: "/cleaning-services/ocean-county",
+    towns: [
+      "Berkeley Township", "Brick", "Jackson", "Lacey Township",
+      "Point Pleasant", "Toms River",
+    ],
   },
   {
     label: "Middlesex",
     value: "Middlesex" as const,
-    href: "/cleaning-services/middlesex-county",
+    towns: [
+      "East Brunswick", "Edison", "Old Bridge", "Sayreville", "Woodbridge",
+    ],
   },
 ]
 
 export function ServiceAreasTabs() {
   const [active, setActive] = useState<"Monmouth" | "Ocean" | "Middlesex">("Monmouth")
-
   const activeCounty = COUNTIES.find((c) => c.value === active)!
-  const towns = getTownsByCounty(active).sort((a, b) => a.name.localeCompare(b.name))
+  const towns = [...activeCounty.towns].sort((a, b) => a.localeCompare(b))
 
   return (
-    <section className="bg-cream-50 py-[4.6rem] border-t border-charcoal/5">
+    <section id="areas" className="scroll-mt-24 bg-cream-50 py-[4.6rem] border-t border-charcoal/5">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-charcoal mb-3 text-center">
           Towns We Serve
@@ -39,10 +56,12 @@ export function ServiceAreasTabs() {
         </p>
 
         {/* County tabs */}
-        <div className="flex gap-2 justify-center mb-8">
+        <div className="flex gap-2 justify-center mb-8" role="tablist" aria-label="Counties served">
           {COUNTIES.map((c) => (
             <button
               key={c.value}
+              role="tab"
+              aria-selected={active === c.value}
               onClick={() => setActive(c.value)}
               className={
                 active === c.value
@@ -55,31 +74,25 @@ export function ServiceAreasTabs() {
           ))}
         </div>
 
-        {/* Fixed-height area: town list + view all button */}
         <div className="flex flex-col min-h-[160px]">
-          {/*
-            flex-wrap + justify-center: every row (including the partial last row)
-            is centered. max-w-[680px] caps at 4 items per row (4×144px + 3×32px gap = 672px).
-          */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-3 max-w-[780px] mx-auto">
             {towns.map((town) => (
-              <Link
-                key={town.slug}
-                href={`/cleaning-services/${town.slug}`}
-                className="text-center text-[1rem] text-charcoal-70 hover:text-brand transition-colors"
-              >
-                {town.name}
-              </Link>
+              <span key={town} className="text-center text-[1rem] text-charcoal-70">
+                {town}
+              </span>
             ))}
           </div>
 
           <div className="mt-auto pt-8 text-center">
-            <Link
-              href={activeCounty.href}
-              className="text-[1rem] font-semibold text-brand hover:text-brand-dark transition-colors"
-            >
-              View all in {activeCounty.label} County →
-            </Link>
+            <p className="text-[1rem] text-charcoal-70">
+              Don&apos;t see your town?{" "}
+              <a
+                href="/contact"
+                className="font-semibold text-brand hover:text-brand-dark transition-colors"
+              >
+                Ask us — we may still cover you.
+              </a>
+            </p>
           </div>
         </div>
       </div>
