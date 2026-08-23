@@ -14,7 +14,15 @@ import { CtaClosed, CtaNext, CtaOpen } from "@/components/ui/CtaVariant";
  * Phone only (`sm:hidden`). It disappears at exactly the width where the contact
  * cards below become a real 3-across row and the number is visible anyway.
  *
- * Styled for a dark ground — both callers render it on the hero image.
+ * Styled for a dark ground — it renders on the hero photo.
+ *
+ * The panels are a near-opaque charcoal scrim with a backdrop blur, NOT the
+ * `bg-white/5`-style wash they started as (2026-08-23). Over a photo that was
+ * only a few percent lighter than what sat behind it, so the boxes read as
+ * faint outlines rather than surfaces and the hero image showed straight
+ * through the text. Contrast against a photo has to come from an opaque-ish
+ * layer; a translucent white one just tints whatever it lands on, and the hero
+ * varies from light wall to dark floor down its own height.
  *
  * ── ONE PRIMARY, AND TEXT IS NEVER IT ────────────────────────────────────
  * Exactly one primary action at any hour, with text visibly smaller than it in
@@ -43,7 +51,7 @@ export function CallTextBlock() {
       <CtaOpen>
         <a
           href={BUSINESS.phoneHref}
-          className="group flex flex-col gap-1 rounded-2xl border border-white/25 bg-white/10 p-5 transition-colors hover:border-brand/60 hover:bg-white/15"
+          className="group flex flex-col gap-1 rounded-2xl border border-white/25 bg-charcoal/75 p-5 shadow-lg shadow-black/25 backdrop-blur-md transition-colors hover:border-brand/60 hover:bg-charcoal/85"
         >
           <span className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-white/60">
             <PhoneIcon />
@@ -59,7 +67,7 @@ export function CallTextBlock() {
           Always mounted (only CSS-hidden), so the CtaMode script can fill the
           CtaNext span; see the warning in CtaVariant.tsx. */}
       <CtaClosed>
-        <div className="rounded-2xl border border-white/15 bg-white/5 p-5">
+        <div className="rounded-2xl border border-white/20 bg-charcoal/70 p-5 shadow-lg shadow-black/25 backdrop-blur-md">
           <p className="text-xs font-semibold uppercase tracking-widest text-white/60">
             After hours
           </p>
@@ -76,10 +84,10 @@ export function CallTextBlock() {
           long enough to wrap a phone column, and right-aligning it against a
           fixed label keeps both rows on one line each (with `truncate` as the
           backstop rather than a hopeful guess about width). */}
-      <div className="overflow-hidden rounded-2xl border border-white/15 bg-white/5">
+      <div className="overflow-hidden rounded-2xl border border-white/20 bg-charcoal/70 shadow-lg shadow-black/25 backdrop-blur-md">
         <a
           href={BUSINESS.smsHref}
-          className="group flex items-center gap-3 px-5 py-3.5 transition-colors hover:bg-white/5"
+          className="group flex items-center gap-3 px-5 py-3.5 transition-colors hover:bg-white/10"
         >
           <span className="text-white/40 transition-colors group-hover:text-brand-light">
             <TextIcon />
@@ -91,7 +99,7 @@ export function CallTextBlock() {
         </a>
         <a
           href={BUSINESS.emailHref}
-          className="group flex items-center gap-3 border-t border-white/10 px-5 py-3.5 transition-colors hover:bg-white/5"
+          className="group flex items-center gap-3 border-t border-white/15 px-5 py-3.5 transition-colors hover:bg-white/10"
         >
           <span className="text-white/40 transition-colors group-hover:text-brand-light">
             <MailIcon />
