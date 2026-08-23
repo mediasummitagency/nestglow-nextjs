@@ -1,7 +1,20 @@
 // Single source of truth for business info, URLs, and tracking IDs.
 // Update values here rather than editing strings across many pages.
 
-export const BASE_URL = "https://nestglowco.com";
+/**
+ * WITH the www — that is what Vercel actually serves. The apex 308s to it
+ * (Vercel's "Redirect apex domains to www", set when the domain was added
+ * 2026-08-23), so an apex canonical points every page at a URL that redirects,
+ * and every sitemap entry becomes a "Page with redirect" in Search Console.
+ *
+ * Caught right after the DNS cutover the same day: canonicals and the sitemap
+ * were emitting the apex while the site served on www. BDF has the same
+ * www-serving shape and the same rule.
+ *
+ * If the apex is ever made the serving host instead, change this too — nothing
+ * derives it from Vercel.
+ */
+export const BASE_URL = "https://www.nestglowco.com";
 
 export const BUSINESS = {
   name: "NestGlow Co",
