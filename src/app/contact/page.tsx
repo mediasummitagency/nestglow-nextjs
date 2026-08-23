@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { Phone, Mail, MessageSquare, ShieldCheck, Clock, BadgeCheck } from "lucide-react";
+import { Phone, Mail, MessageSquare, ShieldCheck, Clock, BadgeCheck, Sparkles } from "lucide-react";
 import { BASE_URL, BUSINESS } from "@/lib/config";
 import { PageHero } from "@/components/layout/PageHero";
 import { ContactForm } from "@/components/forms/ContactForm";
+import { CtaOpen, CtaClosed, CtaNext } from "@/components/ui/CtaVariant";
 
 export const metadata: Metadata = {
   // No brand suffix here — the root layout template appends "| NestGlow Co".
@@ -29,10 +30,25 @@ const contactSchema = {
   },
 };
 
+/**
+ * Three cards at any hour. `when` swaps the first one:
+ *
+ *   answered hours -> Call us   · Text us · Email us
+ *   after hours    -> Send it now (the form below) · Text us · Email us
+ *
+ * The phone is not offered when nobody is answering it. The form takes its
+ * place rather than the grid dropping to two cards, both because the form IS
+ * the after-hours path Lucas asked for and because a 3-column grid holding two
+ * items reads as something failing to load.
+ *
+ * Text and email survive in both states: both sit in an inbox until morning,
+ * so neither makes a promise the hour can break.
+ */
 const contactMethods = [
-  { icon: Phone, label: "Call us", value: BUSINESS.phone, href: BUSINESS.phoneHref },
-  { icon: MessageSquare, label: "Text us", value: BUSINESS.phone, href: BUSINESS.smsHref },
-  { icon: Mail, label: "Email us", value: BUSINESS.email, href: BUSINESS.emailHref },
+  { icon: Phone, label: "Call us", value: BUSINESS.phone, href: BUSINESS.phoneHref, when: "open" as const },
+  { icon: Sparkles, label: "Send it now", value: "Quote request", href: "#quote-form", when: "closed" as const },
+  { icon: MessageSquare, label: "Text us", value: BUSINESS.phone, href: BUSINESS.smsHref, when: null },
+  { icon: Mail, label: "Email us", value: BUSINESS.email, href: BUSINESS.emailHref, when: null },
 ];
 
 const reassurances = [
@@ -61,7 +77,7 @@ export default function ContactPage() {
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
               {contactMethods.map((method) => {
                 const Icon = method.icon;
-                return (
+                const card = (
                   <a
                     key={method.label}
                     href={method.href}
@@ -78,13 +94,34 @@ export default function ContactPage() {
                     </p>
                   </a>
                 );
+
+                // `display: contents` on the wrapper, so the card stays a
+                // direct grid item and keeps its column.
+                return method.when === "open" ? (
+                  <CtaOpen key={method.label}>{card}</CtaOpen>
+                ) : method.when === "closed" ? (
+                  <CtaClosed key={method.label}>{card}</CtaClosed>
+                ) : (
+                  card
+                );
               })}
             </div>
+
+            {/* Says when the PHONE is answered again — not when a human replies.
+                The site's existing "within one business day" promise is true at
+                every hour and is deliberately left alone. Always mounted, so
+                the CtaMode script can fill it; see CtaNext in CtaVariant.tsx. */}
+            <CtaClosed>
+              <p className="mt-6 text-center text-sm text-charcoal-70">
+                Caroline is away from the phone right now — send the form below
+                and she will pick it up <CtaNext />.
+              </p>
+            </CtaClosed>
           </div>
         </section>
 
         {/* The form */}
-        <section className="bg-white py-16">
+        <section id="quote-form" className="bg-white py-16">
           <div className="mx-auto max-w-2xl px-4 sm:px-6">
             <ContactForm />
 

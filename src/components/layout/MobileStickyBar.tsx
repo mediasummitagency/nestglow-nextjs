@@ -2,11 +2,12 @@
 
 import { useState } from "react";
 import { usePathname } from "next/navigation";
-import { Home, Phone, Sparkles, Menu } from "lucide-react";
+import { Home, Phone, MessageSquare, Sparkles, Menu } from "lucide-react";
 import Link from "next/link";
 import { BUSINESS } from "@/lib/config";
 import { cn } from "@/lib/utils";
 import MobileNav from "@/components/layout/MobileNav";
+import { CtaOpen, CtaClosed } from "@/components/ui/CtaVariant";
 
 type DataLayerWindow = Window & { dataLayer?: object[] };
 
@@ -28,11 +29,29 @@ function pushEvent(event: string) {
  */
 const DOCK_H = "h-[calc(64px+env(safe-area-inset-bottom,0px))]";
 
+/**
+ * Four slots at any hour. `when` decides which of Call / Text occupies the
+ * second one:
+ *
+ *   answered hours -> Home · Call · Quote · Menu
+ *   after hours    -> Home · Text · Quote · Menu
+ *
+ * Both are always in the HTML and the CSS hides the one that does not apply
+ * (see `CtaMode.tsx`), so the bar never paints one and swaps to the other. With
+ * `HOURS.ENABLED` false, `CtaClosed` renders nothing and the bar is exactly the
+ * four items it was before this existed.
+ *
+ * The phone is not offered after hours in any Summit build — a CTA that rings
+ * out is worse than no CTA. Text replaces it rather than the form because the
+ * Quote slot beside it already IS the form, and two slots pointing at /contact
+ * would waste one of only four.
+ */
 const NAV_ITEMS = [
-  { label: "Home", icon: Home,     href: "/",                type: "link"   as const, event: "mobile_sticky_home_click" },
-  { label: "Call", icon: Phone,    href: BUSINESS.phoneHref, type: "a"      as const, event: "mobile_sticky_call_click" },
-  { label: "Quote", icon: Sparkles, href: "/contact",        type: "link"   as const, event: "mobile_sticky_quote_click" },
-  { label: "Menu", icon: Menu,     href: null,               type: "button" as const, event: "mobile_sticky_menu_click" },
+  { label: "Home", icon: Home,     href: "/",                type: "link"   as const, event: "mobile_sticky_home_click",  when: null },
+  { label: "Call", icon: Phone,    href: BUSINESS.phoneHref, type: "a"      as const, event: "mobile_sticky_call_click",  when: "open"   as const },
+  { label: "Text", icon: MessageSquare, href: BUSINESS.smsHref, type: "a"   as const, event: "mobile_sticky_text_click",  when: "closed" as const },
+  { label: "Quote", icon: Sparkles, href: "/contact",        type: "link"   as const, event: "mobile_sticky_quote_click", when: null },
+  { label: "Menu", icon: Menu,     href: null,               type: "button" as const, event: "mobile_sticky_menu_click",  when: null },
 ];
 
 export default function MobileStickyBar() {
@@ -74,7 +93,7 @@ export default function MobileStickyBar() {
           DOCK_H,
         )}
       >
-        {NAV_ITEMS.map(({ label, icon: Icon, type, event, href }) => {
+        {NAV_ITEMS.map(({ label, icon: Icon, type, event, href, when }) => {
           const isActive =
             type === "button"
               ? menuOpen
@@ -91,8 +110,19 @@ export default function MobileStickyBar() {
             </>
           );
 
+          // `display: contents` on the variant wrapper, so the slot inside it
+          // stays a direct flex item of the bar and keeps its flex-1 width.
+          const withVariant = (node: React.ReactNode) =>
+            when === "open" ? (
+              <CtaOpen key={label}>{node}</CtaOpen>
+            ) : when === "closed" ? (
+              <CtaClosed key={label}>{node}</CtaClosed>
+            ) : (
+              node
+            );
+
           if (type === "button") {
-            return (
+            return withVariant(
               <button
                 key={label}
                 type="button"
@@ -101,12 +131,12 @@ export default function MobileStickyBar() {
                 onClick={() => { pushEvent(event); setMenuOpen(true); }}
               >
                 {content}
-              </button>
+              </button>,
             );
           }
 
           const Wrapper = type === "link" ? Link : "a";
-          return (
+          return withVariant(
             <Wrapper
               key={label}
               href={href as string}
@@ -115,7 +145,7 @@ export default function MobileStickyBar() {
               onClick={() => pushEvent(event)}
             >
               {content}
-            </Wrapper>
+            </Wrapper>,
           );
         })}
       </nav>

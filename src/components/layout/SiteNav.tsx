@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Phone } from "lucide-react";
 import { BUSINESS } from "@/lib/config";
+import { CtaOpen } from "@/components/ui/CtaVariant";
 import MobileNav from "./MobileNav";
 
 // Four pages, so no dropdowns: Services and Areas are sections of the home
@@ -93,13 +94,21 @@ export default function SiteNav() {
 
             {/* Right col — CTA (desktop) or hamburger (mobile) */}
             <div className="flex items-center justify-end gap-4 col-start-3">
-              <a
-                href={BUSINESS.phoneHref}
-                className="hidden md:flex items-center gap-1.5 text-sm font-medium text-white/80 hover:text-brand transition-colors"
-              >
-                <Phone size={14} />
-                {BUSINESS.phone}
-              </a>
+              {/* Answered hours only. After hours the number comes out of the
+                  header entirely and "Get a quote" is left as the single
+                  primary — offering a call that rings out loses the visitor
+                  outright, because nobody leaves a voicemail for a cleaner.
+                  There is no after-hours replacement here on purpose: the
+                  quote button beside it already IS the after-hours path. */}
+              <CtaOpen>
+                <a
+                  href={BUSINESS.phoneHref}
+                  className="hidden md:flex items-center gap-1.5 text-sm font-medium text-white/80 hover:text-brand transition-colors"
+                >
+                  <Phone size={14} />
+                  {BUSINESS.phone}
+                </a>
+              </CtaOpen>
               {!hideQuoteCta && (
                 <Link
                   href="/contact"

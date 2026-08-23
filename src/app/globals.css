@@ -241,3 +241,23 @@
 @media (min-width: 768px) {
   .dock-clearance { padding-bottom: 0; }
 }
+
+
+/* ── Time-aware CTA variants ──────────────────────────────────────────────
+   `components/ui/CtaMode.tsx` puts data-cta-mode="open" or "closed" on <html>
+   from an inline <head> script, before the parser reaches <body>, and these two
+   rules hide the one that does not apply. Nothing is painted and then swapped.
+
+   `display: contents` so the wrapper never becomes a box — these wrap buttons
+   inside flex and grid rows (the mobile dock, the contact page's card grid),
+   and a stray inline <span> in the middle of a flex container would change the
+   layout in the open state as well as the closed one.
+
+   With no data-cta-mode attribute at all (script failed, or HOURS.ENABLED is
+   false so no markup is emitted in the first place) NEITHER rule matches and
+   the open-hours copy shows — which on this site is the copy the page carried
+   before the feature existed. The <noscript> block in CtaMode.tsx covers the
+   JS-off case, where both would otherwise stack. */
+.cta-variant { display: contents; }
+html[data-cta-mode="open"]   .cta-variant[data-when="closed"],
+html[data-cta-mode="closed"] .cta-variant[data-when="open"] { display: none; }

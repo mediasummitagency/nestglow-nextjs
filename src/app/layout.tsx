@@ -6,6 +6,7 @@ import { TRACKING, BASE_URL, BUSINESS } from "@/lib/config";
 import SiteNav from "@/components/layout/SiteNav";
 import Footer from "@/components/layout/Footer";
 import MobileStickyBar from "@/components/layout/MobileStickyBar";
+import { CtaMode } from "@/components/ui/CtaMode";
 import "./globals.css";
 
 const roboto = Roboto({
@@ -49,7 +50,19 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    // suppressHydrationWarning on <html>: CtaMode's head script adds
+    // `data-cta-mode` to this element before React hydrates. Note this
+    // suppresses the WARNING only — it does NOT stop React stripping the
+    // attribute during hydration, which is why CtaMode carries its own
+    // MutationObserver. See CtaMode.tsx.
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* Must stay in <head> and stay synchronous — the attribute has to be
+            on <html> before the parser reaches the first CTA in <body>, or the
+            wrong button paints and then swaps. Renders nothing at all while
+            HOURS.ENABLED is false. See CtaMode.tsx. */}
+        <CtaMode />
+      </head>
       <body className={`${roboto.variable} antialiased`}>
         {TRACKING.gtmId && (
           <noscript>
