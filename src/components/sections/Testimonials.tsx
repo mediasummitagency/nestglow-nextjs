@@ -1,8 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { ChevronRight } from "lucide-react";
-import { reviews, type Review } from "@/lib/reviews";
+import { type Review, reviews } from "@/lib/reviews";
+import { useSnapCarousel } from "@/lib/useSnapCarousel";
 
 interface TestimonialsProps {
   currentTown?: string;
@@ -15,14 +14,33 @@ function relevanceScore(r: Review, currentTown?: string, currentCounty?: string)
   return 0;
 }
 
+/**
+ * The five reviews.
+ *
+ * Phone: a swipeable carousel, matching `ServicesCarousel` and the phone view of
+ * `WhyNestGlow` — same `useSnapCarousel` hook, same slide width, same dots.
+ *
+ * It replaces a "Show more reviews" button that hid reviews 4 and 5 behind a tap
+ * (2026-08-23). Two problems with that: the two most locally-relevant reviews
+ * are sorted to the FRONT, so the hidden ones were the weakest anyway, and a
+ * tap-to-expand pushed the whole rest of the page down. Swiping costs nothing
+ * and keeps the section one screen tall regardless of how many reviews exist.
+ *
+ * Tablet and up: the existing grid, untouched — 3 across, then 5 across on large
+ * screens. No swipe affordance on a mouse.
+ *
+ * Native scroll-snap on purpose — no carousel library, no drag handlers. It
+ * keeps the momentum, rubber-banding and accessibility behaviour iOS gives for
+ * free and that hand-rolled drag code usually breaks.
+ */
 export function Testimonials({ currentTown, currentCounty }: TestimonialsProps) {
-  const [showAll, setShowAll] = useState(false);
-
   const sorted = [...reviews].sort(
     (a, b) =>
       relevanceScore(b, currentTown, currentCounty) -
       relevanceScore(a, currentTown, currentCounty)
   );
+
+  const { trackRef, active, goTo } = useSnapCarousel(sorted.length);
 
   return (
     <section className="py-16 bg-white border-t border-charcoal/10">
@@ -38,14 +56,24 @@ export function Testimonials({ currentTown, currentCounty }: TestimonialsProps) 
           </p>
         </div>
 
-        {/* 5 editorial cards — 3 col grid, last row 2 cards centered */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-5">
-          {sorted.map((t, i) => (
+        {/* Phone: snap row, next card peeking so the swipe needs no instruction.
+            The negative margin matches the container's own px-6 so the track
+            bleeds to the screen edge while the first card stays aligned with the
+            heading above it. */}
+        <div
+          ref={trackRef}
+          className="
+            no-scrollbar -mx-6 flex snap-x snap-mandatory items-stretch gap-5 overflow-x-auto scroll-smooth px-6 pb-2
+            sm:mx-0 sm:grid sm:snap-none sm:grid-cols-3 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-5
+          "
+        >
+          {sorted.map((t) => (
             <blockquote
               key={t.name}
-              className={`flex flex-col bg-white border-2 border-charcoal/20 rounded-2xl shadow-md p-7 ${
-                i >= 3 && !showAll ? "hidden sm:flex" : "flex"
-              }`}
+              className="
+                flex w-[82%] shrink-0 snap-center flex-col rounded-2xl border-2 border-charcoal/20 bg-white p-7 shadow-md
+                sm:w-auto sm:shrink
+              "
             >
               <div className="flex gap-1.5 mb-6">
                 {[...Array(5)].map((_, j) => (
@@ -64,18 +92,24 @@ export function Testimonials({ currentTown, currentCounty }: TestimonialsProps) 
           ))}
         </div>
 
-        {/* Show more — mobile only */}
-        {!showAll && (
-          <div className="mt-6 text-center sm:hidden">
+        {/* Dots: phone only. They double as the affordance that says "there is
+            more to the right" before anyone has swiped. */}
+        <div className="mt-5 flex justify-center gap-2 sm:hidden">
+          {sorted.map((t, i) => (
             <button
-              onClick={() => setShowAll(true)}
-              className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand hover:text-brand-dark transition-colors"
-            >
-              Show more reviews <ChevronRight size={14} />
-            </button>
-          </div>
-        )}
-
+              key={t.name}
+              type="button"
+              aria-label={`Show the review from ${t.name}`}
+              aria-current={i === active}
+              onClick={() => goTo(i)}
+              className={
+                i === active
+                  ? "h-2 w-6 rounded-full bg-brand transition-all"
+                  : "h-2 w-2 rounded-full bg-charcoal/25 transition-all"
+              }
+            />
+          ))}
+        </div>
 
       </div>
     </section>
