@@ -53,6 +53,28 @@ function Field({
   );
 }
 
+/**
+ * Formats a US phone number as it is typed: 7325550100 -> (732) 555-0100.
+ *
+ * Rebuilt from the digits on every keystroke rather than patched in place, so
+ * editing the middle of the value, pasting "+1 732 555 0100", and deleting
+ * backwards all end up in the same shape instead of the punctuation drifting.
+ *
+ * A leading US country code is dropped: someone pasting +17325550192 means the
+ * same number, and keeping the 1 pushes a digit off the end of the mask.
+ *
+ * Capped at 10 digits. Anything longer is not a number this business can call.
+ */
+function formatPhone(input: string): string {
+  let d = input.replace(/\D/g, "");
+  if (d.length === 11 && d.startsWith("1")) d = d.slice(1);
+  d = d.slice(0, 10);
+  if (d.length === 0) return "";
+  if (d.length < 4) return `(${d}`;
+  if (d.length < 7) return `(${d.slice(0, 3)}) ${d.slice(3)}`;
+  return `(${d.slice(0, 3)}) ${d.slice(3, 6)}-${d.slice(6)}`;
+}
+
 export function ContactForm() {
   /**
    * The hero ZIP box hands off here via ?zip= and, for an out-of-area ZIP,
@@ -85,6 +107,7 @@ export function ContactForm() {
   const matched = incomingZip ? lookupZip(incomingZip) : null;
 
   const [formState, setFormState] = useState<FormState>("idle");
+  const [phone, setPhone] = useState("");
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -221,7 +244,22 @@ export function ContactForm() {
             <input id="name" name="name" required autoComplete="name" placeholder="Jane Smith" className={fieldClass} />
           </Field>
           <Field id="phone" label="Phone" required>
-            <input id="phone" name="phone" type="tel" required autoComplete="tel" placeholder="(732) 555-0100" className={fieldClass} />
+            {/* Controlled so the mask applies while typing. `inputMode="tel"`
+                brings up the phone keypad on a phone; `maxLength` matches the
+                formatted length so the field cannot be over-filled. */}
+            <input
+              id="phone"
+              name="phone"
+              type="tel"
+              inputMode="tel"
+              required
+              autoComplete="tel"
+              placeholder="(732) 555-0100"
+              maxLength={14}
+              value={phone}
+              onChange={(e) => setPhone(formatPhone(e.target.value))}
+              className={fieldClass}
+            />
           </Field>
         </div>
 

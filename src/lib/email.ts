@@ -70,6 +70,13 @@ export type Confirmation = {
 function bodyFor({ name, service, zip, message, outOfArea }: Confirmation): string {
   const first = name.trim().split(/\s+/)[0] || "there";
 
+  // ── ONE LINE PER PARAGRAPH, NEVER HARD-WRAPPED ─────────────────────────
+  // This used to break each sentence across two ~75-character lines. On a
+  // desktop client that looks tidy; on a phone the client re-wraps the already
+  // broken lines and you get ragged half-lines, with "(732) 614-0192" split
+  // across the space inside it (Lucas, 2026-08-23). Leaving each paragraph as
+  // one long line lets every client wrap it to its own width.
+  //
   // Built by pushing rather than filtering a literal: a filter over the whole
   // array to drop an empty detail line would strip the deliberate blank lines
   // too, and the note would arrive as one unbroken paragraph.
@@ -77,8 +84,7 @@ function bodyFor({ name, service, zip, message, outOfArea }: Confirmation): stri
     ? [
         `Hi ${first},`,
         "",
-        `Thanks for getting in touch. We're not cleaning in ${zip ?? "your area"} just yet,`,
-        "so we've added you to the list and we'll email you the moment that changes.",
+        `Thanks for getting in touch. We're not cleaning in ${zip ?? "your area"} just yet, so we've added you to the list and we'll email you the moment that changes.`,
       ]
     : [
         `Hi ${first},`,
@@ -86,8 +92,7 @@ function bodyFor({ name, service, zip, message, outOfArea }: Confirmation): stri
         "Thanks for getting in touch. Your request came through and Caroline has it.",
         "",
         // Worded exactly as the rest of the site words it. Do not tighten.
-        "She'll reply within one business day to confirm the details and give you a",
-        "firm price. No obligation, and nothing is owed for the quote.",
+        "She'll reply within one business day to confirm the details and give you a firm price. No obligation, and nothing is owed for the quote.",
       ];
 
   const details = [
@@ -99,14 +104,18 @@ function bodyFor({ name, service, zip, message, outOfArea }: Confirmation): stri
     lines.push("", "Here's what you sent us:", "", ...details);
   }
 
+  // The number sits on its OWN line rather than at the end of a sentence, so no
+  // client can wrap mid-number. That is the one string in here that must never
+  // break — a phone number split across two lines is unusable on a phone, which
+  // is exactly where it is most likely to be tapped.
   lines.push(
     "",
-    `If you'd rather not wait, call or text ${BUSINESS.phone}.`,
+    "Would rather not wait? Call or text:",
+    BUSINESS.phone,
     "",
     "Talk soon,",
     BUSINESS.name,
-    "House cleaning across Monmouth, Ocean and Middlesex County, NJ",
-    BUSINESS.phone
+    "House cleaning across Monmouth, Ocean and Middlesex County, NJ"
   );
   return lines.join("\n");
 }
