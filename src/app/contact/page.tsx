@@ -3,6 +3,7 @@ import { Phone, Mail, MessageSquare, ShieldCheck, Clock, BadgeCheck, Sparkles } 
 import { BASE_URL, BUSINESS } from "@/lib/config";
 import { PageHero } from "@/components/layout/PageHero";
 import { ContactForm } from "@/components/forms/ContactForm";
+import { CallTextBlock } from "@/components/forms/CallTextBlock";
 import { CtaOpen, CtaClosed, CtaNext } from "@/components/ui/CtaVariant";
 
 export const metadata: Metadata = {
@@ -82,8 +83,14 @@ export default function ContactPage() {
           subheading="Tell us about the place and Caroline will come back with a firm price."
           centered
         >
-          <div id="quote-form" className="mx-auto mt-8 max-w-2xl scroll-mt-24 text-left">
-            <ContactForm />
+          <div className="mx-auto mt-8 max-w-2xl space-y-4 text-left">
+            {/* Phone only. Since the page went form-first the form is the first
+                thing here, so a visitor who would rather call had nothing to
+                call until they scrolled past all of it. */}
+            <CallTextBlock />
+            <div id="quote-form" className="scroll-mt-24">
+              <ContactForm />
+            </div>
           </div>
         </PageHero>
 
