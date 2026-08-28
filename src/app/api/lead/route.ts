@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { FORMS } from "@/lib/config";
 import { sendConfirmation } from "@/lib/email";
+import { notifyZapier } from "@/lib/zapier";
 
 /**
  * The single lead endpoint.
@@ -12,16 +13,24 @@ import { sendConfirmation } from "@/lib/email";
  * requires a server step, and this is it.
  *
  * ── FORMSPREE IS STILL THE THING THAT MUST NOT BREAK ──────────────────────
- * Caroline's copy of the lead is the deliverable. Resend's receipt is a nicety.
- * So:
+ * Caroline's copy of the lead is the deliverable. Resend's receipt and the
+ * Zapier ping are niceties. So:
  *
  *   Formspree fails  -> 502, the visitor sees the form's error state and can
  *                       try again or call. Nothing is silently swallowed.
  *   Resend fails     -> still 200. The lead is delivered; the customer just
  *                       gets no receipt, and the reason is logged.
+ *   Zapier fails     -> still 200. The lead is delivered; Caroline just is not
+ *                       pinged on WhatsApp, and the reason is logged.
  *
- * The two run in PARALLEL rather than in sequence: a slow Resend call must not
- * delay the visitor's success screen, and the receipt does not depend on
+ * ── THE ZAPIER LEG (added 2026-08-27) ─────────────────────────────────────
+ * A Catch Hook that fans out to Zapier's WhatsApp Notifications app, so
+ * Caroline gets a phone alert instead of waiting to notice an email. It is an
+ * ALERT, not a second copy of the lead — see `lib/zapier.ts`. Do not promote it
+ * to a failure condition; Formspree is the only leg that can fail the request.
+ *
+ * All three run in PARALLEL rather than in sequence: a slow Resend or Zapier
+ * call must not delay the visitor's success screen, and neither depends on
  * Formspree's answer.
  *
  * ── RUNTIME ──────────────────────────────────────────────────────────────
@@ -76,18 +85,34 @@ export async function POST(request: Request) {
     outOfArea,
   });
 
-  const [leadDelivered, receipt] = await Promise.all([toFormspree, toCustomer]);
+  const toCaroline = notifyZapier({
+    name,
+    email,
+    phone: get("phone") || undefined,
+    zip: get("zip") || undefined,
+    service: get("service") || undefined,
+    tier: get("tier") || undefined,
+    message: get("message") || undefined,
+    outOfArea,
+  });
 
-  // One line per lead, so a missing receipt is diagnosable from the server log
-  // without reproducing it. `skipped: …` here is the normal state until
-  // RESEND_API_KEY and RESEND_FROM are set — a logged skip, not a failure.
+  const [leadDelivered, receipt, alert] = await Promise.all([
+    toFormspree,
+    toCustomer,
+    toCaroline,
+  ]);
+
+  // One line per lead, so a missing receipt or a silent WhatsApp alert is
+  // diagnosable from the server log without reproducing it. `skipped: …` on
+  // either is the normal state until that leg's env vars are set — a logged
+  // skip, not a failure.
   console.log(
-    `[lead] formspree=${leadDelivered ? "ok" : "FAILED"} receipt=${receipt} outOfArea=${outOfArea}`
+    `[lead] formspree=${leadDelivered ? "ok" : "FAILED"} receipt=${receipt} alert=${alert} outOfArea=${outOfArea}`
   );
 
   if (!leadDelivered) {
     return NextResponse.json({ ok: false, error: "delivery_failed" }, { status: 502 });
   }
 
-  return NextResponse.json({ ok: true, receipt });
+  return NextResponse.json({ ok: true, receipt, alert });
 }
