@@ -21,13 +21,18 @@ import { notifyZapier } from "@/lib/zapier";
  *   Resend fails     -> still 200. The lead is delivered; the customer just
  *                       gets no receipt, and the reason is logged.
  *   Zapier fails     -> still 200. The lead is delivered; Caroline just is not
- *                       pinged on WhatsApp, and the reason is logged.
+ *                       texted, and the reason is logged.
  *
  * ── THE ZAPIER LEG (added 2026-08-27) ─────────────────────────────────────
- * A Catch Hook that fans out to Zapier's WhatsApp Notifications app, so
- * Caroline gets a phone alert instead of waiting to notice an email. It is an
- * ALERT, not a second copy of the lead — see `lib/zapier.ts`. Do not promote it
- * to a failure condition; Formspree is the only leg that can fail the request.
+ * A Catch Hook that fans out to SMS by Zapier, so Caroline gets a text instead
+ * of waiting to notice an email. It is an ALERT, not a second copy of the lead
+ * — see `lib/zapier.ts`. Do not promote it to a failure condition; Formspree is
+ * the only leg that can fail the request.
+ *
+ * This was WhatsApp until SMS replaced it the same day. Meta blocks that
+ * category of message to US numbers while reporting success, so it delivered
+ * nothing. `lib/zapier.ts` carries the full reason; do not reach for WhatsApp
+ * again on a US client.
  *
  * All three run in PARALLEL rather than in sequence: a slow Resend or Zapier
  * call must not delay the visitor's success screen, and neither depends on
@@ -102,7 +107,7 @@ export async function POST(request: Request) {
     toCaroline,
   ]);
 
-  // One line per lead, so a missing receipt or a silent WhatsApp alert is
+  // One line per lead, so a missing receipt or a silent text alert is
   // diagnosable from the server log without reproducing it. `skipped: …` on
   // either is the normal state until that leg's env vars are set — a logged
   // skip, not a failure.

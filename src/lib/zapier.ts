@@ -1,13 +1,29 @@
 import { BUSINESS } from "@/lib/config";
 
 /**
- * Zapier — Caroline's WhatsApp alert.
+ * Zapier — Caroline's SMS alert.
  *
  * The site POSTs one flat JSON object to a Zapier "Catch Hook" trigger. The Zap
- * on the other side sends it to Caroline over Zapier's WhatsApp Notifications
- * app. Same shape Karla's quiz uses (`websites/karla-quiz`, 2026-07-26), minus
- * the Google Sheet in the middle: that build polls a sheet, this one fires the
- * moment the form is submitted.
+ * on the other side texts Caroline via SMS by Zapier. Same shape Karla's quiz
+ * uses (`websites/karla-quiz`, 2026-07-26), minus the Google Sheet in the
+ * middle: that build polls a sheet, this one fires the moment the form is
+ * submitted.
+ *
+ * ── IT WAS WHATSAPP FIRST, AND WHATSAPP CANNOT WORK HERE ─────────────────
+ * Built against Zapier's WhatsApp Notifications app on 2026-08-27 because
+ * that is what Karla's quiz uses. It delivered nothing, while reporting
+ * success at every step.
+ *
+ * Meta paused MARKETING-category WhatsApp templates to US numbers on
+ * 2025-04-01, with no end date. The API still returns 200 and a real `wamid`,
+ * then drops the message. AUTHENTICATION and UTILITY templates are unaffected,
+ * which is why Caroline's setup OTP arrived fine and the lead alerts never did.
+ * Karla is reachable because she is in Brazil.
+ *
+ * So this is not a Zap that was configured wrong, and switching templates or
+ * reconnecting the account does not fix it. WhatsApp lead alerts are dead for
+ * every US client. Do not try this again for one. See `learnings/patterns.md`,
+ * 2026-08-27.
  *
  * ── THIS IS AN ALERT, NOT THE LEAD ────────────────────────────────────────
  * Caroline's actual copy of the lead arrives by Formspree and is confirmed
@@ -32,13 +48,14 @@ import { BUSINESS } from "@/lib/config";
  * Sending "" instead of omitting the key costs nothing and avoids that.
  *
  * ── THE MESSAGE WORDING IS NOT SET HERE ───────────────────────────────────
- * Zapier's WhatsApp Notifications app takes no freeform text. Its Send Message
- * action offers seven fixed templates and typing a custom sentence into the
- * Template field crashes with `Cannot read properties of undefined (reading
- * 'map')` — hit for real on Karla's quiz, logged in `learnings/patterns.md`.
- * The Zap uses the built-in "New Lead" template and maps these fields into its
- * blanks. So changing what Caroline's message SAYS is not a code change here;
- * it is limited by what that template allows.
+ * SMS by Zapier takes freeform text, so the wording lives in the Zap's Message
+ * field, not in this file. Changing what Caroline's text SAYS means editing the
+ * Zap. This file only decides which VALUES are available to put in it.
+ *
+ * Two limits that belong to SMS by Zapier rather than to this code: it cannot
+ * deliver to T-Mobile numbers, and the plan carries a monthly send cap. If
+ * either becomes a problem the replacement is Pushover, already written at
+ * `bdf-nextjs/src/lib/push.ts` and `tcg-nextjs/src/lib/push.ts`.
  */
 
 const ZAPIER_SINK = {
@@ -89,9 +106,9 @@ export async function notifyZapier(lead: LeadAlert, timeoutMs = 5000): Promise<s
     service: lead.service ?? "",
     tier: lead.tier ?? "",
     message: lead.message ?? "",
-    // "yes"/"no" rather than a boolean: this value gets mapped straight into a
-    // WhatsApp template's text blank, where `false` reads like a bug and "no"
-    // reads like an answer. Zapier filters handle both equally well.
+    // "yes"/"no" rather than a boolean: this can land directly in the text of
+    // an SMS, where `false` reads like a bug and "no" reads like an answer.
+    // Zapier's Filter step handles both equally well.
     out_of_area: lead.outOfArea ? "yes" : "no",
     // Zapier stamps its own received-at time, but that is when the Zap ran, not
     // when the person hit submit. On a delayed or replayed Zap those differ.
