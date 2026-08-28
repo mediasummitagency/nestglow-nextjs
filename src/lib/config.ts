@@ -47,9 +47,14 @@ export const TRACKING = {
   // from the site directly, so there is no ga4Id / googleAdsId here to fill in.
   // Every event on this site pushes to `dataLayer` and GTM routes it onward.
   //
-  // No container for NestGlow yet (Lucas, 2026-08-22), so this stays blank and
-  // the loader in layout.tsx renders nothing. Blank = tracking is off entirely.
-  gtmId: "", // e.g. "GTM-XXXXXXX"
+  // ⚠️ DO NOT PASTE GTM'S INSTALL SNIPPET ANYWHERE. `layout.tsx` already
+  // renders both halves of it — the loader script and the <noscript> iframe —
+  // gated on this value. Setting the ID here IS the install. Adding the snippet
+  // on top loads the container twice, which double-counts every conversion.
+  // Same rule and the same warning as BDF.
+  //
+  // Container added 2026-08-27 (Lucas). Blank would mean tracking off entirely.
+  gtmId: "GTM-K85T24PZ",
 } as const;
 
 export const FORMS = {

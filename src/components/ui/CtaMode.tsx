@@ -124,9 +124,12 @@ if(mode===last){return;}
 last=mode;
 /* So GA4/GTM can split conversions by which version of the page the visitor
    was actually shown. Guarded by last so it fires once per real mode change
-   rather than on every re-assert above. GTM boots late here (and is not even
-   configured yet — TRACKING.gtmId is blank), so dataLayer is a plain array
-   until then and the push is picked up whenever a container finally loads. */
+   rather than on every re-assert above. This script is synchronous in <head>
+   and the GTM loader is afterInteractive, so this ALWAYS runs first (no
+   backticks in here — this comment is inside a template literal). dataLayer is
+   a plain array at this point and the container replays the queue once it
+   boots. Container GTM-K85T24PZ added 2026-08-27; before that the push simply
+   sat in the array with nothing to collect it. */
 window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'cta_mode_set',cta_mode:mode});
 window.NG_CTA_MODE=mode;}
 window.__NG_CTA_REFRESH=function(){last=null;try{apply();}catch(e){}};
