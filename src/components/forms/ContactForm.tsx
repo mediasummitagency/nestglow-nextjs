@@ -123,6 +123,23 @@ export function ContactForm() {
     setFormState("submitting");
     data.append("out_of_area", isWaitlist ? "yes" : "no");
 
+    // Context for the Sheet row. Gathered here rather than server-side because
+    // none of it survives the trip: a fetch from the browser carries no
+    // Referer for the ORIGINAL visit, and the server sees its own URL, not the
+    // one in the address bar. `form_page` answers "which page closed them?",
+    // which is the question the Sheet exists to answer and analytics answers
+    // only in aggregate.
+    data.append("form_page", window.location.pathname);
+    data.append("pageUrl", window.location.href);
+    data.append("referrer", document.referrer);
+    // Coarse on purpose. The Sheet is read by a person deciding where to spend
+    // attention, not by a device-capability check, so "mobile or not" is the
+    // whole useful distinction and a UA-parsing dependency is not worth it.
+    data.append(
+      "deviceType",
+      window.matchMedia("(max-width: 767px)").matches ? "mobile" : "desktop"
+    );
+
     try {
       // Posts to our own route rather than straight to Formspree (changed
       // 2026-08-23). The route still forwards to Formspree — that path is

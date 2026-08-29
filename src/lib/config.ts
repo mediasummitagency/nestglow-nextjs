@@ -57,10 +57,20 @@ export const TRACKING = {
   gtmId: "GTM-K85T24PZ",
 } as const;
 
+/**
+ * ⚠️ DEAD AS OF 2026-08-29 — the live lead path does not touch Formspree.
+ *
+ * `/api/lead` now writes a Google Sheet via Apps Script. Formspree was removed
+ * because it silently drops near-duplicate submissions AND because nobody has
+ * the account, so neither its spam rules nor its quota could be inspected. The
+ * full reasoning is in `src/lib/sheet.ts`.
+ *
+ * This block only still exists because `BookingForm.tsx` references it, and
+ * that component is itself orphaned — the `/book` route went in the 2026-08-22
+ * lean cut and nothing imports the form any more. Delete both together;
+ * removing this alone breaks the build.
+ */
 export const FORMS = {
-  // Existing Formspree endpoint for the full booking form. Keep this value.
   booking: "https://formspree.io/f/xnngyenw",
-  // Lucas will create a second Formspree form for the quick-quote hero form
-  // and populate this. Leave empty for now.
   quickQuote: "",
 } as const;

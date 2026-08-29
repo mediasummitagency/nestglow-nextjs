@@ -4,15 +4,18 @@ Live since 2026-08-27. Confirmed arriving on Caroline's phone.
 
 ## The path
 
+**Formspree was removed on 2026-08-29** — see `lead-path.md` for why and for the Apps Script
+setup. The SMS leg below is unchanged; only what sits beside it moved.
+
 ```
-Contact form  ->  /api/lead  ->  Formspree        ->  Caroline's email  (THE LEAD)
-                             ->  Resend           ->  customer's receipt (nicety)
-                             ->  Zapier Catch Hook -> SMS by Zapier -> Caroline (alert)
+Contact form  ->  /api/lead  ->  Apps Script      ->  Google Sheet   (THE RECORD)
+                             ->  Zapier Catch Hook ->  SMS           (Caroline's alert)
+                             ->  Resend            ->  customer's receipt (nicety)
 ```
 
-All three legs run in parallel. **Only Formspree can fail the request.** If Zapier is down or
-the Zap is off, the lead still reaches Caroline by email and the visitor still sees the success
-screen. The failure shows up only in the Vercel log.
+All three legs run in parallel. **Only the Sheet write can fail the request.** If Zapier is down
+or the Zap is off, the lead is still recorded and the visitor still sees the success screen. The
+failure shows up in the Vercel log, at error level, because it means nobody has been told.
 
 Modelled on `websites/karla-quiz`, which does the same thing through a Google Sheet. There is no
 sheet here, so the site posts to the hook directly. That removes Zapier's polling delay: Karla's
