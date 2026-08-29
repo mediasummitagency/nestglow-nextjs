@@ -87,7 +87,7 @@
  * The `v` that comes back is the deployed edit. If it is not this string, the
  * deployment is stale no matter what the editor shows.
  */
-var SCRIPT_VERSION = '2026-08-29a';
+var SCRIPT_VERSION = '2026-08-29b';
 
 /** Tab name. Created on demand, so a fresh spreadsheet needs no setup beyond
  *  deploying this script. */
@@ -185,6 +185,24 @@ function appendRow(values) {
   // runs on an empty tab, so a format set there would never reach a tab that
   // already has rows — which every real one does after the first lead.
   sheet.getRange(rowIndex, 1).setNumberFormat('mmm d, yyyy  h:mm am/pm');
+
+  // ZIP is TEXT, and Sheets does not agree by default. Every New Jersey ZIP
+  // starts with a 0, `appendRow` hands over a bare string, and Sheets reads it
+  // as a number — the first live row on 2026-08-29 stored "07753" as 7753.
+  //
+  // Formatting the cell and writing the value AGAIN is the fix, in that order.
+  // Setting the format alone does nothing here: by the time it is applied the
+  // leading zero has already been discarded, and there is nothing left to
+  // re-render. Town and County are unaffected — they are resolved server-side
+  // from the ZIP before the row is ever sent.
+  //
+  // The column is looked up rather than hard-coded so that appending fields to
+  // LEAD_HEADERS (the attribution block, when NestGlow runs ads) cannot quietly
+  // point this at the wrong cell.
+  var zipCol = LEAD_HEADERS.indexOf('ZIP') + 1;
+  if (zipCol > 0) {
+    sheet.getRange(rowIndex, zipCol).setNumberFormat('@').setValue(values[zipCol - 1]);
+  }
 
   return json({ ok: true, row: rowIndex, tab: LEADS_TAB, v: SCRIPT_VERSION });
 }
