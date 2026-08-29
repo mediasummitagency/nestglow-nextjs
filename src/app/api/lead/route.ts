@@ -61,11 +61,20 @@ export async function POST(request: Request) {
   // Answer 200 so the bot believes it worked and does not retry, but send
   // nothing anywhere.
   //
+  // THIS IS THE ONLY HONEYPOT CHECK. ContactForm used to run the same test in
+  // the browser and return before ever calling this route, which meant an
+  // autofilled field produced no row, no alert and NO LOG LINE — the lead
+  // simply never existed. Removed 2026-08-29; do not reintroduce it there.
+  //
   // Logged rather than silent, because a hidden field can also be filled by
   // browser autofill on a REAL visitor — in which case this line is the only
   // trace that lead ever existed. Gorsegner's live forms were destroying
-  // autofilled leads exactly this way until 2026-08-16.
-  if (get("_gotcha")) {
+  // autofilled leads exactly this way until 2026-08-16, and NestGlow's own
+  // contact form was doing it to Lucas on 2026-08-29.
+  //
+  // The field is `hp_field` across every Summit build. It was `_gotcha` here
+  // until 2026-08-29 — a Formspree convention that outlived Formspree.
+  if (get("hp_field")) {
     console.warn(
       `[lead] honeypot triggered — filtered as spam (or autofill false positive). ` +
         `name=${get("name")} email=${get("email")} phone=${get("phone")}`

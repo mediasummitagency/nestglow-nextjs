@@ -114,12 +114,25 @@ export function ContactForm() {
     const formEl = e.currentTarget;
     const data = new FormData(formEl);
 
-    // Honeypot: real people never fill a hidden field. Bots fill everything.
-    if (data.get("_gotcha")) {
-      setFormState("success");
-      return;
-    }
-
+    // NO CLIENT-SIDE HONEYPOT CHECK. Removed 2026-08-29 — read this before
+    // putting one back.
+    //
+    // It used to short-circuit right here: if the hidden field had a value,
+    // show the thank-you screen and return WITHOUT ever calling /api/lead. A
+    // bot sees success and does not retry, which is the point.
+    //
+    // It also destroyed real leads, silently and without a trace anywhere.
+    // Password managers and Chrome autofill do fill hidden fields. Lucas
+    // submitted this form with his own saved details on 2026-08-29 and got the
+    // thank-you screen, no Sheet row, no receipt, no SMS, and nothing in the
+    // server log — because the request was never made. Details typed by hand
+    // worked every time, which made it look like the form was rejecting his
+    // email address specifically.
+    //
+    // The check now lives ONLY on the server (`hp_field`, in /api/lead), which
+    // logs the whole lead before discarding it. Same protection against bots,
+    // but a false positive leaves something recoverable instead of vanishing.
+    // This is the shape BDF, TCG and Gorsegner already use.
     setFormState("submitting");
     data.append("out_of_area", isWaitlist ? "yes" : "no");
 
@@ -141,12 +154,15 @@ export function ContactForm() {
     );
 
     try {
-      // Posts to our own route rather than straight to Formspree (changed
-      // 2026-08-23). The route still forwards to Formspree — that path is
-      // proven and Caroline receives those emails — and additionally sends the
-      // customer their confirmation via Resend, which needs an API key that can
-      // never be exposed to the browser. It answers 502 only if the FORMSPREE
-      // leg fails, so a missing receipt never shows the visitor an error.
+      // Posts to our own route, never to a third party directly — the Apps
+      // Script token and the Resend API key must never reach the browser.
+      //
+      // The route fans out three ways and only ONE of them decides what the
+      // visitor sees: it answers 502 only if the Google Sheet write fails,
+      // because that row is the record. A failed SMS to Caroline or a missing
+      // customer receipt still answers 200, so neither shows an error to
+      // someone whose lead was in fact captured. (Formspree was this leg until
+      // 2026-08-29; lib/sheet.ts has why it went.)
       const res = await fetch("/api/lead", {
         method: "POST",
         body: data,
@@ -235,15 +251,37 @@ export function ContactForm() {
           </div>
         )}
 
-        {/* Honeypot — hidden from people, irresistible to bots. */}
-        <input
-          type="text"
-          name="_gotcha"
-          tabIndex={-1}
-          autoComplete="off"
+        {/* Honeypot — hidden from people, irresistible to bots.
+
+            Hardened 2026-08-29 to match Gorsegner's, after the old one was
+            filled by autofill on a real visitor and the form ate the lead.
+            Three things changed and all three are load-bearing:
+
+            - OFF-SCREEN (left: -9999px), not sized to zero with opacity 0. A
+              0x0 transparent input is still a fillable input to a password
+              manager; an off-screen one is much less likely to be offered.
+            - Named `hp_field`, not `_gotcha`. That name was a Formspree relic
+              (Formspree left the lead path on 2026-08-29) and, sitting as the
+              first text input in the form, it caught "fill the first field"
+              heuristics. Never name this anything resembling a real autofill
+              category — company, organization, address and friends get filled
+              even off-screen with autoComplete="off".
+            - Carries a real <label>, so it is a properly labelled input rather
+              than a bare box, while saying nothing a filler would want to
+              complete. */}
+        <div
           aria-hidden="true"
-          className="absolute h-0 w-0 overflow-hidden opacity-0"
-        />
+          style={{ position: "absolute", width: 0, height: 0, overflow: "hidden", left: "-9999px" }}
+        >
+          <label htmlFor="ng_hp">Leave this field blank</label>
+          <input
+            type="text"
+            id="ng_hp"
+            name="hp_field"
+            tabIndex={-1}
+            autoComplete="off"
+          />
+        </div>
 
         {tier && (
           <>
