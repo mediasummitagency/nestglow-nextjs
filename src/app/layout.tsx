@@ -84,13 +84,42 @@ export default function RootLayout({
           </noscript>
         )}
         {TRACKING.gtmId && (
-          <Script id="gtm-loader" strategy="afterInteractive">{`
-            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','${TRACKING.gtmId}');
-          `}</Script>
+          /* Google Tag Manager — the canonical Summit loader, standardized 2026-08-31.
+             Until then this site loaded GTM on afterInteractive (immediately after
+             hydration, every pageview); it now loads on the visitor's first gesture, or
+             1 second after the first painted frame, whichever comes first. The timer is
+             deliberately armed off two nested requestAnimationFrames — a plain setTimeout
+             from navigation start races the LCP paint and is the documented cause of TCG
+             scoring 66 and G360 scoring 60. Do not flatten it.
+             See divisions/software/plan-2026-08-31-gtm-standardization.md.
+
+             `no-before-interactive-script-outside-document` is a Pages Router rule that
+             fires on every correct App Router usage; the root layout is the right mount
+             per Next's own docs. beforeInteractive matters: the listeners are once:true,
+             so they must be registered before the reader's first scroll. */
+          // eslint-disable-next-line @next/next/no-before-interactive-script-outside-document
+          <Script id="gtm-loader" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: `(function(w,d,s,l,i){
+  w[l]=w[l]||[];
+  if(!i)return;
+  var loaded=false;
+  var evts=['scroll','pointerdown','keydown','touchstart','mousemove'];
+  function load(){
+    if(loaded)return;
+    loaded=true;
+    evts.forEach(function(e){w.removeEventListener(e,load)});
+    w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+    var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+    j.async=true;
+    j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+    f.parentNode.insertBefore(j,f);
+  }
+  evts.forEach(function(e){w.addEventListener(e,load,{once:true,passive:true})});
+  w.requestAnimationFrame(function(){
+    w.requestAnimationFrame(function(){
+      w.setTimeout(load,1000);
+    });
+  });
+})(window,document,'script','dataLayer','${TRACKING.gtmId}');` }} />
         )}
         <div className="hidden md:block">
           <Suspense fallback={null}>
