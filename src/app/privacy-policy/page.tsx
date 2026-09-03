@@ -17,7 +17,7 @@ export default function PrivacyPolicyPage() {
         <div className="max-w-3xl mx-auto px-4 sm:px-6 py-12">
           <header className="mb-10 space-y-3">
             <h1 className="text-3xl font-bold text-charcoal">Privacy Policy</h1>
-            <p className="text-sm text-charcoal-40">Last updated: April 2026</p>
+            <p className="text-sm text-charcoal-40">Last updated: September 2026</p>
           </header>
 
           <div className="space-y-8 text-charcoal-70 leading-relaxed">
@@ -49,7 +49,7 @@ export default function PrivacyPolicyPage() {
                     <li>Any notes or special requests you include</li>
                   </ul>
                   <p className="mt-2 text-sm">
-                    This information is submitted through Formspree, a third-party form processing service, and is forwarded to our team to respond to your request.
+                    This information is sent to our own server and stored in a private Google spreadsheet that only our team can access, so we can respond to your request.
                   </p>
                 </div>
                 <div>
@@ -81,8 +81,16 @@ export default function PrivacyPolicyPage() {
               </p>
               <div className="space-y-3">
                 <div>
-                  <p className="font-semibold text-charcoal text-sm">Formspree</p>
-                  <p className="text-sm">Processes form submissions. When you submit a booking or contact form, your data passes through Formspree&apos;s servers before being forwarded to us. See Formspree&apos;s privacy policy at formspree.io.</p>
+                  <p className="font-semibold text-charcoal text-sm">Google (Sheets &amp; Apps Script)</p>
+                  <p className="text-sm">Stores form submissions in a private spreadsheet our team uses to respond to your request and manage appointments. See Google&apos;s privacy policy at policies.google.com.</p>
+                </div>
+                <div>
+                  <p className="font-semibold text-charcoal text-sm">Resend</p>
+                  <p className="text-sm">Sends the confirmation email you receive after submitting a request. Your name and email address pass through Resend&apos;s servers to deliver that message. See Resend&apos;s privacy policy at resend.com.</p>
+                </div>
+                <div>
+                  <p className="font-semibold text-charcoal text-sm">Zapier</p>
+                  <p className="text-sm">Relays a text-message alert to our team when a new request arrives, so we can respond quickly. See Zapier&apos;s privacy policy at zapier.com.</p>
                 </div>
                 <div>
                   <p className="font-semibold text-charcoal text-sm">Google Analytics / Google Tag Manager</p>

@@ -8,8 +8,9 @@ import { BUSINESS } from "@/lib/config";
  *
  * ── WHAT THIS IS AND IS NOT ──────────────────────────────────────────────
  * This is the receipt the CUSTOMER gets. Caroline's own notification is not
- * this and must not be moved into it: her lead arrives by Formspree, which is
- * confirmed working (Lucas, 2026-08-23). Resend is additive — if it fails or is
+ * this and must not be moved into it: her lead is written to the Google Sheet
+ * by `/api/lead` (Formspree until 2026-08-29), and her nudge is the Zapier
+ * SMS. Resend is additive — if it fails or is
  * unconfigured, Caroline still gets the lead and the customer simply gets no
  * receipt.
  *

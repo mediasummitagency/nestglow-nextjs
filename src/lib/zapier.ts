@@ -26,13 +26,14 @@ import { BUSINESS } from "@/lib/config";
  * 2026-08-27.
  *
  * ── THIS IS AN ALERT, NOT THE LEAD ────────────────────────────────────────
- * Caroline's actual copy of the lead arrives by Formspree and is confirmed
- * working (Lucas, 2026-08-23). This is a nudge to look at her inbox faster.
- * So it never throws and never fails the request — exactly like Resend's
- * receipt. If Zapier is down, a lead is un-announced, not lost.
+ * Caroline's actual copy of the lead lands in the Google Sheet via
+ * `lib/sheet.ts` (Formspree until 2026-08-29). This is a nudge to look at it
+ * faster. So it never throws and never fails the request — exactly like
+ * Resend's receipt. If Zapier is down, a lead is un-announced, not lost.
  *
  * Do not make a Zapier failure return non-200. The one thing that fails the
- * request is Formspree, because that is the only leg carrying the lead itself.
+ * request is the Sheet write, because that is the only leg carrying the lead
+ * itself.
  *
  * ── WHY A WEBHOOK AND NOT FORMSPREE'S OWN ZAPIER INTEGRATION ──────────────
  * Formspree's Zapier connection is a paid-plan feature and polls on an
