@@ -10,7 +10,7 @@ const servicesLinks = [
   { label: "Regular Home Cleaning", href: "/#services" },
   { label: "Deep Cleaning", href: "/#services" },
   { label: "Move In / Move Out", href: "/#services" },
-  { label: "Airbnb & Rental Turnovers", href: "/#services" },
+  { label: "Airbnb & Rental Turnovers", href: "/#airbnb" },
 ];
 
 const areasLinks = BUSINESS.areaServed.map((label) => ({

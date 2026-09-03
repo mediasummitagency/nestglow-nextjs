@@ -26,11 +26,16 @@ import { CtaOpen, CtaClosed } from "@/components/ui/CtaVariant";
 export function PrimaryCta({
   label,
   className,
+  href = "/contact",
 }: {
   /** Shown after hours, pointing at the form. The open state always says
    *  "Call <number>" — a page-specific label there would bury the number. */
   label: string;
   className: string;
+  /** Where the after-hours button goes. Defaults to the form; a section can
+   *  pass `/contact?service=…` so the form arrives with its service
+   *  pre-selected (see `ContactForm`). The call half never changes. */
+  href?: string;
 }) {
   return (
     <>
@@ -40,7 +45,7 @@ export function PrimaryCta({
         </a>
       </CtaOpen>
       <CtaClosed>
-        <Link href="/contact" className={className}>
+        <Link href={href} className={className}>
           {label}
         </Link>
       </CtaClosed>

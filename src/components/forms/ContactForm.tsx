@@ -20,6 +20,17 @@ const SERVICE_OPTIONS = [
   "Not sure yet",
 ];
 
+// ?service= from a home-page section (the short-term rental block sends
+// `airbnb`). Short keys rather than the label text so the URL stays readable
+// and nothing arbitrary can be injected into the dropdown — an unknown key is
+// ignored and the visitor picks for themselves.
+const SERVICE_PARAM: Record<string, (typeof SERVICE_OPTIONS)[number]> = {
+  regular: "Regular home cleaning",
+  airbnb: "Airbnb or rental turnover",
+  deep: "Deep cleaning",
+  move: "Move in / move out",
+};
+
 function pushToDataLayer(data: Record<string, unknown>) {
   if (typeof window !== "undefined" && Array.isArray((window as unknown as { dataLayer?: unknown[] }).dataLayer)) {
     (window as unknown as { dataLayer: unknown[] }).dataLayer.push(data);
@@ -90,6 +101,9 @@ export function ContactForm() {
   const [incomingZip, setIncomingZip] = useState("");
   const [isWaitlist, setIsWaitlist] = useState(false);
   const [incomingTier, setIncomingTier] = useState("");
+  // Controlled, not `defaultValue`: the ?service= prefill lands after mount,
+  // and an uncontrolled select ignores a default that changes later.
+  const [service, setService] = useState("");
 
   useEffect(() => {
     const q = new URLSearchParams(window.location.search);
@@ -100,6 +114,8 @@ export function ContactForm() {
     // against the real tier ids so nothing arbitrary rides into the email.
     const t = q.get("tier") ?? "";
     if (TIERS.some((x) => x.id === t)) setIncomingTier(t);
+    const s = SERVICE_PARAM[q.get("service") ?? ""];
+    if (s) setService(s);
   }, []);
 
   const tier = TIERS.find((t) => t.id === incomingTier) ?? null;
@@ -339,7 +355,14 @@ export function ContactForm() {
         </div>
 
         <Field id="service" label="What do you need?" required>
-          <select id="service" name="service" required defaultValue="" className={fieldClass}>
+          <select
+            id="service"
+            name="service"
+            required
+            value={service}
+            onChange={(e) => setService(e.target.value)}
+            className={fieldClass}
+          >
             <option value="" disabled>
               Select a service…
             </option>

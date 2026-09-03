@@ -17,6 +17,7 @@ import Tiers from "@/components/sections/Tiers";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { ScrollHint } from "@/components/ui/ScrollHint";
 import { WhyNestGlow } from "@/components/sections/WhyNestGlow";
+import { RentalTurnovers } from "@/components/sections/RentalTurnovers";
 
 export const metadata: Metadata = {
   // Title/description come from the root layout defaults; this exists so the
@@ -72,6 +73,14 @@ const homeFaqs = [
   {
     q: "What if I'm not satisfied with the cleaning?",
     a: "We come back. Our 100% satisfaction guarantee means if something wasn't cleaned to your standard, we return within 24 hours to make it right at no extra charge.",
+  },
+  {
+    q: "Do you clean Airbnb and short-term rentals?",
+    a: "Yes. Between-guest turnovers are one of our two main services, alongside regular home cleaning. We work Airbnb, VRBO and privately rented homes across Monmouth and Ocean County, and we can hold a standing turnover day that follows your booking calendar. Tell us your checkout and check-in times and we plan around them.",
+  },
+  {
+    q: "How fast can you turn a rental between guests?",
+    a: "Most Shore rentals are reset in two to four hours depending on size, with the beds remade, kitchen and baths done, and photos sent to you before we leave. Same-day turnovers are available through the summer season, so it's worth booking your turnover day before the calendar fills.",
   },
 ];
 
@@ -166,6 +175,11 @@ export default function HomePage() {
             </Suspense>
           </div>
         </section>
+
+        {/* Airbnb / short-term rental turnovers — sits right after the
+            residential plans so an owner who just scrolled past three
+            homeowner tiers finds their service before leaving. */}
+        <RentalTurnovers />
 
         {/* Why NestGlow */}
         <WhyNestGlow />
