@@ -46,6 +46,16 @@ export function RentalTurnovers() {
   return (
     <section id="airbnb" className="scroll-mt-24 bg-cream-50 py-16 md:py-20 border-t border-charcoal/5">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
+
+        {/* Section title, centred like "How it works" and "Towns We Serve".
+            The turnover line below is the column heading, not the section's. */}
+        <h2 className="text-3xl md:text-4xl font-bold text-charcoal text-center mb-3">
+          Airbnb &amp; Short-Term Rentals
+        </h2>
+        <p className="text-center text-charcoal-70 mb-12">
+          Between-guest turnovers for Shore rentals, on your booking calendar.
+        </p>
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-center">
 
           <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-charcoal/10 bg-cream-100">
@@ -59,19 +69,16 @@ export function RentalTurnovers() {
           </div>
 
           <div>
-            <p className="text-sm font-semibold uppercase tracking-widest text-brand mb-3">
-              Airbnb &amp; short-term rentals
-            </p>
-            <h2 className="text-3xl md:text-4xl font-bold text-charcoal leading-tight mb-4">
+            <h3 className="text-2xl md:text-3xl font-bold text-charcoal leading-tight mb-4">
               Turnovers that are ready before the next guest is.
-            </h2>
+            </h3>
             <p className="text-charcoal-70 leading-relaxed mb-8">
               Renting on the Shore means the clock starts the minute a guest checks out. NestGlow does
               between-guest turnovers for Airbnb, VRBO and privately rented homes across Monmouth and
               Ocean County, on a schedule that follows your booking calendar, not ours.
             </p>
 
-            <ul className="space-y-5 mb-8">
+            <ul className="space-y-5">
               {points.map((p) => {
                 const Icon = p.icon;
                 return (
@@ -80,25 +87,30 @@ export function RentalTurnovers() {
                       <Icon size={18} />
                     </span>
                     <div>
-                      <h3 className="font-semibold text-brand-dark mb-1">{p.title}</h3>
+                      <h4 className="font-semibold text-brand-dark mb-1">{p.title}</h4>
                       <p className="text-sm text-charcoal-70 leading-relaxed">{p.body}</p>
                     </div>
                   </li>
                 );
               })}
             </ul>
-
-            <PrimaryCta
-              label="Set up turnover cleaning"
-              href="/contact?service=airbnb"
-              className="inline-block bg-brand text-white font-semibold px-8 py-3 rounded-full hover:bg-brand-dark transition-colors"
-            />
-            <p className="mt-4 text-sm text-charcoal-70">
-              We also do the pre-season reset and the end-of-season deep clean.
-            </p>
           </div>
 
         </div>
+
+        {/* CTA sits under the whole block, centred, the way WhyNestGlow and
+            How-it-works end — not tucked under one column. */}
+        <div className="mt-12 text-center">
+          <PrimaryCta
+            label="Set up turnover cleaning"
+            href="/contact?service=airbnb"
+            className="inline-block bg-brand text-white font-semibold px-8 py-3 rounded-full hover:bg-brand-dark transition-colors"
+          />
+          <p className="mt-4 text-sm text-charcoal-70">
+            We also do the pre-season reset and the end-of-season deep clean.
+          </p>
+        </div>
+
       </div>
     </section>
   );
