@@ -11,8 +11,8 @@
  *
  * ── LIVE SINCE 2026-08-23 ────────────────────────────────────────────────
  * Built dark against a placeholder earlier the same session, then switched on
- * once Lucas confirmed: **Mon-Fri 8am-6pm, Sat-Sun 8am-12pm, Eastern** —
- * identical to TCG and BDF, so the per-day map shape was already right. The
+ * once Lucas confirmed Mon-Fri 8am-6pm, Sat-Sun 8am-12pm, Eastern. **Changed
+ * 2026-10-09 (Lucas): 8am-6pm every day.** The
  * flag exists so an unverified guess about when someone answers the phone can
  * never reach a live page, which is exactly the path TCG and BDF each took.
  *
@@ -28,6 +28,11 @@
  *
  * Nothing on this site renders the hours as text today. If that changes, add
  * `BUSINESS.hours` to `config.ts` and keep it in step with `windows` by hand.
+ *
+ * ⚠️ THE GOOGLE BUSINESS PROFILE SAYS "OPEN 24 HOURS" ON PURPOSE. Lucas,
+ * 2026-10-09: same strategy as BDF — 24 hours on the GBP for the "Open now"
+ * filter, real answered hours here. The two are MEANT to disagree. Do not
+ * "sync" either side to the other. Ruling logged in the vault's decisions.md.
  */
 
 export const HOURS = {
@@ -38,7 +43,7 @@ export const HOURS = {
   /**
    * Always the business's clock, never the visitor's.
    *
-   * EASTERN. NestGlow serves Monmouth, Ocean and Middlesex County, New Jersey.
+   * EASTERN. NestGlow is in Long Branch, New Jersey.
    * Do not copy `America/Chicago` across from the BDF file — that one is
    * Houston and says so in its own comment.
    */
@@ -48,11 +53,10 @@ export const HOURS = {
    * ISO-8601 weekday (1 = Monday … 7 = Sunday) → [open, close] as 24h "HH:MM".
    * A day absent from this map is closed all day.
    *
-   * CONFIRMED by Lucas 2026-08-23: **Mon-Fri 8-6, Sat-Sun 8-12** — the same
-   * shape TCG and BDF both turned out to have. This is why the config is a
-   * per-day map and not the single open/close pair Gorsegner uses: flattened to
-   * one window, a Saturday 2pm visitor would be pointed at a phone nobody is
-   * answering. Do not flatten it back.
+   * CONFIRMED by Lucas 2026-10-09: **8-6 every day** (was Mon-Fri 8-6,
+   * Sat-Sun 8-12 from 2026-08-23). All seven days are the same window now, but
+   * keep the per-day map: the moment one day differs again it is the only
+   * shape that can say so.
    *
    * Consequence worth knowing before reading the after-hours copy: every day of
    * the week is answered, so "first thing tomorrow" is always literally
@@ -67,8 +71,8 @@ export const HOURS = {
     3: ["08:00", "18:00"],
     4: ["08:00", "18:00"],
     5: ["08:00", "18:00"],
-    6: ["08:00", "12:00"],
-    7: ["08:00", "12:00"],
+    6: ["08:00", "18:00"],
+    7: ["08:00", "18:00"],
   } as Record<number, [string, string]>,
 
   /** One-off closures, "YYYY-MM-DD". A date listed here is after-hours all day,
@@ -78,7 +82,7 @@ export const HOURS = {
 
   /** Human-readable, for any copy that names the hours. Nothing renders it yet.
    *  Kept here so the two are visibly the same claim when someone updates one. */
-  display: "Mon–Fri 8am–6pm · Sat–Sun 8am–12pm",
+  display: "Every day 8am–6pm",
 } as const;
 
 /** Minutes past midnight for an "HH:MM" string. */

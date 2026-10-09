@@ -14,8 +14,8 @@
  * script is emitted and there is nothing to test, which the run reports rather
  * than silently passing.
  *
- * The cases below assert Caroline's CONFIRMED hours (Lucas, 2026-08-23):
- * Mon-Fri 8am-6pm, Sat-Sun 8am-12pm, Eastern. If those ever change, rewrite the
+ * The cases below assert Caroline's CONFIRMED hours (Lucas, 2026-10-09):
+ * 8am-6pm every day, Eastern (was Sat-Sun 8am-12pm until then). If those ever change, rewrite the
  * expectations here in the same commit — a green run against stale numbers
  * means nothing.
  *
@@ -120,16 +120,17 @@ const CASES = [
   ["Mon 17:59 EDT — one minute before closing", "2026-08-17T21:59:00Z", "open", null],
   ["Mon 18:00 EDT — closing minute", "2026-08-17T22:00:00Z", "closed", "first thing tomorrow"],
   ["Mon 02:00 EDT — middle of the night", "2026-08-17T06:00:00Z", "closed", "at 8:00 AM this morning"],
-  // ── weekend, 08:00-12:00 — the half-day is the whole reason the config is a
-  //    per-day map. A single Mon-Fri window would call all five of these wrong
-  //    in one direction or the other.
+  // ── weekend, 08:00-18:00 since 2026-10-09 (was a 08:00-12:00 half-day). The
+  //    noon and afternoon cases are the ones the old hours called closed.
   ["Sat 07:59 EDT — before the weekend window", "2026-08-22T11:59:00Z", "closed", "at 8:00 AM this morning"],
   ["Sat 08:00 EDT — weekend opening minute", "2026-08-22T12:00:00Z", "open", null],
-  ["Sat 11:59 EDT — last minute of the weekend window", "2026-08-22T15:59:00Z", "open", null],
-  ["Sat 12:00 EDT — weekend closing minute", "2026-08-22T16:00:00Z", "closed", "first thing tomorrow"],
-  ["Sat 14:00 EDT — weekend afternoon (open under weekday hours)", "2026-08-22T18:00:00Z", "closed", "first thing tomorrow"],
+  ["Sat 12:00 EDT — weekend noon (closed under the old half-day)", "2026-08-22T16:00:00Z", "open", null],
+  ["Sat 14:00 EDT — weekend afternoon is answered", "2026-08-22T18:00:00Z", "open", null],
+  ["Sat 17:59 EDT — last weekend minute", "2026-08-22T21:59:00Z", "open", null],
+  ["Sat 18:00 EDT — weekend closing minute", "2026-08-22T22:00:00Z", "closed", "first thing tomorrow"],
   ["Sun 10:00 EDT — Sunday morning is answered", "2026-08-23T14:00:00Z", "open", null],
-  ["Sun 14:00 EDT — Sunday afternoon", "2026-08-23T18:00:00Z", "closed", "first thing tomorrow"],
+  ["Sun 14:00 EDT — Sunday afternoon is answered", "2026-08-23T18:00:00Z", "open", null],
+  ["Sun 18:00 EDT — Sunday close, into Monday", "2026-08-23T22:00:00Z", "closed", "first thing tomorrow"],
   ["Fri 18:00 EDT — closes into an ANSWERED Saturday", "2026-08-21T22:00:00Z", "closed", "first thing tomorrow"],
   // ── timezone: the visitor's clock must never decide this ─────────────────
   ["Visitor 4pm Pacific Mon = 7pm New Jersey — closed", "2026-08-17T23:00:00Z", "closed", null],
@@ -180,9 +181,8 @@ console.log("\n── one-off closures (HOURS.closedDates) ──");
 console.log("\n── forced modes (?cta=) ──");
 {
   const env = makeEnv({ search: "?cta=open" });
-  // A Sunday afternoon, which is closed under the 8-12 weekend window — the
-  // override has to win anyway.
-  check("?cta=open forces open on a closed Sunday afternoon", run(env, new Date("2026-08-23T18:00:00Z")).mode, "open");
+  // Sunday 8pm, after the 8-6 window — the override has to win anyway.
+  check("?cta=open forces open on a closed Sunday evening", run(env, new Date("2026-08-24T00:00:00Z")).mode, "open");
 }
 {
   const env = makeEnv({ search: "?cta=closed" });
