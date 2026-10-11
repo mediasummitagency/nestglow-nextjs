@@ -60,9 +60,9 @@ export default function Footer() {
 
           {/* Services */}
           <div>
-            <h3 className="text-xs font-semibold uppercase tracking-widest text-cream/40 mb-4">
+            <p className="text-xs font-semibold uppercase tracking-widest text-cream/40 mb-4">
               Services
-            </h3>
+            </p>
             <ul className="space-y-2">
               {servicesLinks.map((link) => (
                 <li key={link.label}>
@@ -79,9 +79,9 @@ export default function Footer() {
 
           {/* Service Areas */}
           <div>
-            <h3 className="text-xs font-semibold uppercase tracking-widest text-cream/40 mb-4">
+            <p className="text-xs font-semibold uppercase tracking-widest text-cream/40 mb-4">
               Service Areas
-            </h3>
+            </p>
             <ul className="space-y-2">
               {areasLinks.map((link) => (
                 <li key={link.label}>
@@ -98,9 +98,9 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h3 className="text-xs font-semibold uppercase tracking-widest text-cream/40 mb-4">
+            <p className="text-xs font-semibold uppercase tracking-widest text-cream/40 mb-4">
               Contact
-            </h3>
+            </p>
             <ul className="space-y-3 text-sm text-cream/70">
               <li>
                 <a

@@ -11,7 +11,7 @@ const rows = [
     image: "/images/home/why-owner.png",
     alt: "NestGlow Co owner at a client's door",
     heading: "A name and a face, not a queue",
-    body: "With NestGlow, when you have a question or need to move a date, a real local person picks up. You're talking to the owner, not typing into an app's chat window or waiting on a national support line. We're based right here in Monmouth, Ocean, and Middlesex County, and we answer to our neighbors.",
+    body: "With NestGlow, when you have a question or need to move a date, a real local person picks up. You're talking to the owner, not typing into an app's chat window or waiting on a national support line. We're based right here in Long Branch, and we answer to our neighbors across Monmouth and Ocean County.",
     imageLeft: true,
   },
   {

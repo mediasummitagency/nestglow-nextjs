@@ -24,12 +24,15 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
-    // Kept under ~60 chars so Google does not truncate it. The counties live in
-    // the description and on the page, not in the title.
-    default: `House Cleaning in Monmouth, Ocean & Middlesex County NJ`,
+    // Kept under ~60 chars so Google does not truncate it. Brand at the end on
+    // purpose: every search click so far is a brand search (pull 2026-10-09).
+    default: `House Cleaning in Monmouth & Ocean County NJ | ${BUSINESS.name}`,
     template: `%s | ${BUSINESS.name}`,
   },
-  description: BUSINESS.tagline,
+  // Not the tagline: this is the search snippet, so it leads with the service and
+  // the place and stays under ~155 chars. Shared by every route without its own.
+  description:
+    "House cleaning in Monmouth and Ocean County, NJ. Recurring, deep and move-out cleaning plus Airbnb turnovers. Same team every visit. Free quote.",
   openGraph: {
     title: `${BUSINESS.name} | Professional Cleaning in NJ`,
     description: `${BUSINESS.tagline} 100% satisfaction guarantee — we'll make it right or it's free.`,

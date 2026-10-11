@@ -76,9 +76,11 @@ export function SignatureProcess({
 
           {/* LEFT — copy only */}
           <div className="space-y-6">
-            <p className="text-xl text-center tracking-widest font-semibold text-brand uppercase sm:text-sm sm:text-left">
+            {/* H2, not <p>: the home page went straight from the H1 to this
+                section's room H3s, a skipped level the 2026-10-09 audit flagged. */}
+            <h2 className="text-xl text-center tracking-widest font-semibold text-brand uppercase sm:text-sm sm:text-left">
               {SIGNATURE_PROCESS_NAME}
-            </p>
+            </h2>
 
             <p className="text-charcoal-70 leading-relaxed">{body1}</p>
             <p className="hidden sm:block text-charcoal-70 leading-relaxed">{body2}</p>

@@ -134,7 +134,7 @@ export default function Image() {
             display: "flex",
           }}
         >
-          Monmouth · Ocean · Middlesex County, NJ
+          Monmouth · Ocean County, NJ
         </div>
 
         <div

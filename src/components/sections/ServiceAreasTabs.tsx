@@ -30,8 +30,10 @@ const COUNTIES = [
     label: "Monmouth",
     value: "Monmouth" as const,
     towns: [
-      "Asbury Park", "Bradley Beach", "Colts Neck", "Freehold", "Holmdel",
-      "Manalapan", "Marlboro", "Middletown", "Neptune", "Neptune City", "Red Bank",
+      "Long Branch", "West Long Branch", "Monmouth Beach", "Oceanport",
+      "Eatontown", "Little Silver", "Fair Haven", "Red Bank", "Asbury Park",
+      "Bradley Beach", "Neptune", "Neptune City", "Middletown", "Holmdel",
+      "Colts Neck", "Freehold", "Manalapan", "Marlboro",
     ],
   },
   {
@@ -42,17 +44,10 @@ const COUNTIES = [
       "Point Pleasant", "Toms River",
     ],
   },
-  {
-    label: "Middlesex",
-    value: "Middlesex" as const,
-    towns: [
-      "East Brunswick", "Edison", "Old Bridge", "Sayreville", "Woodbridge",
-    ],
-  },
 ]
 
 export function ServiceAreasTabs() {
-  const [active, setActive] = useState<"Monmouth" | "Ocean" | "Middlesex">("Monmouth")
+  const [active, setActive] = useState<"Monmouth" | "Ocean">("Monmouth")
 
   return (
     <section id="areas" className="scroll-mt-24 bg-cream-50 py-[4.6rem] border-t border-charcoal/5">
@@ -61,7 +56,7 @@ export function ServiceAreasTabs() {
           Towns We Serve
         </h2>
         <p className="text-[1.15rem] text-center text-charcoal-70 mb-12">
-          House cleaning across Monmouth, Ocean, and Middlesex County, NJ
+          House cleaning across Monmouth and Ocean County, NJ, from our base in Long Branch
         </p>
 
         {/* County tabs */}

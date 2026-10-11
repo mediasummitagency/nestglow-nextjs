@@ -7,9 +7,9 @@ import { CallTextBlock } from "@/components/forms/CallTextBlock";
 
 export const metadata: Metadata = {
   // No brand suffix here — the root layout template appends "| NestGlow Co".
-  title: "Contact & Free Quote",
+  title: "Free House Cleaning Quote",
   description:
-    "Get a free cleaning quote from NestGlow Co. Tell us about your home or business and Caroline will come back within one business day. Monmouth, Ocean & Middlesex County, NJ.",
+    "Get a free house cleaning quote from NestGlow Co. Tell us about your home or rental and Caroline replies within one business day. Monmouth & Ocean County, NJ.",
   alternates: { canonical: `${BASE_URL}/contact` },
 };
 
@@ -59,7 +59,7 @@ export default function ContactPage() {
             image without any restyling. `text-left` because the hero container
             is `text-center` and form labels must not inherit it. */}
         <PageHero
-          heading="Get your free quote."
+          heading="Get your free cleaning quote."
           subheading="Tell us about the place and Caroline will come back with a firm price."
           centered
         >
@@ -100,7 +100,7 @@ export default function ContactPage() {
             <h2 className="mb-3 text-2xl font-bold text-charcoal md:text-3xl">Where we clean</h2>
             <p className="mx-auto max-w-xl text-charcoal-70">
               Homes and short-term rentals across{" "}
-              <strong className="text-charcoal">Monmouth, Ocean and Middlesex County, New Jersey</strong>
+              <strong className="text-charcoal">Monmouth and Ocean County, New Jersey</strong>
               . Not sure if you&apos;re in range? Put your ZIP in the form above and we&apos;ll tell
               you straight away.
             </p>

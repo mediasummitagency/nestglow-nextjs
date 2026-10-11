@@ -52,7 +52,7 @@ export function Testimonials({ currentTown, currentCounty }: TestimonialsProps) 
             What our clients say.
           </h2>
           <p className="text-charcoal-70 max-w-2xl mx-auto">
-            Real reviews from homeowners across Monmouth, Ocean, and Middlesex County.
+            Real reviews from homeowners across Monmouth and Ocean County.
           </p>
         </div>
 

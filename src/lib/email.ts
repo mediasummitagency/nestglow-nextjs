@@ -116,7 +116,7 @@ function bodyFor({ name, service, zip, message, outOfArea }: Confirmation): stri
     "",
     "Talk soon,",
     BUSINESS.name,
-    "House cleaning across Monmouth, Ocean and Middlesex County, NJ"
+    "House cleaning across Monmouth and Ocean County, NJ"
   );
   return lines.join("\n");
 }

@@ -34,17 +34,11 @@ const howItWorks = [
   { step: "3", title: "Your home glows", image: "/images/home/how-step-3.png", alt: "A homeowner enjoying a spotless living room", body: "Our insured, background-checked team arrives on time and leaves your space spotless." },
 ];
 
-const counties = [
-  { name: "Monmouth County", href: "/#areas", towns: 10 },
-  { name: "Ocean County", href: "/#areas", towns: 7 },
-  { name: "Middlesex County", href: "/#areas", towns: 6 },
-];
-
 
 const homeFaqs = [
   {
     q: "How much does house cleaning cost in NJ?",
-    a: "Most homes in Monmouth, Ocean, and Middlesex County run between $140 and $400 per clean depending on home size and service type. We give you a firm quote before any work begins, so there are no surprises.",
+    a: "Most homes in Monmouth and Ocean County run between $140 and $400 per clean depending on home size and service type. We give you a firm quote before any work begins, so there are no surprises.",
   },
   {
     q: "Do I need to be home during the cleaning?",
@@ -134,11 +128,15 @@ export default function HomePage() {
             style={{ background: "linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.70))" }}
           />
           <div className="relative z-20 max-w-3xl mx-auto px-4 sm:px-6 text-center space-y-6 pt-20 pb-16 md:py-24">
-            <p className="text-sm font-semibold uppercase tracking-widest text-brand">
-              Cleaning services across NJ
-            </p>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
-              Come home to a place that feels like a fresh start.
+            {/* The eyebrow is part of the H1 so the heading carries the search
+                phrase; it looks exactly as it did when it was a separate <p>. */}
+            <h1 className="space-y-6">
+              <span className="block text-sm font-semibold uppercase tracking-widest text-brand">
+                House cleaning in Monmouth &amp; Ocean County, NJ
+              </span>
+              <span className="block text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
+                Come home to a place that feels like a fresh start.
+              </span>
             </h1>
             <div className="flex flex-col items-center gap-1">
               <div className="flex items-center gap-1">
@@ -165,7 +163,7 @@ export default function HomePage() {
         <section className="bg-white py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <h2 className="text-3xl md:text-4xl font-bold text-charcoal text-center mb-2">
-              Three plans, every one of them a NestGlow Signature Clean.
+              Three house cleaning plans, every one a NestGlow Signature Clean.
             </h2>
             <Suspense fallback={null}>
               <Tiers
@@ -237,7 +235,7 @@ export default function HomePage() {
         <section id="services" className="scroll-mt-24 bg-white py-16 border-t border-charcoal/10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <h2 className="text-3xl md:text-4xl font-bold text-charcoal mb-2 text-center">
-              What we clean
+              Our cleaning services
             </h2>
             <p className="text-center text-charcoal-70 mb-10">
               Every service is backed by our satisfaction guarantee.

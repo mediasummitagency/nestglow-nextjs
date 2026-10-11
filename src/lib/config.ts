@@ -21,7 +21,10 @@ export const BUSINESS = {
   legalName: "NestGlow Co LLC",
   // "Homes and businesses" until 2026-08-22 — changed because Caroline does not sell
   // commercial cleaning. Short-term rentals are the second real service, not offices.
-  tagline: "Cleaning you can trust. Homes and short-term rentals across Monmouth, Ocean, and Middlesex County.",
+  // Middlesex dropped 2026-10-11: Lucas, 10-09, "based in Long Branch, serves Monmouth
+  // and Ocean County". The ZIP router (zipToCounty.ts) still accepts Middlesex ZIPs on
+  // purpose until Caroline says she turns those jobs down.
+  tagline: "Cleaning you can trust. Homes and short-term rentals across Monmouth and Ocean County.",
   phone: "(732) 614-0192",
   phoneHref: "tel:+17326140192",
   smsHref: "sms:+17326140192",
@@ -30,11 +33,11 @@ export const BUSINESS = {
   yearFounded: 2015, // reflects "10+ years of experience"
   address: {
     // NestGlow is home-based — no public street address for the site
-    locality: "Neptune City", // serve-area anchor
+    locality: "Long Branch", // where the business is based (Lucas, 2026-10-09); was Neptune City
     region: "NJ",
     country: "US",
   },
-  areaServed: ["Monmouth County, NJ", "Ocean County, NJ", "Middlesex County, NJ"],
+  areaServed: ["Monmouth County, NJ", "Ocean County, NJ"],
   socials: {
     instagram: "https://instagram.com/nestglowco",
     // Add others as they are set up
