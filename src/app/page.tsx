@@ -128,16 +128,18 @@ export default function HomePage() {
             style={{ background: "linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.70))" }}
           />
           <div className="relative z-20 max-w-3xl mx-auto px-4 sm:px-6 text-center space-y-6 pt-20 pb-16 md:py-24">
-            {/* The eyebrow is part of the H1 so the heading carries the search
-                phrase; it looks exactly as it did when it was a separate <p>. */}
-            <h1 className="space-y-6">
-              <span className="block text-sm font-semibold uppercase tracking-widest text-brand">
-                House cleaning in Monmouth &amp; Ocean County, NJ
-              </span>
-              <span className="block text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
-                Come home to a place that feels like a fresh start.
-              </span>
+            <p className="text-sm font-semibold uppercase tracking-widest text-brand">
+              Based in Long Branch, NJ
+            </p>
+            {/* Says what we do and where, nothing else. Was "Come home to a place
+                that feels like a fresh start." until 2026-10-11 (Lucas: "it just
+                reads as fluff"). */}
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
+              House Cleaning in Monmouth &amp; Ocean County, NJ
             </h1>
+            <p className="text-lg md:text-xl text-white/85 max-w-2xl mx-auto">
+              Recurring, deep and move-out cleaning, plus Airbnb turnovers. Same team every visit.
+            </p>
             <div className="flex flex-col items-center gap-1">
               <div className="flex items-center gap-1">
                 {[...Array(5)].map((_, i) => (
